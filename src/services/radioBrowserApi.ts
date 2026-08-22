@@ -51,13 +51,17 @@ export async function fetchMalayalamOnlineStations(query = ''): Promise<RadioSta
           const isAac = item.codec?.toLowerCase().includes('aac');
           const isHls = item.url_resolved?.includes('.m3u8') || item.url?.includes('.m3u8');
           
-          let category: RadioStation['category'] = 'top-fm';
+          let category: RadioStation['category'] = 'online';
           const lowerName = (item.name + ' ' + item.tags).toLowerCase();
-          if (lowerName.includes('news') || lowerName.includes('talk')) category = 'news-talk';
-          else if (lowerName.includes('air') || lowerName.includes('akashvani')) category = 'akashvani';
-          else if (lowerName.includes('shalom') || lowerName.includes('christian') || lowerName.includes('hindu') || lowerName.includes('quran') || lowerName.includes('devotional')) category = 'devotional';
-          else if (lowerName.includes('gulf') || lowerName.includes('pravasi') || lowerName.includes('suno') || lowerName.includes('dubai') || lowerName.includes('qatar')) category = 'gulf-pravasi';
-          else if (lowerName.includes('retro') || lowerName.includes('old') || lowerName.includes('melody') || lowerName.includes('classic')) category = 'hits-retro';
+          if (lowerName.includes('air') || lowerName.includes('akashvani')) {
+            category = 'air';
+          } else if (lowerName.includes('community') || lowerName.includes('campus') || lowerName.includes('village')) {
+            category = 'community';
+          } else if (lowerName.includes('bhakthi') || lowerName.includes('devotional') || lowerName.includes('christian') || lowerName.includes('hindu') || lowerName.includes('quran') || lowerName.includes('shalom') || lowerName.includes('jesus')) {
+            category = 'devotional';
+          } else {
+            category = 'online';
+          }
 
           const gradients = [
             'from-amber-500 to-red-600',

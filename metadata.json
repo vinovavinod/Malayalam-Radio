@@ -1,6 +1,6 @@
 {
   "name": "Malayalam Radio",
-  "description": "Live Malayalam radio streaming application featuring an authentic Onam festive design (Ponnonam Gold & Kasavu), verified Kerala FM stations, Akashvani broadcasts, Pravasi channels, and interactive retro tuner.",
+  "description": "Live Malayalam radio streaming application featuring an authentic golden theme, verified Kerala FM stations, Akashvani broadcasts, Pravasi channels, and interactive retro tuner.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

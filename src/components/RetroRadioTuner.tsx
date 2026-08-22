@@ -92,7 +92,7 @@ export const RetroRadioTuner: React.FC = () => {
           </div>
           <div>
             <h2 className="text-base sm:text-lg font-black tracking-wider text-amber-100 uppercase flex items-center gap-1.5">
-              <span>പൊന്നോണം VINTAGE RADIO DIAL</span>
+              <span>KERALA VINTAGE RADIO DIAL</span>
             </h2>
             <p className="text-xs text-amber-200/70 font-malayalam">
               ക്ലാസിക് അനലോഗ് ട്യൂണർ • Kerala FM Broadcast 88.0 - 108.0 MHz

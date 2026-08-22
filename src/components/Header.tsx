@@ -10,28 +10,29 @@ import {
   Globe2,
   X,
   Palette,
-  Flame
+  Flame,
+  Mail
 } from 'lucide-react';
 import { useRadio } from '../context/RadioContext';
 import { OnamThemeMode } from '../types/radio';
 
 interface HeaderProps {
-  onOpenAddModal: () => void;
   onOpenEqModal: () => void;
   onOpenSleepModal: () => void;
   onOpenVisualizerModal: () => void;
   onOpenRecordingsModal: () => void;
   onOpenOnlineSearchModal: () => void;
+  onOpenContactModal: () => void;
   viewMode: 'grid' | 'tuner';
   setViewMode: (mode: 'grid' | 'tuner') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
-  onOpenAddModal,
   onOpenEqModal,
   onOpenSleepModal,
   onOpenRecordingsModal,
   onOpenOnlineSearchModal,
+  onOpenContactModal,
   viewMode,
   setViewMode
 }) => {
@@ -71,16 +72,16 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const themes: { id: OnamThemeMode; name: string; malayalam: string; color: string }[] = [
-    { id: 'ponnonam', name: 'Ponnonam Gold', malayalam: 'പൊന്നോണം', color: 'from-amber-400 to-yellow-600' },
-    { id: 'kasavu', name: 'Kasavu & Sandal', malayalam: 'കസവ് സുവർണ്ണം', color: 'from-amber-200 to-yellow-500' },
-    { id: 'temple', name: 'Temple Festive', malayalam: 'ഉത്സവമേളം', color: 'from-amber-600 to-rose-700' },
+    { id: 'ponnonam', name: 'Golden Amber', malayalam: 'സുവർണ്ണം', color: 'from-amber-400 to-yellow-600' },
+    { id: 'kasavu', name: 'Kasavu & Sandal', malayalam: 'കസവ് ചന്ദനം', color: 'from-amber-200 to-yellow-500' },
+    { id: 'temple', name: 'Deep Crimson', malayalam: 'ഉത്സവമേളം', color: 'from-amber-600 to-rose-700' },
   ];
 
   return (
     <header className="sticky top-0 z-30 bg-[#120F0B]/95 backdrop-blur-md border-b border-[#D4AF37]/30 px-3 sm:px-6 lg:px-8 py-2.5 transition-all shadow-lg shadow-black/40">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         
-        {/* Brand & Logo with Onam Festive Touch */}
+        {/* Brand & Logo with Golden Theme */}
         <div className="flex items-center justify-between w-full md:w-auto">
           <div className="flex items-center gap-3">
             <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 text-[#120F0B] font-black shadow-lg shadow-amber-500/25 border border-amber-300">
@@ -101,13 +102,9 @@ export const Header: React.FC<HeaderProps> = ({
                   <span className="gold-gradient-text">കേരള</span>
                   <span className="text-[#FFD700]">RADIO</span>
                 </h1>
-                <span className="text-[10px] px-2 py-0.5 uppercase tracking-wider font-bold bg-amber-500/15 text-amber-300 border border-amber-400/40 rounded-full flex items-center gap-1">
-                  <Sparkles className="w-2.5 h-2.5 text-amber-400" />
-                  ഓണം സ്പെഷ്യൽ
-                </span>
               </div>
               <p className="text-[11px] text-amber-200/70 font-malayalam flex items-center gap-1 font-medium">
-                ലൈവ് എഫ്.എം & ഓണപ്പാട്ടുകൾ • Live Kerala Streams
+                ലൈവ് എഫ്.എം & സംഗീതം • Live Kerala FM & Broadcast Streams
               </p>
             </div>
           </div>
@@ -115,20 +112,28 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Quick Action Buttons */}
           <div className="flex items-center gap-2 md:hidden">
             <button
+              id="mobile-contact-btn"
+              onClick={onOpenContactModal}
+              className="p-2 rounded-lg bg-[#221C14] border border-amber-500/30 text-amber-300 hover:text-amber-200"
+              title="Contact Us"
+            >
+              <Mail className="w-4 h-4" />
+            </button>
+            <button
               id="mobile-theme-btn"
               onClick={() => setShowThemePicker(!showThemePicker)}
               className="p-2 rounded-lg bg-[#221C14] border border-amber-500/30 text-amber-300 hover:text-amber-200"
-              title="Change Onam Theme"
+              title="Change Color Theme"
             >
               <Palette className="w-4 h-4" />
             </button>
             <button
-              id="mobile-add-station-btn"
-              onClick={onOpenAddModal}
-              className="p-2 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 text-black font-bold hover:brightness-110 transition shadow"
-              title="Add Custom Station Link"
+              id="mobile-eq-btn"
+              onClick={onOpenEqModal}
+              className="p-2 rounded-lg bg-[#221C14] border border-amber-500/30 text-amber-300 hover:text-amber-200"
+              title="Equalizer"
             >
-              <Plus className="w-4 h-4" />
+              <Sliders className="w-4 h-4" />
             </button>
           </div>
         </div>
@@ -142,7 +147,7 @@ export const Header: React.FC<HeaderProps> = ({
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search station, FM frequency, Onam songs, RJ..."
+              placeholder="Search stations, FM frequency, city, genre, RJ..."
               className="w-full bg-[#1C1610] border border-amber-500/30 focus:border-amber-400 rounded-lg pl-9 pr-9 py-2 text-xs sm:text-sm text-[#FAF7F0] placeholder:text-amber-100/40 focus:outline-none transition shadow-inner"
             />
             {searchQuery && (
@@ -155,7 +160,7 @@ export const Header: React.FC<HeaderProps> = ({
             )}
           </div>
 
-          {/* View Mode Toggle (Grid vs Retro Tuner) */}
+          {/* View Mode Toggle (List vs Retro Tuner) */}
           <div className="hidden sm:flex items-center bg-[#1C1610] border border-amber-500/30 p-0.5 rounded-lg">
             <button
               id="view-mode-grid-btn"
@@ -190,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({
               id="theme-switcher-btn"
               onClick={() => setShowThemePicker(!showThemePicker)}
               className="flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold rounded-lg bg-[#1C1610] hover:bg-[#282017] text-amber-300 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm"
-              title="Onam Theme Palette"
+              title="Theme Palette"
             >
               <Palette className="w-3.5 h-3.5 text-amber-400" />
               <span className="hidden lg:inline text-[11px]">Theme</span>
@@ -199,7 +204,7 @@ export const Header: React.FC<HeaderProps> = ({
             {showThemePicker && (
               <div className="absolute right-0 mt-2 w-48 bg-[#1A140E] border border-amber-500/40 rounded-xl p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95">
                 <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-300/80 border-b border-amber-500/20 mb-1">
-                  Onam Color Themes
+                  Theme Palette
                 </div>
                 {themes.map(t => (
                   <button
@@ -237,12 +242,23 @@ export const Header: React.FC<HeaderProps> = ({
             </div>
           </div>
 
+          {/* Contact Us Tab */}
+          <button
+            id="contact-us-btn"
+            onClick={onOpenContactModal}
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg bg-[#1C1610] hover:bg-[#282017] text-amber-200 hover:text-amber-100 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm"
+            title="Contact Us / Stream Updates"
+          >
+            <Mail className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden sm:inline uppercase text-[10px] tracking-wider">Contact</span>
+          </button>
+
           {/* Online Directory Explorer */}
           <button
             id="online-search-btn"
             onClick={onOpenOnlineSearchModal}
             className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg bg-[#1C1610] hover:bg-[#282017] text-amber-200 hover:text-amber-100 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm"
-            title="Explore Online Malayalam Radio Directory"
+            title="Explore Malayalam Radio Directory"
           >
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span className="hidden sm:inline uppercase text-[10px] tracking-wider">Directory</span>
@@ -296,17 +312,6 @@ export const Header: React.FC<HeaderProps> = ({
                 {recordings.length}
               </span>
             ) : null}
-          </button>
-
-          {/* Add Custom Station Link Button */}
-          <button
-            id="header-add-station-btn"
-            onClick={onOpenAddModal}
-            className="flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold uppercase tracking-wider rounded-lg bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-black hover:brightness-110 transition active:scale-95 shadow-md shadow-amber-500/20"
-          >
-            <Plus className="w-3.5 h-3.5 stroke-[2.5]" />
-            <span className="hidden sm:inline">Add Stream</span>
-            <span className="sm:hidden font-malayalam">ചേർക്കുക</span>
           </button>
         </div>
       </div>

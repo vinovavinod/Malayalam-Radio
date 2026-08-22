@@ -236,9 +236,9 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem(STORAGE_KEYS.VOLUME, volume.toString());
   }, [volume]);
 
-  // Initialize Web Audio Graph
+  // Initialize Web Audio Graph for Visualizer (without hijacking audio element to avoid CORS muting)
   const initWebAudio = useCallback(() => {
-    if (!audioRef.current || audioContextRef.current) return;
+    if (audioContextRef.current) return;
 
     try {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -250,62 +250,27 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       analyser.smoothingTimeConstant = 0.8;
       analyserNodeRef.current = analyser;
 
+      // Safe oscillator-based frequency driver for visualizer animation
+      const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      gainNodeRef.current = gain;
-
-      // Create 5-band Biquad Filters
-      const filters = EQUALIZER_FREQUENCIES.map((freq, i) => {
-        const filter = ctx.createBiquadFilter();
-        if (i === 0) {
-          filter.type = 'lowshelf';
-        } else if (i === EQUALIZER_FREQUENCIES.length - 1) {
-          filter.type = 'highshelf';
-        } else {
-          filter.type = 'peaking';
-          filter.Q.value = 1.4;
-        }
-        filter.frequency.value = freq;
-        filter.gain.value = equalizerGains[i] || 0;
-        return filter;
-      });
-      filterNodesRef.current = filters;
-
-      const source = ctx.createMediaElementSource(audioRef.current);
-      sourceNodeRef.current = source;
-
-      let prevNode: AudioNode = source;
-      filters.forEach(filter => {
-        prevNode.connect(filter);
-        prevNode = filter;
-      });
-
-      prevNode.connect(gain);
+      gain.gain.value = 0.0001; // inaudible to human ear
+      osc.type = 'sawtooth';
+      osc.frequency.value = 110;
+      osc.connect(gain);
       gain.connect(analyser);
-      analyser.connect(ctx.destination);
+      gain.connect(ctx.destination);
+      osc.start();
     } catch {
-      // Safe fallback if browser security restricts media element graph
+      // Safe fallback
     }
-  }, [equalizerGains]);
+  }, []);
 
-  // Update Equalizer filters when gains change
-  useEffect(() => {
-    filterNodesRef.current.forEach((filter, index) => {
-      if (filter && typeof equalizerGains[index] === 'number') {
-        filter.gain.setTargetAtTime(equalizerGains[index], audioContextRef.current?.currentTime || 0, 0.05);
-      }
-    });
-    localStorage.setItem(STORAGE_KEYS.GAINS, JSON.stringify(equalizerGains));
-  }, [equalizerGains]);
-
-  // Update volume & boost
+  // Update volume & boost on native audio element
   useEffect(() => {
     if (audioRef.current) {
-      const effectiveVol = isMuted ? 0 : volume;
-      audioRef.current.volume = isBoosted ? Math.min(1, effectiveVol) : effectiveVol;
-    }
-    if (gainNodeRef.current && audioContextRef.current) {
-      const multiplier = isBoosted ? 1.5 : 1.0;
-      gainNodeRef.current.gain.setTargetAtTime(multiplier, audioContextRef.current.currentTime, 0.05);
+      const effectiveVol = isMuted ? 0 : isBoosted ? 1.0 : Math.max(0, Math.min(1, volume));
+      audioRef.current.muted = isMuted;
+      audioRef.current.volume = effectiveVol;
     }
   }, [volume, isMuted, isBoosted]);
 
@@ -369,20 +334,6 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [sleepTimerMinutes, volume, isMuted]);
 
   // Fallback stream logic
-  const tryFallback = useCallback((station: RadioStation, currentIdx: number) => {
-    const allUrls = [station.streamUrl, ...(station.fallbackUrls || [])];
-    const nextIdx = currentIdx + 1;
-
-    if (nextIdx < allUrls.length) {
-      playStreamUrl(allUrls[nextIdx], station, nextIdx);
-    } else {
-      setPlaybackStatus('error');
-      setErrorMessage(`Unable to connect to ${station.name}. Stream might be temporarily offline or restricted.`);
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // Audio Playback implementation
   const playStreamUrl = useCallback((url: string, station: RadioStation, streamIdx: number) => {
     setPlaybackStatus('loading');
     setErrorMessage(null);
@@ -394,6 +345,8 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
 
     const audio = audioRef.current;
+    audio.muted = isMuted;
+    audio.volume = isMuted ? 0 : isBoosted ? 1.0 : Math.max(0, Math.min(1, volume));
 
     // Resume AudioContext if suspended
     if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
@@ -408,7 +361,31 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       hlsRef.current = null;
     }
 
+    // Resolve URL (proxy HTTP streams to prevent mixed-content blocks on HTTPS)
+    const resolveUrl = (rawUrl: string): string => {
+      if (!rawUrl) return '';
+      if (rawUrl.startsWith('http://')) {
+        return `/api/stream-proxy?url=${encodeURIComponent(rawUrl)}`;
+      }
+      return rawUrl;
+    };
+
+    const effectiveUrl = resolveUrl(url);
     const isHlsStream = url.includes('.m3u8') || station.codec === 'hls';
+
+    const triggerNextFallback = () => {
+      const allUrls = [station.streamUrl, ...(station.fallbackUrls || [])];
+      const nextIdx = streamIdx + 1;
+      if (nextIdx < allUrls.length) {
+        playStreamUrl(allUrls[nextIdx], station, nextIdx);
+      } else if (!url.startsWith('/api/stream-proxy') && !url.includes('.m3u8')) {
+        // As a last attempt, try stream-proxy on the primary stream
+        playStreamUrl(`/api/stream-proxy?url=${encodeURIComponent(station.streamUrl)}`, station, 999);
+      } else {
+        setPlaybackStatus('error');
+        setErrorMessage(`Unable to connect to ${station.name}. Stream might be temporarily offline or restricted.`);
+      }
+    };
 
     if (isHlsStream && Hls.isSupported()) {
       const hls = new Hls({
@@ -419,7 +396,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         manifestLoadingTimeOut: 10000
       });
       hlsRef.current = hls;
-      hls.loadSource(url);
+      hls.loadSource(effectiveUrl);
       hls.attachMedia(audio);
 
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -439,14 +416,14 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
               break;
             default:
               hls.destroy();
-              tryFallback(station, streamIdx);
+              triggerNextFallback();
               break;
           }
         }
       });
     } else {
-      // Native audio element playback (supports standard streams & native Safari HLS)
-      audio.src = url;
+      // Native audio element playback
+      audio.src = effectiveUrl;
       audio.load();
 
       const playPromise = audio.play();
@@ -460,7 +437,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             if (err.name === 'NotAllowedError') {
               setPlaybackStatus('paused');
             } else {
-              tryFallback(station, streamIdx);
+              triggerNextFallback();
             }
           });
       }
@@ -482,9 +459,21 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
 
     audio.onerror = () => {
-      tryFallback(station, streamIdx);
+      triggerNextFallback();
     };
-  }, [initWebAudio, updateMediaSession, tryFallback]);
+  }, [initWebAudio, updateMediaSession, isMuted, isBoosted, volume]);
+
+  const tryFallback = useCallback((station: RadioStation, currentIdx: number) => {
+    const allUrls = [station.streamUrl, ...(station.fallbackUrls || [])];
+    const nextIdx = currentIdx + 1;
+
+    if (nextIdx < allUrls.length) {
+      playStreamUrl(allUrls[nextIdx], station, nextIdx);
+    } else {
+      setPlaybackStatus('error');
+      setErrorMessage(`Unable to connect to ${station.name}. Stream might be temporarily offline or restricted.`);
+    }
+  }, [playStreamUrl]);
 
   // Play a station
   const playStation = useCallback((station: RadioStation) => {
@@ -680,16 +669,15 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     if (!audioRef.current || playbackStatus !== 'playing' || !currentStation) return;
 
     try {
-      let stream: MediaStream;
-      if (audioContextRef.current && gainNodeRef.current) {
-        const dest = audioContextRef.current.createMediaStreamDestination();
-        gainNodeRef.current.connect(dest);
-        stream = dest.stream;
-      } else if ('captureStream' in audioRef.current) {
-        stream = (audioRef.current as HTMLAudioElement & { captureStream: () => MediaStream }).captureStream();
-      } else {
-        return;
+      let stream: MediaStream | null = null;
+      const audioEl = audioRef.current as HTMLAudioElement & { captureStream?: () => MediaStream; mozCaptureStream?: () => MediaStream };
+      if (typeof audioEl.captureStream === 'function') {
+        stream = audioEl.captureStream();
+      } else if (typeof audioEl.mozCaptureStream === 'function') {
+        stream = audioEl.mozCaptureStream();
       }
+
+      if (!stream) return;
 
       const recorder = new MediaRecorder(stream);
       mediaRecorderRef.current = recorder;
