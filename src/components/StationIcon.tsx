@@ -318,16 +318,6 @@ export const StationIcon: React.FC<StationIconProps> = ({
         monogram: 'RM'
       };
     }
-    if (id === 'club-fm-kerala' || name.includes('club fm')) {
-      return {
-        bg: 'from-red-600 via-rose-600 to-yellow-600',
-        borderColor: 'border-red-400/60',
-        textColor: 'text-white',
-        icon: <Flame className={iconSizes} />,
-        badge: 'Club FM',
-        monogram: 'CFM'
-      };
-    }
     if (id === 'radio4u' || name.includes('radio4u')) {
       return {
         bg: 'from-orange-600 via-amber-600 to-red-600',
@@ -366,26 +356,6 @@ export const StationIcon: React.FC<StationIconProps> = ({
         icon: <Globe className={iconSizes} />,
         badge: 'പ്രവാസി',
         monogram: 'GULF'
-      };
-    }
-    if (id === 'radio-malayalam' || name.includes('evergreen')) {
-      return {
-        bg: 'from-amber-800 via-yellow-700 to-orange-900',
-        borderColor: 'border-amber-400/50',
-        textColor: 'text-amber-100',
-        icon: <Disc3 className={iconSizes} />,
-        badge: 'Classic',
-        monogram: 'OLD'
-      };
-    }
-    if (id === 'radio-sunflower' || name.includes('sunflower') || name.includes('suno')) {
-      return {
-        bg: 'from-yellow-500 via-amber-500 to-orange-500',
-        borderColor: 'border-yellow-400/60',
-        textColor: 'text-yellow-950',
-        icon: <Flower2 className={iconSizes} />,
-        badge: 'Melody',
-        monogram: 'SUN'
       };
     }
     if (id === 'kancheeravam-radio' || name.includes('kancheeravam')) {

@@ -330,24 +330,6 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     codec: 'mp3'
   },
   {
-    id: 'club-fm-kerala',
-    name: 'Club FM Kerala',
-    malayalamName: 'ക്ലബ് എഫ്.എം കേരള',
-    streamUrl: 'https://strw3.openstream.co/1458',
-    fallbackUrls: [
-      'http://strw3.openstream.co/1458'
-    ],
-    logo: 'https://onlineradiofm.in/assets/image/radio/180/clubfmnewlogo.webp',
-    category: 'online',
-    frequency: '94.3 / 104.8 FM',
-    location: 'Kerala',
-    bitrate: '128 kbps MP3',
-    gradient: 'from-yellow-600 to-red-600',
-    description: 'ടൺ കണക്കിന് ഫൺ! മാതൃഭൂമിയുടെ ജനപ്രിയ എഫ്.എം. ആർ.ജെ വർത്തമാനങ്ങൾ, ട്രെൻഡിങ് സിനിമാ ഗാനങ്ങൾ, കോമഡി ട്രാക്കുകൾ.',
-    tags: ['ഓൺലൈൻ റേഡിയോ', 'ക്ലബ് എഫ്.എം', 'മാതൃഭൂമി', 'സൂപ്പർഹിറ്റുകൾ'],
-    codec: 'mp3'
-  },
-  {
     id: 'radio4u',
     name: 'Radio4U',
     malayalamName: 'റേഡിയോ ഫോർ യു',
@@ -417,44 +399,6 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     gradient: 'from-amber-500 to-emerald-700',
     description: 'യു.എ.ഇ, ഖത്തർ, സൗദി അറേബ്യ അടക്കമുള്ള ഗൾഫ് പ്രവാസികൾക്കായി ലോകമെമ്പാടുമുള്ള മലയാളികളെ കോർത്തിണക്കുന്ന ഡിജിറ്റൽ റേഡിയോ.',
     tags: ['ഓൺലൈൻ റേഡിയോ', 'പ്രവാസി', 'ഗൾഫ്', 'ദുബായ്', 'വാർത്തകൾ'],
-    codec: 'mp3'
-  },
-  {
-    id: 'radio-malayalam',
-    name: 'Radio Malayalam Evergreen',
-    malayalamName: 'റേഡിയോ മലയാളം എവർഗ്രീൻ',
-    streamUrl: 'https://stream.zeno.fm/4621p5bdfp8uv',
-    fallbackUrls: [
-      'https://stream.zeno.fm/k22dfh67w8quv',
-      'https://stream.zeno.fm/08e1vkshcc9uv'
-    ],
-    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/03/Yesudas-Radio.jpg',
-    category: 'online',
-    frequency: '128 kbps HD',
-    location: 'Kerala / Global',
-    bitrate: '128 kbps MP3',
-    gradient: 'from-amber-600 to-orange-700',
-    description: 'മലയാള ചലച്ചിത്ര ലോകത്തെ സുവർണ്ണ ഗാനങ്ങൾ. ദേവരാജൻ മാസ്റ്റർ, എം.എസ്. ബാബുരാജ്, യേശുദാസ്, ചിത്ര തുടങ്ങിയ മഹാപ്രതിഭകളുടെ നിത്യഹരിത ഗാനങ്ങൾ.',
-    tags: ['ഓൺലൈൻ റേഡിയോ', 'എവർഗ്രീൻ', 'യേശുദാസ്', 'ക്ലാസിക്കുകൾ'],
-    codec: 'mp3'
-  },
-  {
-    id: 'radio-sunflower',
-    name: 'Radio Sunflower (Suno Melody)',
-    malayalamName: 'റേഡിയോ സൺഫ്ലവർ മെലഡി',
-    streamUrl: 'https://stream.zeno.fm/k22dfh67w8quv',
-    fallbackUrls: [
-      'https://stream.zeno.fm/4621p5bdfp8uv',
-      'https://strw3.openstream.co/1459'
-    ],
-    logo: 'https://onlineradiohub.com/wp-content/uploads/2022/03/radio-suno-malayalam-fm.jpg',
-    category: 'online',
-    frequency: 'Melody Stream',
-    location: 'Kerala',
-    bitrate: '128 kbps MP3',
-    gradient: 'from-yellow-500 to-amber-600',
-    description: 'ശാന്തവും മനോഹരവുമായ മലയാള മെലഡികൾ, അക്കൗസ്റ്റിക് ഗാനങ്ങൾ, മനസ്സിന് കുളിർമയേകുന്ന പശ്ചാത്തല സംഗീതം.',
-    tags: ['ഓൺലൈൻ റേഡിയോ', 'മെലഡികൾ', 'അക്കൗസ്റ്റിക്', 'റിലാക്സ്'],
     codec: 'mp3'
   },
   {
