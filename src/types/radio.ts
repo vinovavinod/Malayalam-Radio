@@ -1,13 +1,16 @@
 export type RadioCategory = 
   | 'all'
   | 'favorites'
-  | 'custom'
+  | 'onam-special'
   | 'top-fm'
   | 'akashvani'
   | 'hits-retro'
   | 'news-talk'
   | 'gulf-pravasi'
-  | 'devotional';
+  | 'devotional'
+  | 'custom';
+
+export type OnamThemeMode = 'ponnonam' | 'kasavu' | 'temple';
 
 export interface RadioStation {
   id: string;
@@ -15,7 +18,7 @@ export interface RadioStation {
   malayalamName?: string;
   streamUrl: string;
   fallbackUrls?: string[];
-  category: 'top-fm' | 'akashvani' | 'hits-retro' | 'news-talk' | 'gulf-pravasi' | 'devotional' | 'custom';
+  category: 'onam-special' | 'top-fm' | 'akashvani' | 'hits-retro' | 'news-talk' | 'gulf-pravasi' | 'devotional' | 'custom';
   frequency?: string;
   location?: string;
   bitrate?: string;

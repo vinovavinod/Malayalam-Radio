@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Radio, Volume2, Sparkles, ChevronRight, ChevronLeft, Disc3 } from 'lucide-react';
+import { Radio, Sparkles, ChevronRight, ChevronLeft, Disc3, Flame } from 'lucide-react';
 import { useRadio } from '../context/RadioContext';
 import { RadioStation } from '../types/radio';
 
@@ -9,7 +9,6 @@ export const RetroRadioTuner: React.FC = () => {
   const [selectedBand, setSelectedBand] = useState<'FM' | 'AM'>('FM');
   const [currentFreq, setCurrentFreq] = useState<number>(94.3); // default FM frequency in MHz
   const dialRef = useRef<HTMLDivElement | null>(null);
-  const [isDragging, setIsDragging] = useState(false);
 
   // Parse frequency number from station if present
   const parseStationFreq = (station: RadioStation): number | null => {
@@ -17,12 +16,6 @@ export const RetroRadioTuner: React.FC = () => {
     const match = station.frequency.match(/(\d+(\.\d+)?)/);
     return match ? parseFloat(match[1]) : null;
   };
-
-  // Filter stations for the current band
-  const fmStations = allStations.filter(s => {
-    const f = parseStationFreq(s);
-    return f && f >= 87.0 && f <= 108.0;
-  });
 
   const minFreq = selectedBand === 'FM' ? 88.0 : 530;
   const maxFreq = selectedBand === 'FM' ? 108.0 : 1600;
@@ -79,51 +72,52 @@ export const RetroRadioTuner: React.FC = () => {
   };
 
   return (
-    <div className="w-full max-w-4xl mx-auto my-6 bg-[#0E0E0E] border-2 border-[#262626] rounded-2xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+    <div className="w-full max-w-4xl mx-auto my-4 sm:my-6 bg-gradient-to-b from-[#1E1710] to-[#120E0A] border-2 border-amber-500/40 rounded-3xl p-5 sm:p-8 shadow-2xl relative overflow-hidden">
       
-      {/* Subtle Grid / Texture Accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(#333333_1px,transparent_1px)] [background-size:16px_16px] opacity-20 pointer-events-none" />
+      {/* Kasavu Gold Decorative Floral Ring Motif */}
+      <div className="absolute -top-16 -right-16 w-48 h-48 bg-amber-400/10 rounded-full blur-2xl pointer-events-none" />
+      <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-yellow-500/10 rounded-full blur-2xl pointer-events-none" />
       
-      {/* Corner Accents */}
-      <div className="absolute top-3 left-3 w-2 h-2 rounded-full bg-[#FF3D00]/60"></div>
-      <div className="absolute top-3 right-3 w-2 h-2 rounded-full bg-[#FF3D00]/60"></div>
-      <div className="absolute bottom-3 left-3 w-2 h-2 rounded-full bg-[#FF3D00]/60"></div>
-      <div className="absolute bottom-3 right-3 w-2 h-2 rounded-full bg-[#FF3D00]/60"></div>
+      {/* Brass Corner Studs */}
+      <div className="absolute top-3.5 left-3.5 w-3 h-3 rounded-full bg-gradient-to-br from-amber-200 to-yellow-600 shadow-md border border-amber-300"></div>
+      <div className="absolute top-3.5 right-3.5 w-3 h-3 rounded-full bg-gradient-to-br from-amber-200 to-yellow-600 shadow-md border border-amber-300"></div>
+      <div className="absolute bottom-3.5 left-3.5 w-3 h-3 rounded-full bg-gradient-to-br from-amber-200 to-yellow-600 shadow-md border border-amber-300"></div>
+      <div className="absolute bottom-3.5 right-3.5 w-3 h-3 rounded-full bg-gradient-to-br from-amber-200 to-yellow-600 shadow-md border border-amber-300"></div>
 
       {/* Top Header of Vintage Radio */}
-      <div className="flex items-center justify-between border-b border-[#262626] pb-4 mb-6 relative z-10">
+      <div className="flex items-center justify-between border-b border-amber-500/30 pb-4 mb-5 relative z-10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-[#181818] border border-[#333333] flex items-center justify-center text-[#FF3D00]">
+          <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 shadow">
             <Radio className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-black tracking-wider text-[#F0F0F0] uppercase">
-              VINTAGE KERALA RADIO DIAL
+            <h2 className="text-base sm:text-lg font-black tracking-wider text-amber-100 uppercase flex items-center gap-1.5">
+              <span>പൊന്നോണം VINTAGE RADIO DIAL</span>
             </h2>
-            <p className="text-xs text-[#888888] font-malayalam">
-              അനലോഗ് ഫ്രീക്വൻസി ട്യൂണർ • 88.0 - 108.0 MHz
+            <p className="text-xs text-amber-200/70 font-malayalam">
+              ക്ലാസിക് അനലോഗ് ട്യൂണർ • Kerala FM Broadcast 88.0 - 108.0 MHz
             </p>
           </div>
         </div>
 
         {/* Band Switch (FM / AM) */}
-        <div className="flex items-center bg-[#141414] border border-[#333333] p-1 rounded-lg">
+        <div className="flex items-center bg-[#17120B] border border-amber-500/30 p-1 rounded-xl shadow-inner">
           <button
             onClick={() => { setSelectedBand('FM'); setCurrentFreq(94.3); }}
-            className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded transition ${
+            className={`px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider rounded-lg transition ${
               selectedBand === 'FM'
-                ? 'bg-[#FF3D00] text-black shadow-md'
-                : 'text-[#888888] hover:text-white'
+                ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow'
+                : 'text-amber-200/60 hover:text-amber-100'
             }`}
           >
             FM BAND
           </button>
           <button
             onClick={() => { setSelectedBand('AM'); setCurrentFreq(810); }}
-            className={`px-4 py-1.5 text-xs font-bold uppercase tracking-wider rounded transition ${
+            className={`px-3.5 py-1.5 text-xs font-extrabold uppercase tracking-wider rounded-lg transition ${
               selectedBand === 'AM'
-                ? 'bg-[#FF3D00] text-black shadow-md'
-                : 'text-[#888888] hover:text-white'
+                ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow'
+                : 'text-amber-200/60 hover:text-amber-100'
             }`}
           >
             AM / MW
@@ -131,24 +125,24 @@ export const RetroRadioTuner: React.FC = () => {
         </div>
       </div>
 
-      {/* Illuminated Backlit Glass Tuner Dial */}
-      <div className="relative rounded-xl bg-[#0A0A0A] border border-[#333333] p-5 sm:p-6 shadow-inner overflow-hidden mb-6 relative z-10">
+      {/* Illuminated Backlit Warm Glass Tuner Dial */}
+      <div className="relative rounded-2xl bg-[#0D0A07] border border-amber-500/40 p-4 sm:p-6 shadow-inner overflow-hidden mb-5 z-10">
         
-        {/* Flame Backlight Glow */}
-        <div className="absolute inset-0 bg-radial from-[#FF3D00]/10 via-transparent to-transparent pointer-events-none" />
+        {/* Warm Golden Backlight Glow */}
+        <div className="absolute inset-0 bg-gradient-to-r from-amber-500/5 via-yellow-400/10 to-amber-500/5 pointer-events-none" />
 
         {/* Frequency Reading Digit */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse"></span>
-            <span className="text-xs font-mono font-bold tracking-widest text-[#FF3D00] uppercase">
-              SIGNAL: {playbackStatus === 'playing' ? 'LOCKED (STEREO)' : 'SEARCHING'}
+            <Flame className="w-4 h-4 text-amber-400 animate-flame" />
+            <span className="text-xs font-mono font-bold tracking-widest text-amber-300 uppercase">
+              SIGNAL: {playbackStatus === 'playing' ? 'LOCKED (STEREO HD)' : 'TUNING'}
             </span>
           </div>
 
-          <div className="font-mono text-3xl font-black text-[#F0F0F0] tracking-wider bg-[#141414] px-4 py-1 rounded-lg border border-[#FF3D00]/40 shadow-inner">
+          <div className="font-mono text-2xl sm:text-3xl font-black text-amber-200 tracking-wider bg-[#1B140D] px-4 py-1 rounded-xl border border-amber-500/50 shadow-inner">
             {currentFreq.toFixed(selectedBand === 'FM' ? 1 : 0)}
-            <span className="text-sm font-sans font-bold text-[#FF3D00] ml-1.5">
+            <span className="text-sm font-sans font-bold text-amber-400 ml-1.5">
               {selectedBand === 'FM' ? 'MHz' : 'kHz'}
             </span>
           </div>
@@ -158,23 +152,23 @@ export const RetroRadioTuner: React.FC = () => {
         <div 
           ref={dialRef}
           onClick={handleDialClick}
-          className="relative h-28 bg-[#111111] border border-[#2A2A2A] rounded-lg cursor-crosshair overflow-hidden select-none py-2"
+          className="relative h-28 bg-[#15100A] border border-amber-500/30 rounded-xl cursor-crosshair overflow-hidden select-none py-2"
         >
           {/* Tick marks along top and bottom */}
-          <div className="absolute inset-x-4 top-2 flex justify-between items-end h-6 border-b border-[#333333]">
+          <div className="absolute inset-x-4 top-2 flex justify-between items-end h-6 border-b border-amber-500/30">
             {Array.from({ length: 41 }).map((_, i) => {
               const isMajor = i % 4 === 0;
               return (
                 <div 
                   key={i} 
-                  className={`w-0.5 ${isMajor ? 'h-4 bg-[#FF3D00]' : 'h-2 bg-[#444444]'}`}
+                  className={`w-0.5 ${isMajor ? 'h-4 bg-amber-400' : 'h-2 bg-amber-500/40'}`}
                 />
               );
             })}
           </div>
 
           {/* Major Frequency Numbers */}
-          <div className="absolute inset-x-4 top-9 flex justify-between text-[11px] font-mono font-bold text-[#CCCCCC]">
+          <div className="absolute inset-x-4 top-9 flex justify-between text-[11px] font-mono font-bold text-amber-200/90">
             {selectedBand === 'FM' ? (
               <>
                 <span>88</span>
@@ -219,8 +213,8 @@ export const RetroRadioTuner: React.FC = () => {
                   className={`absolute -translate-x-1/2 flex flex-col items-center cursor-pointer group hover:z-20 transition`}
                   title={`${station.name} (${sf} ${selectedBand === 'FM' ? 'MHz' : 'kHz'})`}
                 >
-                  <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-[#FF3D00] shadow-md shadow-[#FF3D00]' : 'bg-[#555555] group-hover:bg-[#FF3D00]'} transition`} />
-                  <span className={`text-[9px] font-bold tracking-tighter truncate max-w-[60px] mt-0.5 ${isSelected ? 'text-[#FF3D00]' : 'text-[#666666] group-hover:text-white'}`}>
+                  <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-amber-400 shadow-md shadow-amber-400' : 'bg-amber-500/40 group-hover:bg-amber-400'} transition`} />
+                  <span className={`text-[9px] font-bold tracking-tighter truncate max-w-[65px] mt-0.5 ${isSelected ? 'text-amber-300 font-extrabold' : 'text-neutral-400 group-hover:text-amber-200'}`}>
                     {station.name.replace('Radio ', '').replace('AIR ', '')}
                   </span>
                 </div>
@@ -228,35 +222,35 @@ export const RetroRadioTuner: React.FC = () => {
             })}
           </div>
 
-          {/* The Glowing Red / Flame Indicator Needle */}
+          {/* The Glowing Gold Indicator Needle */}
           <div
             style={{ left: `${needlePercent}%` }}
-            className="absolute top-0 bottom-0 w-0.5 bg-[#FF3D00] shadow-[0_0_12px_#FF3D00] -translate-x-1/2 pointer-events-none transition-all duration-150 z-10"
+            className="absolute top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-200 via-amber-400 to-yellow-500 shadow-[0_0_12px_#FFD700] -translate-x-1/2 pointer-events-none transition-all duration-150 z-10"
           >
-            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#FF3D00] rounded-full shadow-lg" />
-            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#FF3D00] rounded-full shadow-lg" />
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-amber-300 rounded-full shadow-lg border border-yellow-200" />
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-amber-300 rounded-full shadow-lg border border-yellow-200" />
           </div>
         </div>
       </div>
 
       {/* Physical Tuning Controls & Quick Snapping Buttons */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2 relative z-10">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-1 relative z-10">
         
         {/* Fine Tuning Buttons */}
         <div className="flex items-center gap-2">
           <button
             onClick={handleTunePrev}
-            className="flex items-center gap-1 px-3.5 py-2 rounded-lg bg-[#141414] hover:bg-[#202020] border border-[#333333] hover:border-[#FF3D00]/50 text-[#CCCCCC] hover:text-[#FF3D00] font-bold text-xs shadow transition active:scale-95"
+            className="flex items-center gap-1 px-3.5 py-2 rounded-xl bg-[#1C160F] hover:bg-[#281F15] border border-amber-500/30 hover:border-amber-400 text-amber-200 font-bold text-xs shadow transition active:scale-95"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-4 h-4 text-amber-400" />
             <span>FINE TUNE -</span>
           </button>
           <button
             onClick={handleTuneNext}
-            className="flex items-center gap-1 px-3.5 py-2 rounded-lg bg-[#141414] hover:bg-[#202020] border border-[#333333] hover:border-[#FF3D00]/50 text-[#CCCCCC] hover:text-[#FF3D00] font-bold text-xs shadow transition active:scale-95"
+            className="flex items-center gap-1 px-3.5 py-2 rounded-xl bg-[#1C160F] hover:bg-[#281F15] border border-amber-500/30 hover:border-amber-400 text-amber-200 font-bold text-xs shadow transition active:scale-95"
           >
             <span>FINE TUNE +</span>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-4 h-4 text-amber-400" />
           </button>
         </div>
 
@@ -272,14 +266,14 @@ export const RetroRadioTuner: React.FC = () => {
                   if (sf) setCurrentFreq(sf);
                   playStation(station);
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition flex items-center gap-1.5 ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold border transition flex items-center gap-1.5 ${
                   isPlaying
-                    ? 'bg-[#FF3D00] text-black border-[#FF3D00] shadow-md shadow-[#FF3D00]/30'
-                    : 'bg-[#141414] text-[#888888] hover:text-white border-[#333333] hover:bg-[#1E1E1E]'
+                    ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black border-amber-300 shadow-md shadow-amber-500/25'
+                    : 'bg-[#1C160F] text-amber-200/70 hover:text-white border-amber-500/25 hover:bg-[#261E14]'
                 }`}
               >
-                <Disc3 className={`w-3 h-3 ${isPlaying ? 'animate-spin' : ''}`} />
-                <span className="truncate max-w-[90px]">{station.name}</span>
+                <Disc3 className={`w-3 h-3 ${isPlaying ? 'animate-spin text-black' : 'text-amber-400'}`} />
+                <span className="truncate max-w-[95px]">{station.name}</span>
               </button>
             );
           })}

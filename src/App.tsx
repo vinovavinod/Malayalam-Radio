@@ -12,7 +12,6 @@ import {
   SlidersHorizontal,
   History,
   RotateCcw,
-  Search,
   Volume2
 } from 'lucide-react';
 import { RadioProvider, useRadio } from './context/RadioContext';
@@ -40,7 +39,8 @@ function RadioAppContent() {
     recentStations,
     playStation,
     currentStation,
-    favorites
+    favorites,
+    onamTheme
   } = useRadio();
 
   const [viewMode, setViewMode] = useState<'grid' | 'tuner'>('grid');
@@ -67,20 +67,33 @@ function RadioAppContent() {
   const getCategoryIcon = (iconName: string) => {
     switch (iconName) {
       case 'Radio': return <Radio className="w-3.5 h-3.5" />;
-      case 'Heart': return <Heart className="w-3.5 h-3.5 text-red-400 fill-red-400/30" />;
-      case 'PlusCircle': return <PlusCircle className="w-3.5 h-3.5 text-emerald-400" />;
-      case 'Sparkles': return <Sparkles className="w-3.5 h-3.5 text-amber-400" />;
-      case 'TowerControl': return <TowerControl className="w-3.5 h-3.5 text-sky-400" />;
-      case 'Music': return <Music className="w-3.5 h-3.5 text-fuchsia-400" />;
-      case 'Globe': return <Globe className="w-3.5 h-3.5 text-teal-400" />;
+      case 'Heart': return <Heart className="w-3.5 h-3.5 text-rose-400 fill-rose-400/30" />;
+      case 'PlusCircle': return <PlusCircle className="w-3.5 h-3.5 text-amber-400" />;
+      case 'Sparkles': return <Sparkles className="w-3.5 h-3.5 text-yellow-400" />;
+      case 'TowerControl': return <TowerControl className="w-3.5 h-3.5 text-amber-300" />;
+      case 'Music': return <Music className="w-3.5 h-3.5 text-amber-400" />;
+      case 'Globe': return <Globe className="w-3.5 h-3.5 text-emerald-400" />;
       case 'Newspaper': return <Newspaper className="w-3.5 h-3.5 text-orange-400" />;
-      case 'Flame': return <Flame className="w-3.5 h-3.5 text-rose-400" />;
+      case 'Flame': return <Flame className="w-3.5 h-3.5 text-amber-400" />;
       default: return <Radio className="w-3.5 h-3.5" />;
     }
   };
 
+  const themeClass = onamTheme === 'kasavu' 
+    ? 'theme-kasavu bg-[#110F0C]' 
+    : onamTheme === 'temple' 
+    ? 'theme-temple bg-[#140A0A]' 
+    : 'theme-ponnonam bg-[#0E0C0A]';
+
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#F0F0F0] flex flex-col pb-32">
+    <div className={`min-h-screen ${themeClass} text-[#FAF7F0] flex flex-col pb-32 transition-colors duration-300 selection:bg-amber-500 selection:text-black`}>
+      {/* Festive Background Glow & Floral Motifs */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-amber-500/10 via-yellow-600/5 to-transparent blur-3xl"></div>
+        <div className="absolute top-1/3 -right-24 w-80 h-80 bg-orange-600/5 blur-3xl rounded-full"></div>
+        <div className="absolute bottom-1/4 -left-24 w-80 h-80 bg-amber-500/5 blur-3xl rounded-full"></div>
+      </div>
+
       {/* Header */}
       <Header
         onOpenAddModal={handleOpenNewAddModal}
@@ -93,55 +106,92 @@ function RadioAppContent() {
         setViewMode={setViewMode}
       />
 
-      <main className="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 flex-1 flex flex-col">
+      <main className="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-5 flex-1 flex flex-col relative z-10">
         
+        {/* Onam Festive Ribbon Banner */}
+        <div className="mb-4 sm:mb-6 rounded-2xl bg-gradient-to-r from-[#211A10] via-[#2A2014] to-[#211A10] border border-amber-500/35 p-3.5 sm:p-4 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-3 relative overflow-hidden">
+          <div className="absolute -right-8 -top-8 w-28 h-28 bg-amber-400/10 rounded-full blur-xl pointer-events-none"></div>
+          
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center text-amber-300 shadow-inner">
+              <Sparkles className="w-5 h-5 text-amber-400 animate-pulse" />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-amber-300">
+                  പൊന്നോണം സന്ധ്യ & ഓണപ്പാട്ടുകൾ
+                </span>
+                <span className="text-[9px] px-2 py-0.5 rounded-full bg-amber-400 text-black font-extrabold uppercase">
+                  Onam Special
+                </span>
+              </div>
+              <p className="text-xs sm:text-sm text-neutral-300 font-malayalam mt-0.5">
+                മാവേലി നാടുവാണീടും കാലം... മാതൃഭൂമി, ആകാശവാണി, കൊച്ചി 90 FM & പ്രവാസി തത്സമയ പ്രക്ഷേപണം
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button
+              onClick={() => {
+                setActiveCategory('onam-special');
+                setViewMode('grid');
+              }}
+              className="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-amber-400 to-yellow-500 hover:brightness-110 text-black text-xs font-bold uppercase tracking-wider transition shadow-md shadow-amber-500/20 whitespace-nowrap"
+            >
+              Play Onam Tracks
+            </button>
+          </div>
+        </div>
+
         {/* Artistic Hero / Now Playing Status Display */}
         {currentStation && (
-          <div className="mb-6 p-4 sm:p-5 rounded-xl bg-[#111111] border border-[#262626] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative overflow-hidden">
+          <div className="mb-5 p-4 sm:p-5 rounded-2xl bg-[#1A150F] border border-amber-500/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative overflow-hidden shadow-lg shadow-black/50">
             <div className="flex items-center gap-3 relative z-10">
-              <span className="h-[1px] w-8 bg-[#FF3D00] hidden sm:inline-block"></span>
+              <span className="h-[2px] w-8 bg-amber-400 hidden sm:inline-block rounded-full"></span>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-[#FF3D00] font-bold">
-                    Now Playing
+                  <span className="text-[10px] uppercase tracking-[0.25em] text-amber-400 font-bold flex items-center gap-1">
+                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping inline-block"></span>
+                    Now Live Broadcast
                   </span>
-                  <span className="text-[#555555]">•</span>
-                  <span className="text-[10px] uppercase font-mono text-[#888888]">
-                    {currentStation.frequency || 'Live Web Stream'}
+                  <span className="text-neutral-600">•</span>
+                  <span className="text-[11px] font-mono font-medium text-amber-200/70">
+                    {currentStation.frequency || 'Kerala FM'}
                   </span>
                 </div>
                 <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">
                   {currentStation.name}
                 </h2>
                 {currentStation.malayalamName && (
-                  <p className="text-xs font-malayalam text-[#AAAAAA] mt-0.5">
+                  <p className="text-xs font-malayalam text-amber-200/80 mt-0.5 font-medium">
                     {currentStation.malayalamName}
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="flex items-center gap-2 relative z-10">
+            <div className="flex items-center gap-2 relative z-10 w-full sm:w-auto justify-end">
               <button
                 onClick={() => setIsVisualizerModalOpen(true)}
-                className="px-3 py-1.5 rounded-lg bg-[#1C1C1C] hover:bg-[#252525] border border-[#333333] hover:border-[#FF3D00]/50 text-xs font-bold text-[#CCCCCC] hover:text-[#FF3D00] flex items-center gap-1.5 transition"
+                className="px-3 py-1.5 rounded-lg bg-[#261E14] hover:bg-[#33281B] border border-amber-500/40 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-amber-100 flex items-center gap-1.5 transition shadow-sm"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#FF3D00]" />
+                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
                 <span className="uppercase text-[10px] tracking-wider">Visualizer</span>
               </button>
               <button
                 onClick={() => setIsEqModalOpen(true)}
-                className="px-3 py-1.5 rounded-lg bg-[#1C1C1C] hover:bg-[#252525] border border-[#333333] hover:border-[#FF3D00]/50 text-xs font-bold text-[#CCCCCC] hover:text-[#FF3D00] flex items-center gap-1.5 transition"
+                className="px-3 py-1.5 rounded-lg bg-[#261E14] hover:bg-[#33281B] border border-amber-500/40 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-amber-100 flex items-center gap-1.5 transition shadow-sm"
               >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-[#FF3D00]" />
-                <span className="uppercase text-[10px] tracking-wider">EQ</span>
+                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" />
+                <span className="uppercase text-[10px] tracking-wider">EQ Sound</span>
               </button>
             </div>
           </div>
         )}
 
-        {/* Category Pills Navigation Bar */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none border-b border-[#262626] mb-6">
+        {/* Category Navigation Bar */}
+        <div className="flex items-center gap-2 overflow-x-auto pb-3 pt-1 scrollbar-none border-b border-amber-500/20 mb-5">
           {CATEGORIES_CONFIG.map(cat => {
             const isSelected = activeCategory === cat.id;
             const count = cat.id === 'all' 
@@ -160,16 +210,16 @@ function RadioAppContent() {
                   setActiveCategory(cat.id as RadioCategory);
                   setViewMode('grid');
                 }}
-                className={`px-3.5 py-2 rounded-lg text-xs font-bold whitespace-nowrap transition flex items-center gap-2 flex-shrink-0 border uppercase tracking-wider ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition flex items-center gap-2 flex-shrink-0 border uppercase tracking-wider shadow-sm ${
                   isSelected
-                    ? 'bg-[#FF3D00] text-black border-[#FF3D00] shadow-md shadow-[#FF3D00]/20'
-                    : 'bg-[#111111] text-[#999999] hover:text-white border-[#2A2A2A] hover:border-[#444444] hover:bg-[#181818]'
+                    ? 'bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-500 text-black border-amber-300 font-extrabold shadow-md shadow-amber-500/25'
+                    : 'bg-[#1A140E] text-amber-100/70 hover:text-white border-amber-500/20 hover:border-amber-400/50 hover:bg-[#251D14]'
                 }`}
               >
                 {getCategoryIcon(cat.icon)}
                 <span>{cat.label}</span>
                 <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono font-bold ${
-                  isSelected ? 'bg-black text-white' : 'bg-[#222222] text-[#777777]'
+                  isSelected ? 'bg-black text-amber-300' : 'bg-[#2A2016] text-amber-300/70'
                 }`}>
                   {count}
                 </span>
@@ -178,14 +228,14 @@ function RadioAppContent() {
           })}
         </div>
 
-        {/* Recently Played Stations Strip (Only if recents exist and no active search) */}
+        {/* Recently Played Stations Strip */}
         {recentStations.length > 0 && !searchQuery && activeCategory === 'all' && viewMode === 'grid' && (
-          <div className="mb-6 bg-[#111111] border border-[#262626] rounded-xl p-3.5">
+          <div className="mb-5 bg-[#18130D] border border-amber-500/25 rounded-xl p-3.5 shadow-sm">
             <div className="flex items-center justify-between mb-2 px-1">
-              <div className="flex items-center gap-2 text-xs font-bold text-[#CCCCCC] uppercase tracking-wider">
-                <History className="w-3.5 h-3.5 text-[#FF3D00]" />
+              <div className="flex items-center gap-2 text-xs font-bold text-amber-200 uppercase tracking-wider">
+                <History className="w-3.5 h-3.5 text-amber-400" />
                 <span>Recently Played</span>
-                <span className="text-[11px] font-malayalam text-[#777777] font-normal normal-case">
+                <span className="text-[11px] font-malayalam text-amber-200/60 font-normal normal-case">
                   (അവസാനം കേട്ടവ)
                 </span>
               </div>
@@ -200,12 +250,12 @@ function RadioAppContent() {
                     onClick={() => playStation(st)}
                     className={`flex items-center gap-2 px-3 py-1.5 rounded-lg border text-xs font-semibold whitespace-nowrap transition flex-shrink-0 ${
                       isPlaying
-                        ? 'bg-[#FF3D00]/20 border-[#FF3D00] text-[#FF3D00]'
-                        : 'bg-[#161616] border-[#2A2A2A] hover:border-[#444444] text-[#AAAAAA] hover:text-white'
+                        ? 'bg-amber-500/25 border-amber-400 text-amber-200 font-bold'
+                        : 'bg-[#211A11] border-amber-500/20 hover:border-amber-400/50 text-neutral-300 hover:text-white'
                     }`}
                   >
-                    <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-[#FF3D00] animate-ping' : 'bg-[#555555]'}`} />
-                    <span className="truncate max-w-[120px]">{st.name}</span>
+                    <span className={`w-1.5 h-1.5 rounded-full ${isPlaying ? 'bg-amber-400 animate-ping' : 'bg-neutral-500'}`} />
+                    <span className="truncate max-w-[130px]">{st.name}</span>
                   </button>
                 );
               })}
@@ -226,7 +276,7 @@ function RadioAppContent() {
               <div className="flex items-center gap-2">
                 <h2 className="text-sm sm:text-base font-black text-white uppercase tracking-wider flex items-center gap-2">
                   <span>{CATEGORIES_CONFIG.find(c => c.id === activeCategory)?.label || 'Malayalam Stations'}</span>
-                  <span className="text-xs font-normal text-[#666666] font-mono normal-case">
+                  <span className="text-xs font-normal text-amber-300/70 font-mono normal-case">
                     ({filteredStations.length} {filteredStations.length === 1 ? 'station' : 'stations'})
                   </span>
                 </h2>
@@ -235,7 +285,7 @@ function RadioAppContent() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery('')}
-                  className="text-xs text-[#FF3D00] hover:text-white flex items-center gap-1 font-bold"
+                  className="text-xs text-amber-400 hover:text-amber-200 flex items-center gap-1 font-bold"
                 >
                   <RotateCcw className="w-3 h-3" /> Clear search "{searchQuery}"
                 </button>
@@ -244,17 +294,17 @@ function RadioAppContent() {
 
             {/* Grid of Stations */}
             {filteredStations.length === 0 ? (
-              <div className="py-20 text-center text-[#777777] space-y-4 max-w-md mx-auto">
-                <Radio className="w-12 h-12 text-[#444444] mx-auto stroke-1" />
+              <div className="py-16 text-center text-neutral-400 space-y-4 max-w-md mx-auto">
+                <Radio className="w-12 h-12 text-amber-500/40 mx-auto stroke-1" />
                 <div>
-                  <h3 className="text-base font-bold text-[#CCCCCC]">No stations match your criteria</h3>
-                  <p className="text-xs text-[#777777] mt-1 leading-relaxed">
+                  <h3 className="text-base font-bold text-amber-100">No stations match your criteria</h3>
+                  <p className="text-xs text-neutral-400 mt-1 leading-relaxed">
                     {searchQuery 
-                      ? `No stations found for "${searchQuery}". Try searching for Club FM, Suno, Asianet, or Yesudas.`
+                      ? `No stations found for "${searchQuery}". Try searching for Onam, Kochi, Akashvani, or Sargakshetra.`
                       : activeCategory === 'favorites'
                       ? 'You have not added any stations to favorites yet. Click the heart icon on any station to pin it here.'
                       : activeCategory === 'custom'
-                      ? 'You have not added any custom radio links yet.'
+                      ? 'You have not added any custom radio links yet. Click "Add Stream" at top right to paste any live URL!'
                       : 'No radio stations found in this category.'}
                   </p>
                 </div>
@@ -262,18 +312,18 @@ function RadioAppContent() {
                 <div className="flex items-center justify-center gap-3 pt-2">
                   <button
                     onClick={handleOpenNewAddModal}
-                    className="px-4 py-2 rounded-lg bg-[#FF3D00] hover:bg-white text-black text-xs font-bold uppercase tracking-wider shadow-md transition"
+                    className="px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400 to-yellow-500 hover:brightness-110 text-black text-xs font-bold uppercase tracking-wider shadow-md transition"
                   >
-                    Add Radio Link
+                    Add Stream Link
                   </button>
                   <button
                     onClick={() => {
                       setSearchQuery('');
                       setActiveCategory('all');
                     }}
-                    className="px-4 py-2 rounded-lg bg-[#1A1A1A] hover:bg-[#252525] border border-[#333333] text-[#CCCCCC] hover:text-white text-xs font-semibold uppercase tracking-wider transition"
+                    className="px-4 py-2 rounded-lg bg-[#221B12] hover:bg-[#2F251A] border border-amber-500/30 text-amber-200 hover:text-white text-xs font-semibold uppercase tracking-wider transition"
                   >
-                    View All
+                    View All Stations
                   </button>
                 </div>
               </div>

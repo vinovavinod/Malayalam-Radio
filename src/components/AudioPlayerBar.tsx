@@ -16,7 +16,8 @@ import {
   AlertCircle,
   Radio,
   Zap,
-  RotateCw
+  RotateCw,
+  Sparkles
 } from 'lucide-react';
 import { useRadio } from '../context/RadioContext';
 
@@ -31,7 +32,6 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
   onOpenVisualizerModal,
   onOpenEqModal,
   onOpenSleepModal,
-  onOpenRecordingsModal,
 }) => {
   const {
     currentStation,
@@ -62,7 +62,6 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
   // Mini canvas waveform visualizer in bottom player bar
   useEffect(() => {
     if (!miniCanvasRef.current || !analyserNode || playbackStatus !== 'playing') {
-      // Clear canvas if paused
       if (miniCanvasRef.current) {
         const ctx = miniCanvasRef.current.getContext('2d');
         if (ctx) ctx.clearRect(0, 0, miniCanvasRef.current.width, miniCanvasRef.current.height);
@@ -97,10 +96,11 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
         const x = startX + i * (barWidth + gap);
         const y = canvas.height - barHeight;
 
-        // Gradient from bright flame to orange
+        // Gradient from bright Onam gold to amber
         const grad = ctx.createLinearGradient(0, y, 0, canvas.height);
-        grad.addColorStop(0, '#FF3D00');
-        grad.addColorStop(1, '#FF6D00');
+        grad.addColorStop(0, '#FFE066');
+        grad.addColorStop(0.5, '#FFD700');
+        grad.addColorStop(1, '#D4AF37');
 
         ctx.fillStyle = grad;
         ctx.beginPath();
@@ -129,7 +129,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
   return (
     <div 
       id="bottom-audio-player-bar"
-      className="fixed bottom-0 left-0 right-0 z-40 bg-[#0A0A0A]/95 backdrop-blur-xl border-t border-[#262626] px-3 sm:px-6 py-2.5 shadow-2xl transition-all"
+      className="fixed bottom-0 left-0 right-0 z-40 bg-[#14100B]/95 backdrop-blur-xl border-t border-amber-500/40 px-3 sm:px-6 py-2.5 shadow-2xl transition-all shadow-black/80"
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         
@@ -139,7 +139,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             {/* Artwork Icon with Pulse & Mini Visualizer */}
             <div 
               onClick={onOpenVisualizerModal}
-              className={`relative flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center shadow-lg bg-[#141414] border border-[#333333] hover:border-[#FF3D00] text-white font-bold cursor-pointer group`}
+              className={`relative flex-shrink-0 w-11 h-11 rounded-xl flex items-center justify-center shadow-lg bg-[#221B12] border border-amber-500/40 hover:border-amber-400 text-amber-300 font-bold cursor-pointer group`}
               title="Click to open Fullscreen Visualizer"
             >
               {playbackStatus === 'playing' ? (
@@ -150,44 +150,44 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
                   className="w-full h-8 px-1"
                 />
               ) : (
-                <Radio className="w-5 h-5 text-[#888888]" />
+                <Radio className="w-5 h-5 text-amber-400/60" />
               )}
-              <div className="absolute inset-0 bg-[#0A0A0A]/60 rounded-lg opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                <Maximize2 className="w-3.5 h-3.5 text-white" />
+              <div className="absolute inset-0 bg-[#0E0B08]/70 rounded-xl opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+                <Maximize2 className="w-3.5 h-3.5 text-amber-300" />
               </div>
             </div>
 
             {/* Titles */}
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <h4 className="text-sm font-bold text-[#F0F0F0] truncate">
+                <h4 className="text-sm font-bold text-[#FAF7F0] truncate">
                   {currentStation.name}
                 </h4>
                 {currentStation.frequency && (
-                  <span className="hidden sm:inline-block px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-[#FF3D00]/10 text-[#FF3D00] border border-[#FF3D00]/30">
+                  <span className="hidden sm:inline-block px-1.5 py-0.2 rounded text-[9px] font-mono font-bold bg-amber-500/15 text-amber-300 border border-amber-400/35">
                     {currentStation.frequency}
                   </span>
                 )}
               </div>
-              <p className="text-xs font-malayalam text-[#888888] truncate">
+              <p className="text-xs font-malayalam text-amber-200/70 truncate">
                 {currentStation.malayalamName || currentStation.location || 'Malayalam Live Broadcast'}
               </p>
             </div>
           </div>
 
-          {/* Favorite & Quick Status Indicator */}
+          {/* Favorite Toggle */}
           <div className="flex items-center gap-1.5 flex-shrink-0">
             <button
               id="player-fav-btn"
               onClick={() => toggleFavorite(currentStation.id)}
-              className={`p-2 rounded-lg transition ${
+              className={`p-2 rounded-xl transition ${
                 isFav
-                  ? 'text-[#FF3D00] bg-[#FF3D00]/15 hover:bg-[#FF3D00]/25'
-                  : 'text-[#666666] hover:text-[#CCCCCC] hover:bg-[#1A1A1A]'
+                  ? 'text-rose-400 bg-rose-500/20 hover:bg-rose-500/30'
+                  : 'text-amber-200/50 hover:text-amber-100 hover:bg-[#251D14]'
               }`}
               title={isFav ? 'Remove from favorites' : 'Add to favorites'}
             >
-              <Heart className={`w-4 h-4 ${isFav ? 'fill-[#FF3D00] text-[#FF3D00]' : ''}`} />
+              <Heart className={`w-4 h-4 ${isFav ? 'fill-rose-400 text-rose-400' : ''}`} />
             </button>
           </div>
         </div>
@@ -199,18 +199,18 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <button
               id="prev-station-btn"
               onClick={playPreviousStation}
-              className="p-2 text-[#777777] hover:text-white hover:bg-[#1A1A1A] rounded-full transition active:scale-95"
+              className="p-2 text-amber-300/70 hover:text-amber-100 hover:bg-[#251D14] rounded-full transition active:scale-95"
               title="Previous Station"
             >
               <SkipBack className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
 
-            {/* Big Play/Pause Main Button */}
+            {/* Big Play/Pause Main Button in Kasavu Gold */}
             <button
               id="main-play-pause-btn"
               onClick={togglePlayPause}
               disabled={playbackStatus === 'loading'}
-              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#FF3D00] hover:bg-white text-black flex items-center justify-center shadow-lg shadow-[#FF3D00]/25 transition-all active:scale-90 disabled:opacity-75"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:brightness-110 text-black flex items-center justify-center shadow-lg shadow-amber-500/30 transition-all active:scale-90 disabled:opacity-75"
               title={playbackStatus === 'playing' ? 'Pause Stream' : 'Play Stream'}
             >
               {playbackStatus === 'loading' ? (
@@ -226,7 +226,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <button
               id="next-station-btn"
               onClick={playNextStation}
-              className="p-2 text-[#777777] hover:text-white hover:bg-[#1A1A1A] rounded-full transition active:scale-95"
+              className="p-2 text-amber-300/70 hover:text-amber-100 hover:bg-[#251D14] rounded-full transition active:scale-95"
               title="Next Station"
             >
               <SkipForward className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -236,29 +236,29 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           {/* Streaming Status Line */}
           <div className="flex items-center gap-2 text-[10px] uppercase font-mono tracking-wider">
             {playbackStatus === 'playing' ? (
-              <span className="flex items-center gap-1.5 text-[#FF3D00] font-bold">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse"></span>
+              <span className="flex items-center gap-1.5 text-amber-300 font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
                 <span>Live Broadcast</span>
-                <span className="text-[#444444]">•</span>
-                <span className="text-[#888888]">{currentStation.bitrate || '128 kbps'}</span>
+                <span className="text-amber-500/40">•</span>
+                <span className="text-amber-200/80">{currentStation.bitrate || '128 kbps'}</span>
               </span>
             ) : playbackStatus === 'loading' ? (
-              <span className="flex items-center gap-1.5 text-[#FF3D00] animate-pulse">
-                <span>Buffering Stream...</span>
+              <span className="flex items-center gap-1.5 text-amber-300 animate-pulse">
+                <span>Connecting to stream...</span>
               </span>
             ) : playbackStatus === 'error' ? (
-              <div className="flex items-center gap-1.5 text-[#FF3D00]">
+              <div className="flex items-center gap-1.5 text-rose-400">
                 <AlertCircle className="w-3 h-3 flex-shrink-0" />
-                <span className="truncate max-w-[200px]">Stream offline</span>
+                <span className="truncate max-w-[200px]">{errorMessage || 'Stream offline'}</span>
                 <button
                   onClick={() => playStation(currentStation)}
-                  className="underline text-white hover:text-[#FF3D00] font-bold ml-1 flex items-center gap-0.5"
+                  className="underline text-amber-300 hover:text-amber-100 font-bold ml-1 flex items-center gap-0.5"
                 >
                   <RotateCw className="w-3 h-3" /> Retry
                 </button>
               </div>
             ) : (
-              <span className="text-[#666666]">Paused</span>
+              <span className="text-neutral-500">Paused</span>
             )}
           </div>
         </div>
@@ -271,21 +271,21 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             id="player-record-btn"
             onClick={isRecording ? stopRecording : startRecording}
             disabled={playbackStatus !== 'playing' && !isRecording}
-            className={`p-2 rounded-lg border transition ${
+            className={`p-2 rounded-xl border transition ${
               isRecording
-                ? 'bg-[#FF3D00]/20 text-[#FF3D00] border-[#FF3D00] animate-pulse'
-                : 'text-[#888888] hover:text-[#F0F0F0] bg-[#111111] border-[#333333] hover:bg-[#1A1A1A] disabled:opacity-40'
+                ? 'bg-rose-500/25 text-rose-300 border-rose-500 animate-pulse'
+                : 'text-amber-200/70 hover:text-amber-100 bg-[#1D160E] border-amber-500/30 hover:bg-[#2A2015] disabled:opacity-40'
             }`}
             title={isRecording ? 'Stop Recording Clip' : 'Record Radio Clip'}
           >
-            {isRecording ? <Square className="w-4 h-4 fill-[#FF3D00] text-[#FF3D00]" /> : <Mic className="w-4 h-4" />}
+            {isRecording ? <Square className="w-4 h-4 fill-rose-400 text-rose-400" /> : <Mic className="w-4 h-4" />}
           </button>
 
-          {/* Equalizer Modal Trigger */}
+          {/* Equalizer Trigger */}
           <button
             id="player-eq-btn"
             onClick={onOpenEqModal}
-            className="p-2 text-[#888888] hover:text-[#FF3D00] bg-[#111111] border border-[#333333] hover:bg-[#1A1A1A] rounded-lg transition"
+            className="p-2 text-amber-200/70 hover:text-amber-100 bg-[#1D160E] border border-amber-500/30 hover:bg-[#2A2015] rounded-xl transition"
             title="Audio Equalizer"
           >
             <Sliders className="w-4 h-4" />
@@ -295,31 +295,31 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           <button
             id="player-sleep-btn"
             onClick={onOpenSleepModal}
-            className={`flex items-center gap-1 p-2 rounded-lg border transition ${
+            className={`flex items-center gap-1 p-2 rounded-xl border transition ${
               sleepTimerRemainingSec !== null
-                ? 'bg-[#FF3D00]/20 text-[#FF3D00] border-[#FF3D00]'
-                : 'text-[#888888] hover:text-[#F0F0F0] bg-[#111111] border-[#333333] hover:bg-[#1A1A1A]'
+                ? 'bg-amber-500/25 text-amber-300 border-amber-400'
+                : 'text-amber-200/70 hover:text-amber-100 bg-[#1D160E] border-amber-500/30 hover:bg-[#2A2015]'
             }`}
             title="Sleep Timer"
           >
-            <Clock className="w-4 h-4 text-[#FF3D00]" />
+            <Clock className="w-4 h-4 text-amber-400" />
             {sleepTimerRemainingSec !== null && (
-              <span className="font-mono text-xs font-bold text-[#FF3D00]">
+              <span className="font-mono text-xs font-bold text-amber-300">
                 {formatSleepTime(sleepTimerRemainingSec)}
               </span>
             )}
           </button>
 
-          {/* Volume Control */}
-          <div className="hidden sm:flex items-center gap-2 bg-[#111111] border border-[#333333] px-2.5 py-1.5 rounded-lg">
+          {/* Volume Slider & Boost */}
+          <div className="hidden sm:flex items-center gap-2 bg-[#1D160E] border border-amber-500/30 px-2.5 py-1.5 rounded-xl">
             <button
               id="player-mute-btn"
               onClick={toggleMute}
-              className="text-[#888888] hover:text-white transition"
+              className="text-amber-300/80 hover:text-amber-100 transition"
               title={isMuted ? 'Unmute' : 'Mute'}
             >
               {isMuted || volume === 0 ? (
-                <VolumeX className="w-4 h-4 text-[#FF3D00]" />
+                <VolumeX className="w-4 h-4 text-rose-400" />
               ) : volume < 0.5 ? (
                 <Volume1 className="w-4 h-4" />
               ) : (
@@ -335,7 +335,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
               step="0.01"
               value={isMuted ? 0 : volume}
               onChange={(e) => setVolume(Number(e.target.value))}
-              className="w-18 sm:w-22 h-1 bg-[#333333] rounded-lg appearance-none cursor-pointer accent-[#FF3D00]"
+              className="w-18 sm:w-22 h-1 bg-[#3A2E20] rounded-lg appearance-none cursor-pointer accent-amber-400"
               title={`Volume: ${Math.round(volume * 100)}%`}
             />
 
@@ -343,10 +343,10 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
             <button
               id="player-boost-btn"
               onClick={toggleBoost}
-              className={`px-1.5 py-0.5 rounded text-[10px] font-bold font-mono transition flex items-center gap-0.5 ${
+              className={`px-1.5 py-0.5 rounded-md text-[10px] font-bold font-mono transition flex items-center gap-0.5 ${
                 isBoosted
-                  ? 'bg-[#FF3D00] text-black shadow-sm shadow-[#FF3D00]/50'
-                  : 'bg-[#222222] text-[#888888] hover:text-white'
+                  ? 'bg-amber-400 text-black shadow-sm shadow-amber-400/50'
+                  : 'bg-[#2E2418] text-amber-300/70 hover:text-amber-100'
               }`}
               title="150% Audio Booster"
             >
@@ -359,7 +359,7 @@ export const AudioPlayerBar: React.FC<AudioPlayerBarProps> = ({
           <button
             id="player-fullscreen-visualizer-btn"
             onClick={onOpenVisualizerModal}
-            className="p-2 text-[#888888] hover:text-[#FF3D00] bg-[#111111] border border-[#333333] hover:bg-[#1A1A1A] rounded-lg transition"
+            className="p-2 text-amber-200/70 hover:text-amber-100 bg-[#1D160E] border border-amber-500/30 hover:bg-[#2A2015] rounded-xl transition"
             title="Open Audio Visualizer"
           >
             <Maximize2 className="w-4 h-4" />

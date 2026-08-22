@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Hls from 'hls.js';
-import { RadioStation, RadioCategory, PlaybackStatus, EqualizerPreset, RadioRecording } from '../types/radio';
+import { RadioStation, RadioCategory, PlaybackStatus, EqualizerPreset, RadioRecording, OnamThemeMode } from '../types/radio';
 import { DEFAULT_STATIONS } from '../data/defaultStations';
 
 export const EQUALIZER_PRESETS: EqualizerPreset[] = [
@@ -13,7 +13,7 @@ export const EQUALIZER_PRESETS: EqualizerPreset[] = [
   { name: 'Club / Dance', bands: [7, 3, 0, 3, 5] },
 ];
 
-const EQUALIZER_FREQUENCIES = [60, 230, 910, 4000, 14000];
+export const EQUALIZER_FREQUENCIES = [60, 230, 910, 4000, 14000];
 
 interface RadioContextType {
   currentStation: RadioStation | null;
@@ -38,8 +38,10 @@ interface RadioContextType {
   isRecording: boolean;
   recordingDurationSec: number;
   activeStreamIndex: number;
+  onamTheme: OnamThemeMode;
   
   // Actions
+  setOnamTheme: (theme: OnamThemeMode) => void;
   playStation: (station: RadioStation) => void;
   togglePlayPause: () => void;
   stopPlayback: () => void;
@@ -70,15 +72,30 @@ interface RadioContextType {
 const RadioContext = createContext<RadioContextType | null>(null);
 
 const STORAGE_KEYS = {
-  FAVORITES: 'malayalam_radio_favorites_v3',
-  CUSTOM_STATIONS: 'malayalam_radio_custom_stations_v3',
-  RECENTS: 'malayalam_radio_recent_v3',
-  VOLUME: 'malayalam_radio_vol_v3',
-  PRESET: 'malayalam_radio_eq_preset_v3',
-  GAINS: 'malayalam_radio_eq_gains_v3'
+  FAVORITES: 'malayalam_radio_fav_v4',
+  CUSTOM_STATIONS: 'malayalam_radio_custom_v4',
+  RECENTS: 'malayalam_radio_recents_v4',
+  VOLUME: 'malayalam_radio_volume_v4',
+  PRESET: 'malayalam_radio_eq_preset_v4',
+  GAINS: 'malayalam_radio_eq_gains_v4',
+  ONAM_THEME: 'malayalam_radio_onam_theme_v4'
 };
 
 export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [onamTheme, setOnamThemeState] = useState<OnamThemeMode>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.ONAM_THEME);
+      return (saved as OnamThemeMode) || 'ponnonam';
+    } catch {
+      return 'ponnonam';
+    }
+  });
+
+  const setOnamTheme = useCallback((theme: OnamThemeMode) => {
+    setOnamThemeState(theme);
+    localStorage.setItem(STORAGE_KEYS.ONAM_THEME, theme);
+  }, []);
+
   const [customStations, setCustomStations] = useState<RadioStation[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.CUSTOM_STATIONS);
@@ -91,9 +108,9 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [favorites, setFavorites] = useState<string[]>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.FAVORITES);
-      return saved ? JSON.parse(saved) : ['radio4u', 'sargakshetra-896', 'radio-malabar', 'air-kochi'];
+      return saved ? JSON.parse(saved) : ['ponnonam-special', 'air-kochi', 'sargakshetra-896', 'devikulam-fm', 'radio-media-village'];
     } catch {
-      return ['radio4u', 'sargakshetra-896', 'radio-malabar', 'air-kochi'];
+      return ['ponnonam-special', 'air-kochi', 'sargakshetra-896', 'devikulam-fm', 'radio-media-village'];
     }
   });
 
@@ -157,7 +174,6 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Combine default and custom stations
   const allStations = useMemo(() => {
     const combined = [...customStations, ...DEFAULT_STATIONS];
-    // Deduplicate by ID
     const seen = new Set<string>();
     return combined.filter(st => {
       if (seen.has(st.id)) return false;
@@ -196,7 +212,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     });
   }, [allStations, activeCategory, searchQuery, favorites]);
 
-  // Recent stations object list
+  // Recent stations list
   const recentStations = useMemo(() => {
     return recentStationIds
       .map(id => allStations.find(s => s.id === id))
@@ -254,7 +270,6 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       });
       filterNodesRef.current = filters;
 
-      // Connect source to filters
       const source = ctx.createMediaElementSource(audioRef.current);
       sourceNodeRef.current = source;
 
@@ -268,7 +283,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       gain.connect(analyser);
       analyser.connect(ctx.destination);
     } catch {
-      // Browser cross-origin or autoplay policy fallback
+      // Safe fallback if browser security restricts media element graph
     }
   }, [equalizerGains]);
 
@@ -300,7 +315,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       navigator.mediaSession.metadata = new MediaMetadata({
         title: station.name,
         artist: station.malayalamName || station.location || 'Malayalam Radio Live',
-        album: `${station.frequency || 'Live FM'} • ${station.category.toUpperCase()}`,
+        album: `${station.frequency || 'Live FM'} • Onam Radio Special`,
         artwork: [
           { src: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=512&auto=format&fit=crop&q=80', sizes: '512x512', type: 'image/jpeg' }
         ]
@@ -340,7 +355,6 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           return null;
         }
 
-        // Gentle volume fade during last 20 seconds
         if (prev <= 20 && audioRef.current && !isMuted) {
           audioRef.current.volume = Math.max(0, (volume * (prev / 20)));
         }
@@ -354,6 +368,20 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     };
   }, [sleepTimerMinutes, volume, isMuted]);
 
+  // Fallback stream logic
+  const tryFallback = useCallback((station: RadioStation, currentIdx: number) => {
+    const allUrls = [station.streamUrl, ...(station.fallbackUrls || [])];
+    const nextIdx = currentIdx + 1;
+
+    if (nextIdx < allUrls.length) {
+      playStreamUrl(allUrls[nextIdx], station, nextIdx);
+    } else {
+      setPlaybackStatus('error');
+      setErrorMessage(`Unable to connect to ${station.name}. Stream might be temporarily offline or restricted.`);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Audio Playback implementation
   const playStreamUrl = useCallback((url: string, station: RadioStation, streamIdx: number) => {
     setPlaybackStatus('loading');
@@ -362,13 +390,12 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     if (!audioRef.current) {
       audioRef.current = new Audio();
-      audioRef.current.crossOrigin = 'anonymous';
       audioRef.current.preload = 'auto';
     }
 
     const audio = audioRef.current;
 
-    // Resume Web Audio Context if suspended
+    // Resume AudioContext if suspended
     if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
       audioContextRef.current.resume();
     } else if (!audioContextRef.current) {
@@ -387,7 +414,9 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const hls = new Hls({
         enableWorker: true,
         lowLatencyMode: true,
-        backBufferLength: 30
+        backBufferLength: 30,
+        fragLoadingTimeOut: 10000,
+        manifestLoadingTimeOut: 10000
       });
       hlsRef.current = hls;
       hls.loadSource(url);
@@ -401,10 +430,22 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
       hls.on(Hls.Events.ERROR, (_, data) => {
         if (data.fatal) {
-          tryFallback(station, streamIdx);
+          switch (data.type) {
+            case Hls.ErrorTypes.NETWORK_ERROR:
+              hls.startLoad();
+              break;
+            case Hls.ErrorTypes.MEDIA_ERROR:
+              hls.recoverMediaError();
+              break;
+            default:
+              hls.destroy();
+              tryFallback(station, streamIdx);
+              break;
+          }
         }
       });
     } else {
+      // Native audio element playback (supports standard streams & native Safari HLS)
       audio.src = url;
       audio.load();
 
@@ -425,7 +466,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       }
     }
 
-    // Attach listeners
+    // Event listeners
     audio.onplaying = () => {
       setPlaybackStatus('playing');
       setErrorMessage(null);
@@ -443,21 +484,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     audio.onerror = () => {
       tryFallback(station, streamIdx);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initWebAudio, updateMediaSession]);
-
-  // Fallback stream logic
-  const tryFallback = useCallback((station: RadioStation, currentIdx: number) => {
-    const allUrls = [station.streamUrl, ...(station.fallbackUrls || [])];
-    const nextIdx = currentIdx + 1;
-
-    if (nextIdx < allUrls.length) {
-      playStreamUrl(allUrls[nextIdx], station, nextIdx);
-    } else {
-      setPlaybackStatus('error');
-      setErrorMessage(`Unable to connect to stream for ${station.name}. Please check stream URL or try another station.`);
-    }
-  }, [playStreamUrl]);
+  }, [initWebAudio, updateMediaSession, tryFallback]);
 
   // Play a station
   const playStation = useCallback((station: RadioStation) => {
@@ -565,7 +592,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       id,
       isCustom: true,
       category: stationData.category || 'custom',
-      gradient: stationData.gradient || 'from-emerald-600 to-teal-800',
+      gradient: stationData.gradient || 'from-amber-600 to-yellow-600',
       addedAt: Date.now()
     };
     setCustomStations(prev => [newStation, ...prev]);
@@ -725,7 +752,6 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const testStreamUrl = useCallback(async (url: string): Promise<{ success: boolean; message?: string }> => {
     return new Promise((resolve) => {
       const testAudio = new Audio();
-      testAudio.crossOrigin = 'anonymous';
       testAudio.preload = 'auto';
 
       let resolved = false;
@@ -733,16 +759,16 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         if (!resolved) {
           resolved = true;
           testAudio.src = '';
-          resolve({ success: false, message: 'Connection timed out after 7s. Stream may be inactive or geo-restricted.' });
+          resolve({ success: false, message: 'Connection timed out after 6s. Stream may be inactive or geo-restricted.' });
         }
-      }, 7000);
+      }, 6000);
 
       testAudio.oncanplay = () => {
         if (!resolved) {
           resolved = true;
           clearTimeout(timer);
           testAudio.src = '';
-          resolve({ success: true, message: 'Stream loaded successfully and is ready to broadcast!' });
+          resolve({ success: true, message: 'Stream connected and loaded successfully!' });
         }
       };
 
@@ -751,7 +777,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           resolved = true;
           clearTimeout(timer);
           testAudio.src = '';
-          resolve({ success: false, message: 'Stream failed to decode. Check URL or CORS settings.' });
+          resolve({ success: false, message: 'Stream failed to decode. Check URL or audio format.' });
         }
       };
 
@@ -785,6 +811,8 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         isRecording,
         recordingDurationSec,
         activeStreamIndex,
+        onamTheme,
+        setOnamTheme,
         playStation,
         togglePlayPause,
         stopPlayback,
