@@ -32,8 +32,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kochi, Kerala',
     bitrate: 'Live HLS Stream',
     gradient: 'from-amber-600 to-orange-700',
-    description: 'Radio Kochi 90 FM - Vibrant Community Radio broadcasting live from the Queen of Arabian Sea.',
-    tags: ['Community Radio', 'Kochi', '90 FM', 'Live'],
+    description: 'അറബിക്കടലിന്റെ റാണിയായ കൊച്ചിയിൽ നിന്നുള്ള തനതായ കമ്മ്യൂണിറ്റി റേഡിയോ. തീരദേശ വാർത്തകൾ, സമകാലിക വിനോദങ്ങൾ, യുവത്വത്തിന്റെ പ്രിയഗാനങ്ങൾ.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'കൊച്ചി', '90 FM', 'തത്സമയം'],
     codec: 'hls'
   },
   {
@@ -50,8 +50,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Changanassery, Kottayam',
     bitrate: '128 kbps MP3',
     gradient: 'from-orange-500 to-amber-600',
-    description: 'Community Radio 89.6 FM Sargakshetra from Changanassery, Kerala.',
-    tags: ['Community Radio', 'Kottayam', 'Culture', 'Talk'],
+    description: 'ചങ്ങനാശ്ശേരിയിൽ നിന്നുള്ള പ്രമുഖ കമ്മ്യൂണിറ്റി റേഡിയോ. വിദ്യാഭ്യാസം, കൃഷി, സാംസ്കാരിക പരിപാടികൾ, മനസ്സ് നിറയ്ക്കുന്ന സംഗീതം.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'കോട്ടയം', 'സംസ്കാരം', 'സംഗീതം'],
     codec: 'mp3'
   },
   {
@@ -68,8 +68,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Changanassery, Kottayam',
     bitrate: '128 kbps Live',
     gradient: 'from-amber-600 to-yellow-600',
-    description: 'Radio Media Village 90.8 FM - The first community radio in Kottayam district.',
-    tags: ['Community Radio', 'Kottayam', 'Youth', 'Music'],
+    description: 'കോട്ടയം ജില്ലയിലെ പ്രഥമ കമ്മ്യൂണിറ്റി റേഡിയോ. യുവജന പരിപാടികൾ, വിജ്ഞാനപ്രദമായ ചർച്ചകൾ, നിത്യഹരിത ഗാനങ്ങൾ.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'കോട്ടയം', 'യുവതരംഗം', 'പാട്ടുകൾ'],
     codec: 'mp3'
   },
   {
@@ -86,8 +86,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kollam, Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-rose-600 to-amber-700',
-    description: 'Radio Benziger 107.8 FM - Community Radio station from Bishop Benziger Hospital Kollam.',
-    tags: ['Community Radio', 'Kollam', 'Health', 'Coastal Voice'],
+    description: 'കൊല്ലം ബിഷപ്പ് ബെൻസിഗർ ആശുപത്രിയിൽ നിന്നുള്ള ആരോഗ്യ-സാമൂഹിക ശബ്ദം. ആരോഗ്യ ബോധവൽക്കരണം, തീരദേശ ജനതയുടെ ശബ്ദം.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'കൊല്ലം', 'ആരോഗ്യം', 'തീരദേശം'],
     codec: 'mp3'
   },
   {
@@ -104,8 +104,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kollam, Kerala',
     bitrate: '128 kbps',
     gradient: 'from-emerald-600 to-teal-700',
-    description: 'Ashrayam 90.0 FM Community Radio from Kollam, Kerala.',
-    tags: ['Community Radio', 'Kollam', 'Music', 'Social'],
+    description: 'കൊല്ലം ജില്ലയിൽ നിന്നുള്ള ജനകീയ കമ്മ്യൂണിറ്റി റേഡിയോ. നാട്ടറിവുകൾ, ഗ്രാമീണ ജീവിതം, സാമൂഹ്യ പരിപാടികൾ, ഗാനങ്ങൾ.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'കൊല്ലം', 'സാമൂഹികം', 'സംഗീതം'],
     codec: 'mp3'
   },
   {
@@ -122,8 +122,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Wayanad, Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-emerald-700 to-teal-800',
-    description: 'Radio Mattoli 90.4 FM - The community radio station of Wayanad, Voice of the Voiceless.',
-    tags: ['Community Radio', 'Wayanad', 'Agriculture', 'Tribal Voice'],
+    description: 'വയനാടിന്റെ ഹൃദയസ്പന്ദനം, ശബ്ദമില്ലാത്തവരുടെ ശബ്ദം. ഗോത്രവർഗ്ഗ പാരമ്പര്യം, കൃഷിപാഠങ്ങൾ, വനസംരക്ഷണം, നാടൻപാട്ടുകൾ.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'വയനാട്', 'കൃഷി', 'നാടൻപാട്ടുകൾ'],
     codec: 'mp3'
   },
   {
@@ -140,8 +140,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Palakkad, Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-orange-600 to-amber-600',
-    description: 'Ahalia 90.4 FM Community Radio from Palakkad campus, broadcasting health, education & music.',
-    tags: ['Community Radio', 'Palakkad', 'Education', 'Health'],
+    description: 'പാലക്കാട് അഹല്യ ക്യാമ്പസിൽ നിന്നുള്ള റേഡിയോ. ആരോഗ്യ സന്ദേശങ്ങൾ, ശാസ്ത്ര സാങ്കേതിക വിദ്യകൾ, മാപ്പിളപ്പാട്ടുകൾ, ശാസ്ത്രീയ സംഗീതം.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'പാലക്കാട്', 'ആരോഗ്യം', 'വിദ്യാഭ്യാസം'],
     codec: 'mp3'
   },
   {
@@ -158,8 +158,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Thrissur, Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-red-600 to-amber-700',
-    description: 'Ente Radio 91.2 FM community station from Cultural Capital Thrissur.',
-    tags: ['Community Radio', 'Thrissur', 'Kerala', 'Stories'],
+    description: 'സാംസ്കാരിക തലസ്ഥാനമായ തൃശൂരിൽ നിന്നുള്ള കമ്മ്യൂണിറ്റി റേഡിയോ. പൂരപ്പൊലിമ, കലകൾ, കാർഷികം, വിനോദ പരിപാടികൾ.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'തൃശ്ശൂർ', 'സാംസ്കാരികം', 'കഥകൾ'],
     codec: 'mp3'
   },
   {
@@ -176,8 +176,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-600 to-red-700',
-    description: 'Popular Malayalam FM station playing youth tracks, cinema hits, and entertainment.',
-    tags: ['Community Radio', 'Entertainment', 'Hits', 'Youth'],
+    description: 'പുത്തൻ മലയാളം സിനിമാ ഗാനങ്ങളും യുവതലമുറയുടെ തരംഗ ട്രെൻഡുകളും അവതരിപ്പിക്കുന്ന ഊർജ്ജസ്വലമായ എഫ്.എം ചാനൽ.',
+    tags: ['കമ്മ്യൂണിറ്റി റേഡിയോ', 'സിനിമ ഗാനങ്ങൾ', 'യുവത്വം', 'വിനോദം'],
     codec: 'mp3'
   },
 
@@ -196,8 +196,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Devikulam, Idukki',
     bitrate: 'HLS Live',
     gradient: 'from-emerald-700 to-green-900',
-    description: 'Akashvani Devikulam 101.4 FM - High ranges of Munnar and Idukki high altitude broadcast.',
-    tags: ['AIR', 'Akashvani', 'Devikulam', 'Munnar', 'Idukki'],
+    description: 'മൂന്നാറിലെയും ഇടുക്കി ഹൈറേഞ്ചിലെയും മലനിരകളിൽ നിന്നുള്ള ആകാശവാണി തത്സമയ സംപ്രേഷണം. തോട്ടം തൊഴിലാളി പരിപാടികളും വാർത്തകളും.',
+    tags: ['ആകാശവാണി', 'ദേവികുളം', 'മൂന്നാർ', 'ഇടുക്കി', 'വാർത്തകൾ'],
     codec: 'hls'
   },
   {
@@ -214,8 +214,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Alappuzha, Kerala',
     bitrate: 'HLS Live',
     gradient: 'from-teal-600 to-cyan-800',
-    description: 'Akashvani Alappuzha - All India Radio live transmission from the Venice of the East.',
-    tags: ['AIR', 'Akashvani', 'Alappuzha', 'Venice of the East'],
+    description: 'കിഴക്കിന്റെ വെനീസ് എന്നറിയപ്പെടുന്ന ആലപ്പുഴയിൽ നിന്നുള്ള ആകാശവാണി പ്രക്ഷേപണം. കുട്ടനാടൻ കൃഷി വിശേഷങ്ങളും വള്ളപ്പാട്ടുകളും.',
+    tags: ['ആകാശവാണി', 'ആലപ്പുഴ', 'കുട്ടനാട്', 'കായലുകൾ'],
     codec: 'hls'
   },
   {
@@ -232,8 +232,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kozhikode, Kerala',
     bitrate: 'HLS Live',
     gradient: 'from-amber-600 to-emerald-700',
-    description: 'Akashvani Kozhikode Real FM - Cultural epicenter of Malabar music, drama, and regional news.',
-    tags: ['AIR', 'Akashvani', 'Kozhikode', 'Real FM', 'Malabar'],
+    description: 'മലബാറിന്റെ സാംസ്കാരിക പൈതൃകം, ആകാശവാണി നാടകങ്ങൾ, ബാബുരാജ് സംഗീതം, സാഹിത്യ ചർച്ചകൾ, പ്രാദേശിക വാർത്തകൾ.',
+    tags: ['ആകാശവാണി', 'കോഴിക്കോട്', 'റിയൽ FM', 'മലബാർ', 'നാടകം'],
     codec: 'hls'
   },
   {
@@ -250,8 +250,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kochi, Kerala',
     bitrate: 'HLS Live',
     gradient: 'from-orange-600 to-rose-700',
-    description: 'All India Radio Kochi FM Rainbow - Youth programs, film reviews, and popular Malayalam songs.',
-    tags: ['AIR', 'Akashvani', 'FM Rainbow', 'Kochi'],
+    description: 'ആകാശവാണി കൊച്ചി എഫ്.എം റെയിൻബോ. മലയാള സിനിമ ഗാനങ്ങൾ, യുവജന സമ്പർക്ക പരിപാടികൾ, അഭിമുഖങ്ങൾ.',
+    tags: ['ആകാശവാണി', 'എഫ്.എം റെയിൻബോ', 'കൊച്ചി', 'സിനിമ'],
     codec: 'hls'
   },
   {
@@ -268,8 +268,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Thiruvananthapuram, Kerala',
     bitrate: 'HLS Live',
     gradient: 'from-yellow-600 to-amber-700',
-    description: 'Akashvani Ananthapuri FM 101.9 - Capital city broadcast from Thiruvananthapuram.',
-    tags: ['AIR', 'Akashvani', 'Thiruvananthapuram', 'Ananthapuri', 'Capital'],
+    description: 'തലസ്ഥാന നഗരിയിൽ നിന്നുള്ള ആകാശവാണി അനന്തപുരി എഫ്.എം. ഔദ്യോഗിക വാർത്തകൾ, വിവര വിനിമയം, രാഗമാലിക ഗാനങ്ങൾ.',
+    tags: ['ആകാശവാണി', 'തിരുവനന്തപുരം', 'അനന്തപുരി', 'തലസ്ഥാനം'],
     codec: 'hls'
   },
   {
@@ -286,8 +286,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Manjeri, Malappuram',
     bitrate: 'HLS Live',
     gradient: 'from-emerald-600 to-green-800',
-    description: 'Akashvani Manjeri 100.2 FM - Serving Malappuram and central Kerala with culture and agriculture.',
-    tags: ['AIR', 'Akashvani', 'Manjeri', 'Malappuram'],
+    description: 'മലപ്പുറം ജില്ലയിലെയും മധ്യകേരളത്തിലെയും ജനങ്ങൾക്കായി ആകാശവാണി മഞ്ചേരി നിലയത്തിൽ നിന്നുള്ള പ്രക്ഷേപണം.',
+    tags: ['ആകാശവാണി', 'മഞ്ചേരി', 'മലപ്പുറം', 'കൃഷി'],
     codec: 'hls'
   },
 
@@ -307,8 +307,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-500 via-orange-500 to-yellow-500',
-    description: 'Special evergreen melodies, festival songs, boat race beats, and nostalgic Malayalam golden tunes.',
-    tags: ['Online Radio', 'Sangeetham', 'Melody', 'Kerala', 'Nostalgia'],
+    description: 'മനം മയക്കുന്ന മലയാളം ഗാനങ്ങൾ, ഉത്സവ ഗാനങ്ങൾ, വള്ളംകളി പാട്ടുകൾ, ഗൃഹാതുരത്വം ഉണർത്തുന്ന സുവർണ്ണ കാലഘട്ടത്തിലെ മെലഡികൾ.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'സംഗീതം', 'മെലഡികൾ', 'കേരളം', 'നോസ്റ്റാൾജിയ'],
     codec: 'mp3'
   },
   {
@@ -325,8 +325,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-500 to-orange-600',
-    description: 'Radio Mango - Nattilengum Paattode Paattu, premier Malayalam private FM station.',
-    tags: ['Online Radio', 'Radio Mango', 'Cinema Hits', 'Kerala'],
+    description: 'നാട്ടിലെങ്ങും പാട്ടോടെ പാട്ട്! മലയാള മനോരമയുടെ പ്രമുഖ പ്രൈവറ്റ് എഫ്.എം ചാനൽ. എക്കാലത്തെയും മികച്ച ഹിറ്റ് ഗാനങ്ങൾ.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'റേഡിയോ മാംഗോ', 'സിനിമാ ഹിറ്റുകൾ', 'കേരളം'],
     codec: 'mp3'
   },
   {
@@ -343,8 +343,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-yellow-600 to-red-600',
-    description: 'Club FM - Ton Kannakkinu Fun! Superhit Malayalam songs, RJ talks, and non-stop entertainment.',
-    tags: ['Online Radio', 'Club FM', 'Mathrubhumi', 'Superhits', 'Kerala'],
+    description: 'ടൺ കണക്കിന് ഫൺ! മാതൃഭൂമിയുടെ ജനപ്രിയ എഫ്.എം. ആർ.ജെ വർത്തമാനങ്ങൾ, ട്രെൻഡിങ് സിനിമാ ഗാനങ്ങൾ, കോമഡി ട്രാക്കുകൾ.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'ക്ലബ് എഫ്.എം', 'മാതൃഭൂമി', 'സൂപ്പർഹിറ്റുകൾ'],
     codec: 'mp3'
   },
   {
@@ -361,8 +361,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala / Global',
     bitrate: '128 kbps MP3',
     gradient: 'from-orange-600 to-amber-600',
-    description: '24/7 non-stop Malayalam music, trending film tracks, and evergreen favorites.',
-    tags: ['Online Radio', 'Hits', 'Music', 'Non-Stop', 'Kerala'],
+    description: '24 മണിക്കൂറും ഇടവേളകളില്ലാത്ത മലയാളം സംഗീത പ്രവാഹം. പുതിയ ഹിറ്റുകളും പഴയകാല ക്ലാസിക് ഗാനങ്ങളും.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'ഹിറ്റുകൾ', 'സംഗീതം', '24x7'],
     codec: 'mp3'
   },
   {
@@ -379,8 +379,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Palakkad, Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-600 to-orange-700',
-    description: 'Radio Palakkad - Local tunes, folklore, Sopana sangeetham, and popular Malayalam songs.',
-    tags: ['Online Radio', 'Palakkad', 'Local', 'Folk', 'Melody'],
+    description: 'പാലക്കാടൻ നാട്ടുവിശേഷങ്ങൾ, സോപാന സംഗീതം, നാടൻപാട്ടുകൾ, കാറ്റാടിപ്പാടങ്ങളുടെ സംഗീതം.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'പാലക്കാട്', 'നാടൻപാട്ടുകൾ', 'മെലഡികൾ'],
     codec: 'mp3'
   },
   {
@@ -397,8 +397,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Malabar, Kerala',
     bitrate: 'Live HLS Stream',
     gradient: 'from-amber-600 to-emerald-700',
-    description: 'Malabar region news, Mappila pattukal, and cultural radio broadcast.',
-    tags: ['Online Radio', 'Malabar', 'Culture', 'News', 'Mappila Songs'],
+    description: 'മലബാർ മേഖലയിലെ സാംസ്കാരിക ശബ്ദം. പ്രശസ്തമായ മാപ്പിളപ്പാട്ടുകൾ, ചരിത്രം, മലബാറിന്റെ തനതു ഗാനങ്ങൾ.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'മലബാർ', 'സംസ്കാരം', 'മാപ്പിളപ്പാട്ടുകൾ'],
     codec: 'hls'
   },
   {
@@ -415,8 +415,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'UAE / Gulf / Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-500 to-emerald-700',
-    description: 'Digital Malayali Radio for the worldwide Malayali diaspora across UAE, Qatar, Saudi and beyond.',
-    tags: ['Online Radio', 'Pravasi', 'Gulf', 'Dubai', 'Talk'],
+    description: 'യു.എ.ഇ, ഖത്തർ, സൗദി അറേബ്യ അടക്കമുള്ള ഗൾഫ് പ്രവാസികൾക്കായി ലോകമെമ്പാടുമുള്ള മലയാളികളെ കോർത്തിണക്കുന്ന ഡിജിറ്റൽ റേഡിയോ.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'പ്രവാസി', 'ഗൾഫ്', 'ദുബായ്', 'വാർത്തകൾ'],
     codec: 'mp3'
   },
   {
@@ -434,8 +434,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala / Global',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-600 to-orange-700',
-    description: 'Non-stop Malayalam evergreen classics from the golden era of Malayalam cinema (Devarajan Master, Baburaj, Yesudas, Chithra).',
-    tags: ['Online Radio', 'Evergreen', 'Oldies', 'Yesudas', 'Classics'],
+    description: 'മലയാള ചലച്ചിത്ര ലോകത്തെ സുവർണ്ണ ഗാനങ്ങൾ. ദേവരാജൻ മാസ്റ്റർ, എം.എസ്. ബാബുരാജ്, യേശുദാസ്, ചിത്ര തുടങ്ങിയ മഹാപ്രതിഭകളുടെ നിത്യഹരിത ഗാനങ്ങൾ.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'എവർഗ്രീൻ', 'യേശുദാസ്', 'ക്ലാസിക്കുകൾ'],
     codec: 'mp3'
   },
   {
@@ -453,8 +453,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-yellow-500 to-amber-600',
-    description: 'Soothing Malayalam tunes, acoustic melodies, and relaxing ambient music.',
-    tags: ['Online Radio', 'Melodies', 'Acoustic', 'Relaxing', 'Kerala'],
+    description: 'ശാന്തവും മനോഹരവുമായ മലയാള മെലഡികൾ, അക്കൗസ്റ്റിക് ഗാനങ്ങൾ, മനസ്സിന് കുളിർമയേകുന്ന പശ്ചാത്തല സംഗീതം.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', 'മെലഡികൾ', 'അക്കൗസ്റ്റിക്', 'റിലാക്സ്'],
     codec: 'mp3'
   },
   {
@@ -471,8 +471,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-600 to-red-700',
-    description: '90s and 2000s Malayalam film nostalgia, timeless compositions and melodies.',
-    tags: ['Online Radio', '90s Hits', 'Nostalgia', 'Film Songs', 'Melodies'],
+    description: '90-കളിലെയും 2000-കളിലെയും മലയാള സിനിമാ ഗൃഹാതുരത്വം, കാലാതീതമായ ഗാനരചനകളും ഇമ്പമാർന്ന ഈണങ്ങളും.',
+    tags: ['ഓൺലൈൻ റേഡിയോ', '90s ഹിറ്റുകൾ', 'നോസ്റ്റാൾജിയ', 'സിനിമ ഗാനങ്ങൾ'],
     codec: 'mp3'
   },
   // ==================== DEVOTIONAL RADIOS ====================
@@ -490,8 +490,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-500 to-orange-700',
-    description: 'Malayalam devotional songs, Sabarimala Ayyappa devotional tracks, Guruvayoor bhajans, and Devi stothrams.',
-    tags: ['Devotional', 'Ayyappa', 'Guruvayoor', 'Bhajans', 'Spiritual', 'Hindu'],
+    description: 'ശബരിമല അയ്യപ്പ ഭക്തിഗാനങ്ങൾ, ഗുരുവായൂരപ്പൻ ഭജനകൾ, ലളിതാ സഹസ്രനാമം, ദേവി സ്തോത്രങ്ങൾ, നിത്യ ഭക്തി സംഗീതം.',
+    tags: ['ഭക്തിഗാനങ്ങൾ', 'അയ്യപ്പൻ', 'ഗുരുവായൂർ', 'ഭജനകൾ', 'സ്തോത്രങ്ങൾ'],
     codec: 'mp3'
   },
   {
@@ -508,8 +508,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala / Global',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-600 to-indigo-700',
-    description: '24x7 Malayalam Christian Psalms, gospel tracks, worship and hymns.',
-    tags: ['Devotional', 'Christian', 'Psalms', 'Gospel', 'Worship'],
+    description: '24 മണിക്കൂറും മലയാളം ക്രിസ്തീയ സങ്കീർത്തനങ്ങൾ, ആരാധനാ ഗാനങ്ങൾ, ആത്മീയാനുഭവമേകുന്ന സുവിശേഷ സംഗീതം.',
+    tags: ['ഭക്തിഗാനങ്ങൾ', 'ക്രിസ്തീയം', 'സങ്കീർത്തനങ്ങൾ', 'ആരാധന'],
     codec: 'mp3'
   },
   {
@@ -526,8 +526,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala / Global',
     bitrate: '128 kbps MP3',
     gradient: 'from-amber-500 to-cyan-700',
-    description: 'DVN Radio Malayalam Christian broadcast, faith messages, prayers and spiritual music.',
-    tags: ['Devotional', 'Christian', 'DVN', 'Gospel', 'Worship', 'Spiritual'],
+    description: 'ഡി.വി.എൻ മലയാളം ക്രിസ്തീയ പ്രക്ഷേപണം. പ്രാർത്ഥനാ സന്ദേശങ്ങൾ, സുവിശേഷ വചനങ്ങൾ, ഭക്തിസാന്ദ്രമായ ഗാനങ്ങൾ.',
+    tags: ['ഭക്തിഗാനങ്ങൾ', 'ക്രിസ്തീയം', 'പ്രാർത്ഥന', 'ആത്മീയത'],
     codec: 'mp3'
   },
   {
@@ -544,8 +544,8 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     location: 'Kerala / Global',
     bitrate: '128 kbps MP3',
     gradient: 'from-yellow-500 to-rose-700',
-    description: 'Jesus Radio (Jesus Reigns) Malayalam Christian devotional streaming, songs and hymns.',
-    tags: ['Devotional', 'Christian', 'Jesus', 'Gospel', 'Worship', 'Hymns'],
+    description: 'ജീസസ് റെയിൻസ് മലയാളം ക്രിസ്തീയ ഭക്തി സംപ്രേഷണം. പരമ്പരാഗത സ്തോത്രഗീതങ്ങളും പുതിയ ആരാധനാ ഗാനങ്ങളും.',
+    tags: ['ഭക്തിഗാനങ്ങൾ', 'ക്രിസ്തീയം', 'സ്തോത്രങ്ങൾ', 'ഗാനങ്ങൾ'],
     codec: 'mp3'
   }
 ];
