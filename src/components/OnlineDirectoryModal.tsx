@@ -16,6 +16,7 @@ import {
 import { fetchMalayalamOnlineStations } from '../services/radioBrowserApi';
 import { RadioStation } from '../types/radio';
 import { useRadio } from '../context/RadioContext';
+import { StationIcon } from './StationIcon';
 
 interface OnlineDirectoryModalProps {
   isOpen: boolean;
@@ -148,18 +149,28 @@ export const OnlineDirectoryModal: React.FC<OnlineDirectoryModalProps> = ({ isOp
                   className="p-3.5 rounded-xl bg-[#1A140E] border border-amber-500/25 hover:border-amber-400/50 transition flex items-center justify-between gap-3"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#251D14] border border-amber-500/30 text-amber-300 font-bold flex-shrink-0 shadow">
-                      <Radio className="w-5 h-5" />
-                    </div>
+                    <StationIcon
+                      station={st}
+                      size="sm"
+                      isPlaying={isPlaying}
+                    />
 
                     <div className="min-w-0">
                       <h4 className="text-xs sm:text-sm font-bold text-white truncate uppercase tracking-wide">
                         {st.name}
                       </h4>
-                      <div className="flex items-center gap-2 text-[11px] text-amber-300/60 mt-0.5">
-                        <span>{st.location}</span>
+                      <div className="flex items-center gap-2 text-[11px] text-amber-300/60 mt-0.5 flex-wrap">
+                        <span>{st.location || 'Malayalam'}</span>
                         <span>•</span>
-                        <span className="font-mono text-amber-400">{st.bitrate}</span>
+                        <span className="font-mono text-amber-400">{st.bitrate || '128 kbps'}</span>
+                        {st.category && (
+                          <>
+                            <span>•</span>
+                            <span className="uppercase text-[9px] px-1.5 py-0.2 rounded bg-[#241B12] text-amber-200 border border-amber-500/20">
+                              {st.category}
+                            </span>
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>

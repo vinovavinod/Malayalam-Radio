@@ -14,6 +14,7 @@ import {
   CircleDot
 } from 'lucide-react';
 import { useRadio } from '../context/RadioContext';
+import { StationIcon } from './StationIcon';
 
 interface VisualizerModalProps {
   isOpen: boolean;
@@ -246,9 +247,11 @@ export const VisualizerModal: React.FC<VisualizerModalProps> = ({ isOpen, onClos
         {/* Top Control Bar */}
         <div className="w-full flex items-center justify-between border-b border-[#262626] pb-4 mb-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#181818] border border-[#333333] text-[#FF3D00] shadow-lg">
-              <Radio className="w-5 h-5" />
-            </div>
+            <StationIcon
+              station={currentStation}
+              size="sm"
+              isPlaying={playbackStatus === 'playing'}
+            />
             <div>
               <h3 className="text-base font-bold text-white flex items-center gap-2">
                 {currentStation.name}

@@ -26,6 +26,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'https://fm.ashrayafm90.com/ashrayafm'
     ],
+    logo: 'https://radiosindia.com/images/radiokochi.jpg',
     category: 'community',
     frequency: '90.0 FM',
     location: 'Kochi, Kerala',
@@ -43,6 +44,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://icecast.octosignals.com/sargakshetrafm'
     ],
+    logo: 'https://radiosindia.com/images/sargakshetrafm.jpg',
     category: 'community',
     frequency: '89.6 FM',
     location: 'Changanassery, Kottayam',
@@ -60,6 +62,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://443-1.autopo.st/183/stream'
     ],
+    logo: 'https://radiosindia.com/images/radiomediavillage.jpg',
     category: 'community',
     frequency: '90.8 FM',
     location: 'Changanassery, Kottayam',
@@ -77,6 +80,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://icecast.octosignals.com/benziger'
     ],
+    logo: 'https://radiosindia.com/images/radiobenziger.jpg',
     category: 'community',
     frequency: '107.8 FM',
     location: 'Kollam, Kerala',
@@ -94,6 +98,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://fm.ashrayafm90.com/ashrayafm'
     ],
+    logo: 'https://radiosindia.com/images/ashrayafm.jpg',
     category: 'community',
     frequency: '90.0 FM',
     location: 'Kollam, Kerala',
@@ -111,6 +116,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://cast1.my-control-panel.com/proxy/radiomattoli/stream'
     ],
+    logo: 'https://radiosindia.com/images/radiomattoli.jpg',
     category: 'community',
     frequency: '90.4 FM',
     location: 'Wayanad, Kerala',
@@ -128,6 +134,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://cast1.my-control-panel.com/proxy/ahaliafm/stream'
     ],
+    logo: 'https://radiosindia.com/images/ahaliafm.jpg',
     category: 'community',
     frequency: '90.4 FM',
     location: 'Palakkad, Kerala',
@@ -145,6 +152,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://cast1.my-control-panel.com/proxy/enteradio/stream'
     ],
+    logo: 'https://radiosindia.com/images/enteradio.jpg',
     category: 'community',
     frequency: '91.2 FM',
     location: 'Thrissur, Kerala',
@@ -162,6 +170,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://cast1.my-control-panel.com/proxy/myradio90fm/stream'
     ],
+    logo: 'https://radiosindia.com/images/malayalammusic.jpg',
     category: 'community',
     frequency: '90.0 FM',
     location: 'Kerala',
@@ -181,6 +190,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://air.pc.cdn.bitgravity.com/air/live/pbaudio214/chunklist.m3u8'
     ],
+    logo: 'https://radiosindia.com/images/air.jpg',
     category: 'air',
     frequency: '101.4 FM',
     location: 'Devikulam, Idukki',
@@ -198,6 +208,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://air.pc.cdn.bitgravity.com/air/live/pbaudio230/playlist.m3u8'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/03/air-alappuzha-akashvani.jpg',
     category: 'air',
     frequency: '576 AM / AIR',
     location: 'Alappuzha, Kerala',
@@ -215,6 +226,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://air.pc.cdn.bitgravity.com/air/live/pbaudio083/playlist.m3u8'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/03/air-kozhikode-real-fm.jpg',
     category: 'air',
     frequency: '103.6 FM / Real FM',
     location: 'Kozhikode, Kerala',
@@ -232,6 +244,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://air.pc.cdn.bitgravity.com/air/live/pbaudio044/playlist.m3u8'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/03/RainbowFMKochi.jpg',
     category: 'air',
     frequency: '107.5 FM Rainbow',
     location: 'Kochi, Kerala',
@@ -249,6 +262,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://air.pc.cdn.bitgravity.com/air/live/pbaudio040/playlist.m3u8'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/02/vividh-bharati-thiruvananthapuram.jpg',
     category: 'air',
     frequency: '101.9 FM',
     location: 'Thiruvananthapuram, Kerala',
@@ -266,6 +280,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://air.pc.cdn.bitgravity.com/air/live/pbaudio079/playlist.m3u8'
     ],
+    logo: 'https://radiosindia.com/images/airmanjeri.jpg',
     category: 'air',
     frequency: '100.2 FM',
     location: 'Manjeri, Malappuram',
@@ -286,6 +301,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
       'https://stream.zeno.fm/k22dfh67w8quv',
       'http://airspectrum.cdnstream1.com:8120/1651_128'
     ],
+    logo: 'https://radiosindia.com/images/sangeethamradio.jpg',
     category: 'online',
     frequency: 'Melody HD',
     location: 'Kerala',
@@ -303,6 +319,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://strw3.openstream.co/1459'
     ],
+    logo: 'https://radiosindia.com/images/radiomango.jpg',
     category: 'online',
     frequency: '91.9 FM',
     location: 'Kerala',
@@ -320,6 +337,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://strw3.openstream.co/1458'
     ],
+    logo: 'https://onlineradiofm.in/assets/image/radio/180/clubfmnewlogo.webp',
     category: 'online',
     frequency: '94.3 / 104.8 FM',
     location: 'Kerala',
@@ -337,6 +355,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://a5.asurahosting.com/listen/radio4u/radio.mp3'
     ],
+    logo: 'https://radiosindia.com/images/radio4u.jpg',
     category: 'online',
     frequency: 'Online HD',
     location: 'Kerala / Global',
@@ -354,6 +373,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'https://stream.zeno.fm/k22dfh67w8quv'
     ],
+    logo: 'https://radiosindia.com/images/radiopalakkad.jpg',
     category: 'online',
     frequency: 'Online FM',
     location: 'Palakkad, Kerala',
@@ -371,6 +391,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://airspectrum.cdnstream1.com:8120/1651_128'
     ],
+    logo: 'https://radiosindia.com/images/radiomalabar.jpg',
     category: 'online',
     frequency: 'Online HLS',
     location: 'Malabar, Kerala',
@@ -388,6 +409,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://radio.digitalmalayali.in/listen/stream/radio.mp3'
     ],
+    logo: 'https://radio.digitalmalayali.in/static/uploads/album_art.1688135987.jpg',
     category: 'online',
     frequency: 'Digital HD',
     location: 'UAE / Gulf / Kerala',
@@ -406,6 +428,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
       'https://stream.zeno.fm/k22dfh67w8quv',
       'https://stream.zeno.fm/08e1vkshcc9uv'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/03/Yesudas-Radio.jpg',
     category: 'online',
     frequency: '128 kbps HD',
     location: 'Kerala / Global',
@@ -424,6 +447,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
       'https://stream.zeno.fm/4621p5bdfp8uv',
       'https://strw3.openstream.co/1459'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2022/03/radio-suno-malayalam-fm.jpg',
     category: 'online',
     frequency: 'Melody Stream',
     location: 'Kerala',
@@ -441,6 +465,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'http://radiosavre.com:8020/radio.mp3'
     ],
+    logo: 'https://radiosindia.com/images/malayalamradio.jpg',
     category: 'online',
     frequency: '90s Hits',
     location: 'Kerala',
@@ -459,6 +484,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'https://stream.zeno.fm/k22dfh67w8quv'
     ],
+    logo: 'https://radiosindia.com/images/iyalisaibakthiradio.jpg',
     category: 'devotional',
     frequency: '24x7 Divine',
     location: 'Kerala',
@@ -476,6 +502,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'https://s2.citrus3.com:8046/stream'
     ],
+    logo: 'https://radiosindia.com/images/psalmsradio.jpg',
     category: 'devotional',
     frequency: 'Psalms 24x7',
     location: 'Kerala / Global',
@@ -493,6 +520,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'https://ice31.securenetsystems.net/DVN'
     ],
+    logo: 'https://radiosindia.com/images/dvnradio.jpg',
     category: 'devotional',
     frequency: 'DVN Live',
     location: 'Kerala / Global',
@@ -510,6 +538,7 @@ export const DEFAULT_STATIONS: RadioStation[] = [
     fallbackUrls: [
       'https://gains.reviveradio.net/proxy/jesusreigns?mp=/stream'
     ],
+    logo: 'https://onlineradiohub.com/wp-content/uploads/2023/03/JesusRadio.jpg',
     category: 'devotional',
     frequency: 'Jesus Reigns',
     location: 'Kerala / Global',
