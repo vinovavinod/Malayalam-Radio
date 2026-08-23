@@ -69,14 +69,14 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
   const getCategoryIcon = () => {
     switch (station.category) {
       case 'air':
-        return <TowerControl className="w-3 h-3 text-orange-400" />;
+        return <TowerControl className="w-3 h-3 text-amber-700" />;
       case 'community':
-        return <Users className="w-3 h-3 text-amber-400" />;
+        return <Users className="w-3 h-3 text-emerald-700" />;
       case 'devotional':
-        return <Sparkles className="w-3 h-3 text-yellow-400" />;
+        return <Sparkles className="w-3 h-3 text-yellow-700" />;
       case 'online':
       default:
-        return <Globe className="w-3 h-3 text-emerald-400" />;
+        return <Globe className="w-3 h-3 text-stone-700" />;
     }
   };
 
@@ -98,15 +98,18 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
     <div
       id={`station-card-${station.id}`}
       onClick={handleCardClick}
-      className={`group relative w-full flex flex-col md:flex-row items-start md:items-center justify-between p-3.5 sm:p-5 rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden shadow-lg gap-3 sm:gap-4 ${
+      className={`group relative w-full flex flex-col md:flex-row items-start md:items-center justify-between p-3.5 sm:p-5 rounded-2xl transition-all duration-300 cursor-pointer overflow-hidden gap-3 sm:gap-4 ${
         isCurrent
-          ? 'bg-gradient-to-r from-[#2B1F13] via-[#20170F] to-[#16100A] border-amber-400 shadow-xl shadow-amber-500/15 ring-1 ring-amber-400/50'
-          : 'bg-[#140F0A] hover:bg-[#1C150E] border-amber-500/20 hover:border-amber-400/50 hover:shadow-black/70'
+          ? 'station-tile-cream-active ring-1 ring-[#D4AF37]/50'
+          : 'station-tile-cream'
       }`}
     >
+      {/* Subtle Inset Luxury Top Sheen */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent pointer-events-none" />
+
       {/* Active Station Digital Ambient Glow */}
       {isCurrent && (
-        <div className="absolute -right-12 -top-12 w-44 h-44 bg-amber-400/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -right-12 -top-12 w-44 h-44 bg-amber-400/20 rounded-full blur-3xl pointer-events-none" />
       )}
 
       {/* Main Left Section: Station Icon + Full Digital Details */}
@@ -127,20 +130,20 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
           
           {/* Top Title & Badges Bar */}
           <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-base sm:text-lg font-bold text-white tracking-tight group-hover:text-amber-300 transition">
+            <h3 className="text-base sm:text-lg font-bold text-stone-900 tracking-tight group-hover:text-amber-900 transition-colors">
               {station.name}
             </h3>
 
             {/* Digital Frequency Badge */}
             {station.frequency && (
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold uppercase tracking-wider bg-amber-500/15 text-amber-300 border border-amber-400/35">
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-mono font-extrabold uppercase tracking-wider bg-[#F2E8D8] text-[#7A4513] border border-[#E3D3BE]">
                 {station.frequency}
               </span>
             )}
 
             {/* Preset Indicator Tag */}
             {isPreset && (
-              <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-black uppercase bg-amber-400 text-black shadow-sm">
+              <span className="px-1.5 py-0.5 rounded text-[9px] font-mono font-black uppercase bg-[#C27803] text-white shadow-xs">
                 P{presetSlotIndex + 1}
               </span>
             )}
@@ -148,12 +151,12 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
             {/* Category Badge */}
             <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border flex items-center gap-1 ${
               station.category === 'devotional'
-                ? 'bg-amber-500/20 text-amber-300 border-amber-400/40'
+                ? 'bg-[#FEF3C7] text-[#92400E] border-[#FDE68A]'
                 : station.category === 'air'
-                ? 'bg-orange-500/15 text-orange-300 border-orange-400/35'
+                ? 'bg-[#FFF2DE] text-[#9A3412] border-[#FCD39B]'
                 : station.category === 'community'
-                ? 'bg-amber-600/15 text-amber-200 border-amber-500/30'
-                : 'bg-[#1C150E] text-amber-200/90 border-amber-500/25'
+                ? 'bg-[#ECFDF5] text-[#065F46] border-[#A7F3D0]'
+                : 'bg-[#F3EDE2] text-[#6B573F] border-[#E3D7C5]'
             }`}>
               {getCategoryIcon()}
               <span>{getCategoryLabel()}</span>
@@ -161,13 +164,13 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
 
             {/* Live Streaming On-Air Status */}
             {isCurrent && isPlaying ? (
-              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 flex items-center gap-1.5 animate-pulse">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-300 flex items-center gap-1.5 animate-pulse">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
                 <span>ON AIR</span>
               </span>
             ) : (
-              <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono text-amber-200/60 bg-[#1A120B] border border-amber-500/20">
-                <Wifi className="w-2.5 h-2.5 text-amber-400" />
+              <span className="hidden sm:inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-mono text-stone-600 bg-[#EFE8DC] border border-[#DFD3C0]">
+                <Wifi className="w-2.5 h-2.5 text-amber-700" />
                 <span>{station.bitrate || '128k'}</span>
               </span>
             )}
@@ -175,27 +178,27 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
 
           {/* Malayalam Station Name */}
           {station.malayalamName && (
-            <p className="text-xs sm:text-sm font-malayalam text-amber-200/90 font-medium">
+            <p className="text-xs sm:text-sm font-malayalam text-[#7A4513] font-medium">
               {station.malayalamName}
             </p>
           )}
 
           {/* Description */}
           {station.description && (
-            <p className="text-xs text-neutral-300/80 line-clamp-2 leading-relaxed font-normal pt-0.5">
+            <p className="text-xs text-[#5A4D3F] line-clamp-2 leading-relaxed font-normal pt-0.5">
               {station.description}
             </p>
           )}
 
           {/* Location & Digital Audio Format Tags */}
           <div className="flex items-center gap-2 pt-1 flex-wrap text-xs">
-            <span className="text-[11px] text-amber-300/80 flex items-center gap-1 font-mono font-medium">
-              <MapPin className="w-3 h-3 text-amber-400 flex-shrink-0" />
+            <span className="text-[11px] text-[#78350F] flex items-center gap-1 font-mono font-medium">
+              <MapPin className="w-3 h-3 text-amber-700 flex-shrink-0" />
               <span>{station.location || 'Kerala Live'}</span>
             </span>
 
             {station.codec && (
-              <span className="px-1.5 py-0.2 rounded bg-[#1F170E] border border-amber-500/20 text-amber-200/70 text-[9px] uppercase font-mono">
+              <span className="px-1.5 py-0.2 rounded bg-[#EFE8DC] border border-[#DFD3C0] text-[#6A5A4A] text-[9px] uppercase font-mono font-semibold">
                 {station.codec.toUpperCase()}
               </span>
             )}
@@ -203,7 +206,7 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
             {station.tags?.slice(0, 3).map((tag, idx) => (
               <span 
                 key={idx} 
-                className="px-1.5 py-0.2 rounded bg-[#1F170E] border border-amber-500/20 text-amber-200/70 text-[9px] uppercase tracking-wider font-mono"
+                className="px-1.5 py-0.2 rounded bg-[#EFE8DC] border border-[#DFD3C0] text-[#6A5A4A] text-[9px] uppercase tracking-wider font-mono"
               >
                 #{tag}
               </span>
@@ -213,7 +216,7 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
       </div>
 
       {/* Right Section: Action Controls & Preset Assigning */}
-      <div className="flex items-center justify-between md:justify-end gap-2.5 w-full md:w-auto pt-2.5 md:pt-0 border-t md:border-t-0 border-amber-500/20 relative z-10 flex-shrink-0">
+      <div className="flex items-center justify-between md:justify-end gap-2.5 w-full md:w-auto pt-2.5 md:pt-0 border-t md:border-t-0 border-[#E8DEC\-C] md:border-transparent relative z-10 flex-shrink-0">
         
         {/* Preset Quick-Assign Popover Menu */}
         <div className="relative">
@@ -225,8 +228,8 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
             }}
             className={`p-2 sm:p-2.5 rounded-xl border transition ${
               isPreset
-                ? 'bg-amber-400/20 border-amber-400/50 text-amber-300'
-                : 'bg-[#181109] hover:bg-[#261B0E] border-amber-500/20 text-amber-200/60 hover:text-white'
+                ? 'bg-[#F5E6CC] border-[#D8BE96] text-[#7A4513]'
+                : 'bg-[#F2ECE0] hover:bg-[#E8DFC9] border-[#DFD1BD] text-[#5C4936] hover:text-stone-900'
             }`}
             title="Assign to Digital Preset Memory (P1 - P10)"
           >
@@ -236,9 +239,9 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
           {showPresetMenu && (
             <div 
               onClick={(e) => e.stopPropagation()}
-              className="absolute right-0 bottom-full mb-2 w-48 bg-[#16100A] border border-amber-500/40 rounded-xl p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95"
+              className="absolute right-0 bottom-full mb-2 w-48 bg-[#FFFCF7] border border-[#E5DAC7] rounded-xl p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95"
             >
-              <div className="text-[10px] font-mono font-bold uppercase text-amber-300 mb-1.5 px-1 border-b border-amber-500/20 pb-1">
+              <div className="text-[10px] font-mono font-bold uppercase text-[#7A5A38] mb-1.5 px-1 border-b border-[#EFE5D4] pb-1">
                 Assign to Preset Slot:
               </div>
               <div className="grid grid-cols-5 gap-1">
@@ -252,8 +255,8 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
                     }}
                     className={`py-1 rounded text-[10px] font-mono font-bold transition border ${
                       presets[slotIdx] === station.id
-                        ? 'bg-amber-400 text-black border-amber-300 font-black'
-                        : 'bg-[#1E1710] hover:bg-amber-500/20 text-amber-200 border-amber-500/25'
+                        ? 'bg-[#C27803] text-white border-[#A16207] font-black'
+                        : 'bg-[#F5EDE0] hover:bg-[#EADBC6] text-[#5C4936] border-[#DFD1BD]'
                     }`}
                   >
                     P{slotIdx + 1}
@@ -268,10 +271,10 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
         <button
           id={`copy-btn-${station.id}`}
           onClick={handleCopyLink}
-          className="p-2 sm:p-2.5 rounded-xl text-amber-200/60 hover:text-white hover:bg-[#20160D] border border-amber-500/20 hover:border-amber-500/40 transition"
+          className="p-2 sm:p-2.5 rounded-xl text-[#5C4936] hover:text-stone-900 hover:bg-[#E8DFC9] border border-[#DFD1BD] transition"
           title={copied ? 'Copied stream URL!' : 'Copy Stream URL'}
         >
-          {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
+          {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
         </button>
 
         {/* Favorite Bookmark Button */}
@@ -283,12 +286,12 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
           }}
           className={`p-2 sm:p-2.5 rounded-xl transition border ${
             isFav
-              ? 'text-rose-400 bg-rose-500/15 border-rose-500/30 hover:bg-rose-500/25'
-              : 'text-amber-200/50 hover:text-white hover:bg-[#20160D] border-amber-500/20 hover:border-amber-500/40'
+              ? 'text-rose-600 bg-rose-50 border-rose-200 hover:bg-rose-100'
+              : 'text-[#8C7A68] hover:text-stone-900 hover:bg-[#E8DFC9] border-[#DFD1BD]'
           }`}
           title={isFav ? 'Remove from favorites' : 'Add to favorites'}
         >
-          <Heart className={`w-4 h-4 ${isFav ? 'fill-rose-400 text-rose-400' : ''}`} />
+          <Heart className={`w-4 h-4 ${isFav ? 'fill-rose-500 text-rose-500' : ''}`} />
         </button>
 
         {/* Digital Play / Pause Button */}
@@ -298,12 +301,12 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
             e.stopPropagation();
             handleCardClick();
           }}
-          className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-black text-xs flex items-center gap-2 transition shadow-md ${
+          className={`px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-xl font-black text-xs flex items-center gap-2 transition shadow-xs ${
             isCurrent && isPlaying
-              ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black border border-amber-300 shadow-amber-500/20 hover:brightness-110'
+              ? 'bg-gradient-to-r from-[#D97706] via-[#D4AF37] to-[#B45309] text-white border border-amber-300 shadow-md shadow-amber-900/20 hover:brightness-105 active:scale-95'
               : isCurrent && isLoading
-              ? 'bg-[#251A10] text-amber-300 border border-amber-400/50'
-              : 'bg-[#1D150E] text-amber-200 hover:text-black hover:bg-gradient-to-r hover:from-amber-400 hover:to-yellow-500 border border-amber-500/30 hover:border-amber-300'
+              ? 'bg-[#F5E6CC] text-[#7A4513] border border-amber-300'
+              : 'bg-[#EFE5D4] hover:bg-gradient-to-r hover:from-[#D97706] hover:to-[#D4AF37] hover:text-white text-[#4A3828] border border-[#DDCFBA] hover:border-amber-400 active:scale-95 transition-all'
           }`}
           title={isPlaying ? 'Pause Station' : 'Listen Now'}
         >
@@ -314,7 +317,7 @@ export const StationCard: React.FC<StationCardProps> = ({ station }) => {
             </>
           ) : isPlaying ? (
             <>
-              <Pause className="w-3.5 h-3.5 fill-black text-black" />
+              <Pause className="w-3.5 h-3.5 fill-white text-white" />
               <span>Playing</span>
             </>
           ) : (

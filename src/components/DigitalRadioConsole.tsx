@@ -166,13 +166,13 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
           const segY = canvas.height - (s + 1) * segHeight;
           const segH = Math.max(1.5, segHeight - 1);
 
-          // LED Color gradient: Amber -> Gold -> Cyan peak
+          // Cool LED Color gradient: Deep Sky -> Vivid Cyan -> Ice White Peak
           if (s >= 6) {
-            ctx.fillStyle = isLive ? '#38BDF8' : '#334155'; // Peak Cyan LED
-          } else if (s >= 4) {
-            ctx.fillStyle = isLive ? '#FDE047' : '#475569'; // Yellow LED
+            ctx.fillStyle = isLive ? '#E0F2FE' : '#334155'; // Ice Peak LED
+          } else if (s >= 3) {
+            ctx.fillStyle = isLive ? '#38BDF8' : '#1E293B'; // Sky-400 LED
           } else {
-            ctx.fillStyle = isLive ? '#F59E0B' : '#332415'; // Amber LED
+            ctx.fillStyle = isLive ? '#0284C7' : '#0F172A'; // Sky-600 LED
           }
 
           ctx.fillRect(x, segY, barWidth, segH);
@@ -200,35 +200,35 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
   return (
     <section 
       id="digital-radio-console-receiver"
-      className="w-full mb-6 relative rounded-3xl bg-gradient-to-b from-[#1E1812] via-[#15100B] to-[#0D0A07] border-2 border-amber-500/40 p-3 sm:p-5 shadow-2xl shadow-black/80 overflow-hidden"
+      className="w-full mb-6 relative rounded-3xl bg-gradient-to-b from-white via-slate-50 to-slate-100 border-2 border-sky-200/80 p-3 sm:p-5 shadow-xl shadow-slate-200/60 overflow-hidden text-slate-800"
     >
-      {/* Metallic Chassis Chamfers & Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-500/10 via-transparent to-transparent pointer-events-none" />
+      {/* Cool Atmospheric Chassis Chamfers & Glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-400/10 via-transparent to-transparent pointer-events-none" />
       
       {/* Precision CNC Allen Screw Corner Rivets */}
-      <div className="absolute top-2.5 left-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-[#4A3D2E] to-[#1C1712] border border-amber-500/30 flex items-center justify-center">
-        <div className="w-1 h-0.5 bg-amber-400/40 transform rotate-45" />
+      <div className="absolute top-2.5 left-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 border border-slate-300 flex items-center justify-center">
+        <div className="w-1 h-0.5 bg-slate-500 transform rotate-45" />
       </div>
-      <div className="absolute top-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-[#4A3D2E] to-[#1C1712] border border-amber-500/30 flex items-center justify-center">
-        <div className="w-1 h-0.5 bg-amber-400/40 transform rotate-45" />
+      <div className="absolute top-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 border border-slate-300 flex items-center justify-center">
+        <div className="w-1 h-0.5 bg-slate-500 transform rotate-45" />
       </div>
-      <div className="absolute bottom-2.5 left-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-[#4A3D2E] to-[#1C1712] border border-amber-500/30 flex items-center justify-center">
-        <div className="w-1 h-0.5 bg-amber-400/40 transform rotate-45" />
+      <div className="absolute bottom-2.5 left-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 border border-slate-300 flex items-center justify-center">
+        <div className="w-1 h-0.5 bg-slate-500 transform rotate-45" />
       </div>
-      <div className="absolute bottom-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-[#4A3D2E] to-[#1C1712] border border-amber-500/30 flex items-center justify-center">
-        <div className="w-1 h-0.5 bg-amber-400/40 transform rotate-45" />
+      <div className="absolute bottom-2.5 right-2.5 w-2.5 h-2.5 rounded-full bg-gradient-to-br from-slate-200 to-slate-400 border border-slate-300 flex items-center justify-center">
+        <div className="w-1 h-0.5 bg-slate-500 transform rotate-45" />
       </div>
 
       {/* Top Receiver Chassis Bar */}
-      <div className="flex items-center justify-between border-b border-amber-500/25 pb-3 mb-3 gap-2 flex-wrap">
+      <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-3 gap-2 flex-wrap">
         <div className="flex items-center gap-2.5">
-          <div className="px-2.5 py-1 rounded-md bg-[#0F0B07] border border-amber-500/35 flex items-center gap-1.5 shadow-inner">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping inline-block" />
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-amber-300 font-mono">
+          <div className="px-2.5 py-1 rounded-md bg-sky-50 border border-sky-200 flex items-center gap-1.5 shadow-xs">
+            <span className="w-2 h-2 rounded-full bg-sky-500 animate-ping inline-block" />
+            <span className="text-[10px] font-black uppercase tracking-[0.2em] text-sky-700 font-mono">
               DIGITAL RECEIVER • DAB+ / FM / IP
             </span>
           </div>
-          <span className="hidden sm:inline-block text-[11px] font-mono text-amber-200/60">
+          <span className="hidden sm:inline-block text-[11px] font-mono text-slate-500">
             MODEL: KR-9000HiFi
           </span>
         </div>
@@ -236,8 +236,8 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
         {/* Receiver Telemetry Status Badges */}
         <div className="flex items-center gap-2">
           {/* Signal RSSI Meter */}
-          <div className="flex items-center gap-1 bg-[#0F0B07] px-2 py-0.5 rounded border border-amber-500/25">
-            <span className="text-[9px] font-mono font-bold text-amber-300/80">SIGNAL</span>
+          <div className="flex items-center gap-1 bg-slate-100 px-2 py-0.5 rounded border border-slate-200">
+            <span className="text-[9px] font-mono font-bold text-slate-500">SIGNAL</span>
             <div className="flex items-end gap-0.5 h-3">
               {[1, 2, 3, 4, 5].map(bar => (
                 <span
@@ -245,33 +245,33 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
                   className={`w-1 rounded-xs transition-all ${
                     bar <= signalBars
                       ? bar === 5
-                        ? 'h-3 bg-emerald-400'
+                        ? 'h-3 bg-emerald-500'
                         : bar >= 3
-                        ? 'h-2.5 bg-amber-400'
-                        : 'h-1.5 bg-amber-500'
-                      : 'h-1 bg-neutral-700'
+                        ? 'h-2.5 bg-sky-500'
+                        : 'h-1.5 bg-sky-400'
+                      : 'h-1 bg-slate-300'
                   }`}
                 />
               ))}
             </div>
-            <span className="text-[9px] font-mono font-bold text-emerald-400 ml-0.5">
+            <span className="text-[9px] font-mono font-bold text-emerald-600 ml-0.5">
               {playbackStatus === 'playing' ? 'LOCK' : 'SEARCH'}
             </span>
           </div>
 
           {/* Master Clock */}
-          <div className="hidden md:flex items-center gap-1.5 bg-[#0F0B07] px-2.5 py-0.5 rounded border border-amber-500/25 text-amber-200">
-            <span className="text-[9px] uppercase tracking-wider font-bold text-amber-400/70 font-mono">IST</span>
-            <span className="text-xs font-mono font-bold text-[#FFE6A7]">{digitalTime}</span>
+          <div className="hidden md:flex items-center gap-1.5 bg-slate-100 px-2.5 py-0.5 rounded border border-slate-200 text-slate-700">
+            <span className="text-[9px] uppercase tracking-wider font-bold text-sky-600 font-mono">IST</span>
+            <span className="text-xs font-mono font-bold text-slate-900">{digitalTime}</span>
           </div>
         </div>
       </div>
 
       {/* MASTER DIGITAL OLED / VFD MATRIX DISPLAY CONSOLE */}
-      <div className="w-full bg-[#080604] border-2 border-amber-500/40 rounded-2xl p-3.5 sm:p-5 relative overflow-hidden shadow-inner flex flex-col gap-3">
+      <div className="w-full bg-[#0B132B] border-2 border-sky-800/60 rounded-2xl p-3.5 sm:p-5 relative overflow-hidden shadow-inner flex flex-col gap-3">
         {/* Subtle OLED Scanline Grid Overlay */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,11,0)_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-40 z-20" />
-        <div className="absolute top-0 right-0 w-96 h-48 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(11,19,43,0)_50%,rgba(0,0,0,0.5)_50%)] bg-[length:100%_4px] pointer-events-none opacity-40 z-20" />
+        <div className="absolute top-0 right-0 w-96 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Display Row 1: Frequency Large Readout, Station Name & Live Badges */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-3 relative z-10">
@@ -283,10 +283,10 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
                 station={currentStation} 
                 size="md" 
                 isPlaying={playbackStatus === 'playing'}
-                className="ring-2 ring-amber-400/40 flex-shrink-0"
+                className="ring-2 ring-sky-400/40 flex-shrink-0"
               />
             ) : (
-              <div className="w-12 h-12 rounded-xl bg-[#1A140E] border border-amber-500/30 flex items-center justify-center text-amber-400 flex-shrink-0 shadow">
+              <div className="w-12 h-12 rounded-xl bg-slate-800 border border-sky-500/30 flex items-center justify-center text-sky-400 flex-shrink-0 shadow">
                 <Radio className="w-6 h-6" />
               </div>
             )}
@@ -294,11 +294,11 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
                 {/* Digital Frequency Big Readout */}
-                <span className="text-xl sm:text-2xl lg:text-3xl font-black font-mono tracking-tight text-amber-300 drop-shadow-[0_0_8px_rgba(245,158,11,0.6)]">
+                <span className="text-xl sm:text-2xl lg:text-3xl font-black font-mono tracking-tight text-cyan-300 drop-shadow-[0_0_8px_rgba(6,182,212,0.6)]">
                   {currentStation?.frequency || '102.7 MHz'}
                 </span>
                 
-                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-extrabold uppercase bg-amber-400/15 text-amber-200 border border-amber-400/30 shadow-sm">
+                <span className="px-2 py-0.5 rounded text-[10px] font-mono font-extrabold uppercase bg-sky-500/20 text-sky-200 border border-sky-400/30 shadow-xs">
                   {currentStation?.category?.toUpperCase() || 'FM DIGITAL'}
                 </span>
 
@@ -315,7 +315,7 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
               </h2>
 
               {currentStation?.malayalamName && (
-                <p className="text-xs sm:text-sm font-malayalam text-amber-300/90 font-medium truncate">
+                <p className="text-xs sm:text-sm font-malayalam text-sky-200 font-medium truncate">
                   {currentStation.malayalamName} • {currentStation.location || 'Kerala'}
                 </p>
               )}
@@ -323,14 +323,14 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
           </div>
 
           {/* Mini Real-Time LED Audio Spectrum Canvas */}
-          <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end border-t lg:border-t-0 pt-2 lg:pt-0 border-amber-500/20">
+          <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end border-t lg:border-t-0 pt-2 lg:pt-0 border-sky-800/40">
             <div className="flex flex-col items-end gap-1">
-              <div className="flex items-center gap-2 text-[10px] font-mono text-amber-300/70">
+              <div className="flex items-center gap-2 text-[10px] font-mono text-cyan-200/80">
                 <span>DSP: {selectedPresetName.toUpperCase()}</span>
                 <span>•</span>
                 <span>320K STEREO</span>
               </div>
-              <div className="w-48 sm:w-56 h-10 bg-[#040302] rounded-lg border border-amber-500/30 p-1 flex items-center justify-center shadow-inner overflow-hidden">
+              <div className="w-48 sm:w-56 h-10 bg-[#060D1E] rounded-lg border border-sky-700/50 p-1 flex items-center justify-center shadow-inner overflow-hidden">
                 <canvas
                   ref={canvasRef}
                   width={220}
@@ -345,31 +345,31 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
               <button
                 id="digital-console-visualizer-btn"
                 onClick={onOpenVisualizerModal}
-                className="p-2 rounded-xl bg-[#1C160F] hover:bg-[#2A2016] border border-amber-500/35 hover:border-amber-300 text-amber-300 hover:text-white transition shadow-sm"
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-sky-500/30 hover:border-sky-300 text-cyan-300 hover:text-white transition shadow-xs"
                 title="Fullscreen Sound Visualizer"
               >
-                <Sparkles className="w-4 h-4 text-amber-400" />
+                <Sparkles className="w-4 h-4 text-cyan-400" />
               </button>
 
               <button
                 id="digital-console-eq-btn"
                 onClick={onOpenEqModal}
-                className="p-2 rounded-xl bg-[#1C160F] hover:bg-[#2A2016] border border-amber-500/35 hover:border-amber-300 text-amber-300 hover:text-white transition shadow-sm"
+                className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-sky-500/30 hover:border-sky-300 text-cyan-300 hover:text-white transition shadow-xs"
                 title="Audio Equalizer & Presets"
               >
-                <SlidersHorizontal className="w-4 h-4 text-amber-400" />
+                <SlidersHorizontal className="w-4 h-4 text-cyan-400" />
               </button>
             </div>
           </div>
         </div>
 
         {/* Display Row 2: Scrolling RDS Radio-Text Information Ticker */}
-        <div className="w-full bg-[#030201] border border-amber-500/30 rounded-lg px-3 py-1.5 overflow-hidden relative shadow-inner flex items-center">
-          <span className="text-[10px] font-mono font-bold uppercase text-amber-400 bg-amber-500/20 px-1.5 py-0.5 rounded mr-2 flex-shrink-0 border border-amber-400/30">
+        <div className="w-full bg-[#050A18] border border-sky-800/50 rounded-lg px-3 py-1.5 overflow-hidden relative shadow-inner flex items-center">
+          <span className="text-[10px] font-mono font-bold uppercase text-cyan-400 bg-cyan-950 px-1.5 py-0.5 rounded mr-2 flex-shrink-0 border border-cyan-500/40">
             RDS
           </span>
           <div className="overflow-hidden whitespace-nowrap w-full">
-            <div className="inline-block animate-marquee text-xs font-mono text-[#FFE4A0] font-medium tracking-wide">
+            <div className="inline-block animate-marquee text-xs font-mono text-cyan-100 font-medium tracking-wide">
               {rdsText} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {rdsText}
             </div>
           </div>
@@ -378,11 +378,11 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
         {/* Display Row 3: Digital Presets Bank (P1 to P10 Buttons) */}
         <div className="w-full pt-1">
           <div className="flex items-center justify-between mb-1.5">
-            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-amber-300/80 flex items-center gap-1">
-              <BookmarkPlus className="w-3 h-3 text-amber-400" />
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-cyan-200/90 flex items-center gap-1">
+              <BookmarkPlus className="w-3 h-3 text-cyan-400" />
               <span>DIGITAL PRESET MEMORY BANK (P1 - P10)</span>
             </span>
-            <span className="text-[10px] font-mono text-amber-200/50 hidden sm:inline">
+            <span className="text-[10px] font-mono text-cyan-300/50 hidden sm:inline">
               CLICK PRESET TO TUNE • LONG CLICK / HOLD TO OVERWRITE
             </span>
           </div>
@@ -418,25 +418,25 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
                   }}
                   className={`group relative flex flex-col items-center justify-center p-1.5 rounded-xl border transition-all duration-200 ${
                     isActive
-                      ? 'bg-gradient-to-b from-amber-400 via-amber-500 to-yellow-600 text-black border-amber-300 shadow-md shadow-amber-500/40 font-extrabold ring-1 ring-amber-300'
+                      ? 'bg-gradient-to-b from-sky-400 via-cyan-500 to-blue-600 text-white border-sky-300 shadow-md shadow-cyan-500/40 font-extrabold ring-1 ring-cyan-300'
                       : isAssigningThis
-                      ? 'bg-amber-500/30 text-amber-200 border-amber-400 animate-pulse ring-1 ring-amber-400'
-                      : 'bg-[#140F0A] hover:bg-[#201811] text-amber-200/80 hover:text-white border-amber-500/25 hover:border-amber-400/60 shadow-inner'
+                      ? 'bg-sky-500/30 text-sky-200 border-sky-400 animate-pulse ring-1 ring-sky-400'
+                      : 'bg-slate-800/80 hover:bg-slate-700 text-slate-200 hover:text-white border-sky-800/40 hover:border-sky-500/60 shadow-inner'
                   }`}
                   title={st ? `P${index + 1}: ${st.name} (${st.frequency || 'Live'})` : `P${index + 1}: Empty (Click to assign)`}
                 >
                   <div className="flex items-center gap-1 w-full justify-between px-0.5">
-                    <span className={`text-[10px] font-mono font-black ${isActive ? 'text-black' : 'text-amber-400'}`}>
+                    <span className={`text-[10px] font-mono font-black ${isActive ? 'text-white' : 'text-cyan-400'}`}>
                       P{index + 1}
                     </span>
                     {isActive && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-black animate-ping" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
                     )}
                   </div>
                   <span className="text-[10px] font-bold truncate max-w-full leading-tight mt-0.5">
                     {st ? st.name.replace('Radio ', '').replace('AIR ', '') : '---'}
                   </span>
-                  <span className={`text-[8px] font-mono truncate max-w-full ${isActive ? 'text-black/80' : 'text-amber-300/60'}`}>
+                  <span className={`text-[8px] font-mono truncate max-w-full ${isActive ? 'text-sky-100' : 'text-cyan-300/70'}`}>
                     {st?.frequency || (st ? 'ONLINE' : 'EMPTY')}
                   </span>
                 </button>
@@ -447,21 +447,21 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
       </div>
 
       {/* Receiver Master Control Panel Strip */}
-      <div className="w-full flex flex-col sm:flex-row items-center justify-between pt-3 mt-3 border-t border-amber-500/25 gap-3">
+      <div className="w-full flex flex-col sm:flex-row items-center justify-between pt-3 mt-3 border-t border-slate-200 gap-3">
         {/* Left: Quick Actions & Boost */}
         <div className="flex items-center gap-2 w-full sm:w-auto justify-start flex-wrap">
           {/* DSP Bass Boost Rocker Switch */}
           <button
             id="dsp-bass-boost-toggle"
             onClick={toggleBoost}
-            className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold uppercase transition flex items-center gap-1.5 border shadow-sm ${
+            className={`px-3 py-1.5 rounded-xl text-xs font-mono font-bold uppercase transition flex items-center gap-1.5 border shadow-xs ${
               isBoosted
-                ? 'bg-amber-400 text-black border-amber-300 shadow-amber-400/30'
-                : 'bg-[#18120B] text-amber-300 hover:text-white border-amber-500/30 hover:bg-[#241B12]'
+                ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white border-sky-400 shadow-sky-500/25'
+                : 'bg-white text-slate-700 hover:text-slate-900 border-slate-200 hover:bg-slate-50'
             }`}
             title="Toggle DSP Bass Boost (+6dB)"
           >
-            <Zap className={`w-3.5 h-3.5 ${isBoosted ? 'fill-black text-black' : 'text-amber-400'}`} />
+            <Zap className={`w-3.5 h-3.5 ${isBoosted ? 'fill-white text-white' : 'text-sky-500'}`} />
             <span>BASS BOOST {isBoosted ? 'ON' : 'OFF'}</span>
           </button>
 
@@ -472,12 +472,12 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
               onClick={() => toggleFavorite(currentStation.id)}
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border ${
                 isFav
-                  ? 'bg-rose-500/20 text-rose-300 border-rose-500/40'
-                  : 'bg-[#18120B] text-amber-200/80 hover:text-white border-amber-500/30 hover:bg-[#241B12]'
+                  ? 'bg-rose-50 text-rose-600 border-rose-200'
+                  : 'bg-white text-slate-700 hover:text-slate-900 border-slate-200 hover:bg-slate-50 shadow-xs'
               }`}
               title="Add current station to favorites"
             >
-              <Heart className={`w-3.5 h-3.5 ${isFav ? 'fill-rose-400 text-rose-400' : 'text-rose-400'}`} />
+              <Heart className={`w-3.5 h-3.5 ${isFav ? 'fill-rose-500 text-rose-500' : 'text-rose-500'}`} />
               <span className="hidden xs:inline">{isFav ? 'Favorited' : 'Favorite'}</span>
             </button>
           )}
@@ -493,10 +493,10 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
                   setAssigningSlot(0);
                 }
               }}
-              className="px-2.5 py-1.5 rounded-xl text-xs font-mono font-bold bg-[#18120B] hover:bg-[#241B12] text-amber-300 hover:text-white border border-amber-500/30 transition flex items-center gap-1"
+              className="px-2.5 py-1.5 rounded-xl text-xs font-mono font-bold bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-200 transition flex items-center gap-1 shadow-xs"
               title="Save current station into a Preset slot (P1-P10)"
             >
-              <BookmarkPlus className="w-3.5 h-3.5 text-amber-400" />
+              <BookmarkPlus className="w-3.5 h-3.5 text-sky-600" />
               <span>SAVE PRESET</span>
             </button>
           )}
@@ -507,7 +507,7 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
           <button
             id="console-prev-btn"
             onClick={playPreviousStation}
-            className="p-2.5 rounded-full bg-[#18120B] hover:bg-[#281F14] text-amber-300 hover:text-white border border-amber-500/30 transition active:scale-95 shadow-md"
+            className="p-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-200 transition active:scale-95 shadow-sm"
             title="Previous Station"
           >
             <SkipBack className="w-4 h-4" />
@@ -516,22 +516,22 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
           <button
             id="console-play-pause-btn"
             onClick={togglePlayPause}
-            className="w-12 h-12 rounded-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-black flex items-center justify-center font-black shadow-lg shadow-amber-500/40 hover:brightness-110 active:scale-95 transition"
+            className="w-12 h-12 rounded-full bg-gradient-to-r from-sky-500 via-cyan-500 to-blue-600 text-white flex items-center justify-center font-black shadow-lg shadow-sky-500/30 hover:brightness-110 active:scale-95 transition"
             title={playbackStatus === 'playing' ? 'Pause' : 'Play'}
           >
             {playbackStatus === 'loading' ? (
-              <div className="w-5 h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+              <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
             ) : playbackStatus === 'playing' ? (
-              <Pause className="w-5 h-5 fill-black" />
+              <Pause className="w-5 h-5 fill-white" />
             ) : (
-              <Play className="w-5 h-5 fill-black ml-0.5" />
+              <Play className="w-5 h-5 fill-white ml-0.5" />
             )}
           </button>
 
           <button
             id="console-next-btn"
             onClick={playNextStation}
-            className="p-2.5 rounded-full bg-[#18120B] hover:bg-[#281F14] text-amber-300 hover:text-white border border-amber-500/30 transition active:scale-95 shadow-md"
+            className="p-2.5 rounded-full bg-white hover:bg-slate-50 text-slate-700 hover:text-slate-900 border border-slate-200 transition active:scale-95 shadow-sm"
             title="Next Station"
           >
             <SkipForward className="w-4 h-4" />
@@ -540,14 +540,14 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
 
         {/* Right: Master Volume & Attenuation Readout */}
         <div className="flex items-center gap-2.5 w-full sm:w-auto justify-end">
-          <div className="flex items-center gap-2 bg-[#120D08] px-3 py-1.5 rounded-full border border-amber-500/30 shadow-inner">
+          <div className="flex items-center gap-2 bg-slate-100 px-3 py-1.5 rounded-full border border-slate-200 shadow-xs">
             <button 
               id="console-mute-btn"
               onClick={toggleMute} 
-              className="text-amber-400 hover:text-white transition"
+              className="text-slate-600 hover:text-slate-900 transition"
               title={isMuted ? 'Unmute' : 'Mute'}
             >
-              {isMuted ? <VolumeX className="w-4 h-4 text-rose-400" /> : <Volume2 className="w-4 h-4" />}
+              {isMuted ? <VolumeX className="w-4 h-4 text-rose-500" /> : <Volume2 className="w-4 h-4 text-sky-600" />}
             </button>
 
             <input
@@ -558,10 +558,10 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
               step="0.01"
               value={isMuted ? 0 : volume}
               onChange={(e) => setVolume(Number(e.target.value))}
-              className="w-20 sm:w-24 h-1.5 bg-[#2B2014] rounded-lg appearance-none cursor-pointer accent-amber-400"
+              className="w-20 sm:w-24 h-1.5 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-sky-500"
             />
 
-            <span className="text-[10px] font-mono font-bold text-amber-300 w-8 text-right">
+            <span className="text-[10px] font-mono font-bold text-slate-700 w-8 text-right">
               {Math.round(isMuted ? 0 : volume * 100)}%
             </span>
           </div>

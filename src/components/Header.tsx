@@ -72,38 +72,38 @@ export const Header: React.FC<HeaderProps> = ({
   };
 
   const themes: { id: OnamThemeMode; name: string; malayalam: string; color: string }[] = [
-    { id: 'ponnonam', name: 'Golden Amber', malayalam: 'സുവർണ്ണം', color: 'from-amber-400 to-yellow-600' },
-    { id: 'kasavu', name: 'Kasavu & Sandal', malayalam: 'കസവ് ചന്ദനം', color: 'from-amber-200 to-yellow-500' },
-    { id: 'temple', name: 'Deep Crimson', malayalam: 'ഉത്സവമേളം', color: 'from-amber-600 to-rose-700' },
+    { id: 'frost', name: 'Glacier & Cyan', malayalam: 'ഹിമധ്വനി', color: 'from-sky-400 to-cyan-500' },
+    { id: 'azure', name: 'Coastal Azure', malayalam: 'തീരദേശം', color: 'from-blue-500 to-indigo-600' },
+    { id: 'nordic', name: 'Arctic Teal', malayalam: 'ശീതക്കാറ്റ്', color: 'from-teal-500 to-emerald-600' },
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-[#120F0B]/95 backdrop-blur-md border-b border-[#D4AF37]/30 px-3 sm:px-6 lg:px-8 py-2.5 transition-all shadow-lg shadow-black/40">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200/90 px-3 sm:px-6 lg:px-8 py-2.5 transition-all shadow-sm">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
         
-        {/* Brand & Logo with Golden Theme */}
+        {/* Brand & Logo with Cool Light Theme */}
         <div className="flex items-center justify-between w-full md:w-auto">
           <div className="flex items-center gap-3">
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 via-amber-500 to-yellow-600 text-[#120F0B] font-black shadow-lg shadow-amber-500/25 border border-amber-300">
+            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br from-sky-500 via-cyan-500 to-blue-600 text-white font-black shadow-md shadow-sky-500/20 border border-sky-300">
               <span className="font-display font-black text-xl">കേ</span>
               {playbackStatus === 'playing' ? (
                 <span className="absolute -top-1 -right-1 flex h-4 w-4">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-300 opacity-80"></span>
-                  <span className="relative inline-flex rounded-full h-4 w-4 bg-yellow-400 border-2 border-[#120F0B]"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-300 opacity-80"></span>
+                  <span className="relative inline-flex rounded-full h-4 w-4 bg-cyan-400 border-2 border-white"></span>
                 </span>
               ) : (
-                <Flame className="w-3.5 h-3.5 absolute -top-1 -right-1 text-amber-300 animate-flame drop-shadow" />
+                <Sparkles className="w-3.5 h-3.5 absolute -top-1 -right-1 text-cyan-200 animate-pulse drop-shadow" />
               )}
             </div>
             
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-xl sm:text-2xl font-black tracking-tight text-[#FAF7F0] flex items-center gap-1.5">
-                  <span className="gold-gradient-text">കേരള</span>
-                  <span className="text-[#FFD700]">RADIO</span>
+                <h1 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-1.5">
+                  <span className="cool-gradient-text">കേരള</span>
+                  <span className="text-sky-600">RADIO</span>
                 </h1>
               </div>
-              <p className="text-[11px] text-amber-200/70 font-malayalam flex items-center gap-1 font-medium">
+              <p className="text-[11px] text-slate-500 font-malayalam flex items-center gap-1 font-medium">
                 ലൈവ് എഫ്.എം & സംഗീതം • Live Kerala FM & Broadcast Streams
               </p>
             </div>
@@ -114,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-contact-btn"
               onClick={onOpenContactModal}
-              className="p-2 rounded-lg bg-[#221C14] border border-amber-500/30 text-amber-300 hover:text-amber-200"
+              className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200"
               title="Contact Us"
             >
               <Mail className="w-4 h-4" />
@@ -122,7 +122,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-theme-btn"
               onClick={() => setShowThemePicker(!showThemePicker)}
-              className="p-2 rounded-lg bg-[#221C14] border border-amber-500/30 text-amber-300 hover:text-amber-200"
+              className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200"
               title="Change Color Theme"
             >
               <Palette className="w-4 h-4" />
@@ -130,7 +130,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="mobile-eq-btn"
               onClick={onOpenEqModal}
-              className="p-2 rounded-lg bg-[#221C14] border border-amber-500/30 text-amber-300 hover:text-amber-200"
+              className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-900 hover:bg-slate-200"
               title="Equalizer"
             >
               <Sliders className="w-4 h-4" />
@@ -141,19 +141,19 @@ export const Header: React.FC<HeaderProps> = ({
         {/* Search & Mode Switcher */}
         <div className="flex items-center gap-2.5 w-full md:w-auto flex-1 max-w-md">
           <div className="relative w-full">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-amber-400/60" />
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               id="radio-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search stations, FM frequency, city, genre, RJ..."
-              className="w-full bg-[#1C1610] border border-amber-500/30 focus:border-amber-400 rounded-lg pl-9 pr-9 py-2 text-xs sm:text-sm text-[#FAF7F0] placeholder:text-amber-100/40 focus:outline-none transition shadow-inner"
+              className="w-full bg-slate-50 border border-slate-200 focus:border-sky-500 focus:bg-white rounded-lg pl-9 pr-9 py-2 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none transition shadow-xs"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-amber-300/70 hover:text-amber-100"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -161,14 +161,14 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* View Mode Toggle (List vs Retro Tuner) */}
-          <div className="hidden sm:flex items-center bg-[#1C1610] border border-amber-500/30 p-0.5 rounded-lg">
+          <div className="hidden sm:flex items-center bg-slate-100 border border-slate-200 p-0.5 rounded-lg">
             <button
               id="view-mode-grid-btn"
               onClick={() => setViewMode('grid')}
               className={`px-3 py-1.5 text-[10px] uppercase font-bold tracking-wider rounded-md transition ${
                 viewMode === 'grid' 
-                  ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow' 
-                  : 'text-amber-200/70 hover:text-amber-100'
+                  ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs' 
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               Stations
@@ -178,11 +178,11 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => setViewMode('tuner')}
               className={`px-3 py-1.5 text-[10px] uppercase font-bold tracking-wider rounded-md transition ${
                 viewMode === 'tuner' 
-                  ? 'bg-gradient-to-r from-amber-400 to-yellow-500 text-black shadow' 
-                  : 'text-amber-200/70 hover:text-amber-100'
+                  ? 'bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-xs' 
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Vintage Dial
+              Synthesizer
             </button>
           </div>
         </div>
@@ -194,17 +194,17 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               id="theme-switcher-btn"
               onClick={() => setShowThemePicker(!showThemePicker)}
-              className="flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold rounded-lg bg-[#1C1610] hover:bg-[#282017] text-amber-300 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm"
+              className="flex items-center gap-1.5 px-2.5 py-2 text-xs font-semibold rounded-lg bg-slate-100 hover:bg-slate-200/80 text-slate-700 hover:text-slate-900 border border-slate-200 transition shadow-xs"
               title="Theme Palette"
             >
-              <Palette className="w-3.5 h-3.5 text-amber-400" />
+              <Palette className="w-3.5 h-3.5 text-sky-600" />
               <span className="hidden lg:inline text-[11px]">Theme</span>
             </button>
 
             {showThemePicker && (
-              <div className="absolute right-0 mt-2 w-48 bg-[#1A140E] border border-amber-500/40 rounded-xl p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95">
-                <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-300/80 border-b border-amber-500/20 mb-1">
-                  Theme Palette
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl p-2 shadow-xl z-50 animate-in fade-in zoom-in-95">
+                <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-1">
+                  Cool Light Themes
                 </div>
                 {themes.map(t => (
                   <button
@@ -215,8 +215,8 @@ export const Header: React.FC<HeaderProps> = ({
                     }}
                     className={`w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition ${
                       onamTheme === t.id 
-                        ? 'bg-amber-500/25 text-amber-200 font-bold border border-amber-500/40' 
-                        : 'text-neutral-300 hover:bg-[#251D14] hover:text-amber-200'
+                        ? 'bg-sky-50 text-sky-700 font-bold border border-sky-200' 
+                        : 'text-slate-700 hover:bg-slate-50 hover:text-slate-900'
                     }`}
                   >
                     <span>{t.name}</span>
@@ -228,17 +228,17 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
 
           {/* World Times */}
-          <div className="hidden xl:flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-[#1C1610] border border-amber-500/30 text-xs">
-            <div className="flex items-center gap-1.5 text-amber-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span className="text-amber-400/80 uppercase text-[10px] tracking-wider font-bold">Kerala:</span>
-              <span className="font-mono font-bold text-[#FFF5EA]">{istTime}</span>
+          <div className="hidden xl:flex items-center gap-2.5 px-3 py-1.5 rounded-lg bg-slate-100 border border-slate-200 text-xs">
+            <div className="flex items-center gap-1.5 text-slate-700">
+              <span className="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
+              <span className="text-slate-500 uppercase text-[10px] tracking-wider font-bold">Kerala:</span>
+              <span className="font-mono font-bold text-slate-900">{istTime}</span>
             </div>
-            <span className="text-amber-500/30">|</span>
-            <div className="flex items-center gap-1.5 text-amber-200">
-              <Globe2 className="w-3 h-3 text-amber-400" />
-              <span className="text-amber-400/80 uppercase text-[10px] tracking-wider font-bold">Gulf:</span>
-              <span className="font-mono font-bold text-[#FFF5EA]">{gstTime}</span>
+            <span className="text-slate-300">|</span>
+            <div className="flex items-center gap-1.5 text-slate-700">
+              <Globe2 className="w-3 h-3 text-sky-600" />
+              <span className="text-slate-500 uppercase text-[10px] tracking-wider font-bold">Gulf:</span>
+              <span className="font-mono font-bold text-slate-900">{gstTime}</span>
             </div>
           </div>
 
@@ -246,10 +246,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="contact-us-btn"
             onClick={onOpenContactModal}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg bg-[#1C1610] hover:bg-[#282017] text-amber-200 hover:text-amber-100 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 transition shadow-xs"
             title="Contact Us / Stream Updates"
           >
-            <Mail className="w-3.5 h-3.5 text-amber-400" />
+            <Mail className="w-3.5 h-3.5 text-sky-600" />
             <span className="hidden sm:inline uppercase text-[10px] tracking-wider">Contact</span>
           </button>
 
@@ -257,10 +257,10 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="online-search-btn"
             onClick={onOpenOnlineSearchModal}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg bg-[#1C1610] hover:bg-[#282017] text-amber-200 hover:text-amber-100 border border-amber-500/30 hover:border-amber-400/60 transition shadow-sm"
+            className="flex items-center gap-1.5 px-3 py-2 text-xs font-bold rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 transition shadow-xs"
             title="Explore Malayalam Radio Directory"
           >
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+            <Sparkles className="w-3.5 h-3.5 text-sky-600" />
             <span className="hidden sm:inline uppercase text-[10px] tracking-wider">Directory</span>
           </button>
 
@@ -268,26 +268,26 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="equalizer-btn"
             onClick={onOpenEqModal}
-            className="p-2 text-amber-200 hover:text-amber-100 rounded-lg bg-[#1C1610] hover:bg-[#282017] border border-amber-500/30 hover:border-amber-400/60 transition relative shadow-sm"
+            className="p-2 text-slate-700 hover:text-slate-900 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 transition relative shadow-xs"
             title="Audio Equalizer & Presets"
           >
-            <Sliders className="w-4 h-4 text-amber-400" />
+            <Sliders className="w-4 h-4 text-sky-600" />
           </button>
 
           {/* Sleep Timer Indicator / Button */}
           <button
             id="sleep-timer-btn"
             onClick={onOpenSleepModal}
-            className={`flex items-center gap-1.5 px-2.5 py-2 text-xs font-bold rounded-lg border transition shadow-sm ${
+            className={`flex items-center gap-1.5 px-2.5 py-2 text-xs font-bold rounded-lg border transition shadow-xs ${
               sleepTimerRemainingSec !== null 
-                ? 'bg-amber-500/20 text-amber-300 border-amber-400' 
-                : 'bg-[#1C1610] text-amber-200 hover:text-amber-100 border-amber-500/30 hover:bg-[#282017]'
+                ? 'bg-sky-100 text-sky-800 border-sky-300' 
+                : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:bg-slate-200'
             }`}
             title="Sleep Timer"
           >
-            <Clock className="w-3.5 h-3.5 text-amber-400" />
+            <Clock className="w-3.5 h-3.5 text-sky-600" />
             {sleepTimerRemainingSec !== null && (
-              <span className="font-mono text-xs font-bold text-amber-300">
+              <span className="font-mono text-xs font-bold text-sky-700">
                 {formatSleepTime(sleepTimerRemainingSec)}
               </span>
             )}
@@ -297,18 +297,18 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             id="recordings-list-btn"
             onClick={onOpenRecordingsModal}
-            className={`flex items-center gap-1.5 px-2.5 py-2 text-xs font-bold rounded-lg border transition shadow-sm ${
+            className={`flex items-center gap-1.5 px-2.5 py-2 text-xs font-bold rounded-lg border transition shadow-xs ${
               isRecording 
-                ? 'bg-red-500/25 text-red-300 border-red-500 animate-pulse' 
-                : 'bg-[#1C1610] text-amber-200 hover:text-amber-100 border-amber-500/30 hover:bg-[#282017]'
+                ? 'bg-red-50 text-red-700 border-red-300 animate-pulse' 
+                : 'bg-slate-100 text-slate-700 hover:text-slate-900 border-slate-200 hover:bg-slate-200'
             }`}
             title="Radio Clips & Recordings"
           >
-            <Mic className={`w-3.5 h-3.5 ${isRecording ? 'text-red-400' : 'text-amber-400'}`} />
+            <Mic className={`w-3.5 h-3.5 ${isRecording ? 'text-red-500' : 'text-sky-600'}`} />
             {isRecording ? (
-              <span className="font-mono text-xs text-red-300 font-bold">{recordingDurationSec}s</span>
+              <span className="font-mono text-xs text-red-600 font-bold">{recordingDurationSec}s</span>
             ) : recordings.length > 0 ? (
-              <span className="px-1.5 py-0.2 rounded bg-amber-500/30 text-[10px] font-bold text-amber-200">
+              <span className="px-1.5 py-0.2 rounded bg-sky-100 text-[10px] font-bold text-sky-700">
                 {recordings.length}
               </span>
             ) : null}

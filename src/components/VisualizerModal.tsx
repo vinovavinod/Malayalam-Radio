@@ -33,6 +33,8 @@ interface VisualizerModalProps {
 export type VisualizerMode = 'spectrum' | 'waveform' | 'radial' | 'vu-meter';
 
 export type VisualizerTheme = 
+  | 'frost-sky'
+  | 'azure-ocean'
   | 'kasavu-gold' 
   | 'temple-lamp' 
   | 'pookkalam' 
@@ -61,6 +63,50 @@ interface VisualizerPalette {
 }
 
 const VISUALIZER_THEMES: VisualizerPalette[] = [
+  {
+    id: 'frost-sky',
+    name: 'Frost Sky',
+    malayalamName: 'ഹിമവർണ്ണം',
+    tagline: 'Cool Nordic Glacier, Electric Cyan & Ice White',
+    icon: <Sparkles className="w-3.5 h-3.5" />,
+    primary: '#0284C7',
+    secondary: '#38BDF8',
+    highlight: '#F0F9FF',
+    base: '#0C4A6E',
+    glowColor: 'rgba(56, 189, 248, 0.8)',
+    dialBgGradient: ['#0B192C', '#040D1A'],
+    needleColor: '#38BDF8',
+    gradientStops: ['#F0F9FF', '#38BDF8', '#0284C7'],
+    radialColor: (i, total) => {
+      const hue = 190 + (i / total) * 30;
+      return `hsl(${hue}, 95%, ${50 + (i % 3) * 12}%)`;
+    },
+    activeBtnClasses: 'bg-gradient-to-r from-sky-500 to-cyan-500 text-white shadow-sky-500/25',
+    badgeBorder: 'border-sky-400/40 text-sky-200 bg-sky-950/40',
+    dotColor: '#38BDF8'
+  },
+  {
+    id: 'azure-ocean',
+    name: 'Azure Waves',
+    malayalamName: 'നീലക്കടൽ',
+    tagline: 'Arabian Sea Deep Blue & Shimmering Foam Waves',
+    icon: <Waves className="w-3.5 h-3.5" />,
+    primary: '#2563EB',
+    secondary: '#60A5FA',
+    highlight: '#EFF6FF',
+    base: '#1E3A8A',
+    glowColor: 'rgba(96, 165, 250, 0.8)',
+    dialBgGradient: ['#0A1128', '#030718'],
+    needleColor: '#60A5FA',
+    gradientStops: ['#EFF6FF', '#60A5FA', '#2563EB'],
+    radialColor: (i, total) => {
+      const hue = 210 + (i / total) * 35;
+      return `hsl(${hue}, 90%, ${55 + (i % 2) * 15}%)`;
+    },
+    activeBtnClasses: 'bg-gradient-to-r from-blue-600 to-indigo-500 text-white shadow-blue-500/25',
+    badgeBorder: 'border-blue-400/40 text-blue-200 bg-blue-950/40',
+    dotColor: '#60A5FA'
+  },
   {
     id: 'kasavu-gold',
     name: 'Kasavu Gold',

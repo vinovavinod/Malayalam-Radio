@@ -102,9 +102,9 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [onamTheme, setOnamThemeState] = useState<OnamThemeMode>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEYS.ONAM_THEME);
-      return (saved as OnamThemeMode) || 'ponnonam';
+      return (saved as OnamThemeMode) || 'frost';
     } catch {
-      return 'ponnonam';
+      return 'frost';
     }
   });
 

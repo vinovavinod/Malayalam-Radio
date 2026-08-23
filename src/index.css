@@ -3,9 +3,9 @@
 @layer base {
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-    color: #F8F5EE;
+    color: #0F172A;
     min-height: 100vh;
-    background-color: #0E0C0A;
+    background-color: #F8FAFC;
   }
   
   .font-display {
@@ -21,95 +21,97 @@
   }
 }
 
-/* Kasavu Gold & Onam Aesthetics */
-.gold-gradient-text {
-  background: linear-gradient(135deg, #FFF0B3 0%, #FFD700 50%, #D4AF37 100%);
+/* Cool & Clean Gradients */
+.cool-gradient-text {
+  background: linear-gradient(135deg, #0284C7 0%, #06B6D4 50%, #2563EB 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.kasavu-gold-border {
-  border-color: rgba(212, 175, 55, 0.35);
+.gold-gradient-text {
+  background: linear-gradient(135deg, #B45309 0%, #D4AF37 50%, #92400E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.kasavu-gold-border:hover {
-  border-color: rgba(255, 215, 0, 0.7);
+/* Premium Cream Station Tiles */
+.station-tile-cream {
+  background: linear-gradient(145deg, #FFFCF7 0%, #FAF5EB 50%, #F5EDE0 100%);
+  border: 1px solid #E6DBCB;
+  box-shadow: 0 2px 8px -2px rgba(100, 70, 30, 0.05), 0 1px 3px 0 rgba(0, 0, 0, 0.03);
 }
 
-/* Onam Pookkalam & Lamp Animations */
-@keyframes pookkalamSpinSlow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.station-tile-cream:hover {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FAF4E8 50%, #F4EAD9 100%);
+  border-color: #D4AF37;
+  box-shadow: 0 8px 20px -4px rgba(180, 120, 30, 0.12), 0 2px 6px 0 rgba(0, 0, 0, 0.04);
 }
 
-.animate-pookkalam-slow {
-  animation: pookkalamSpinSlow 40s linear infinite;
+.station-tile-cream-active {
+  background: linear-gradient(145deg, #FFF9EA 0%, #FAF0D8 50%, #F5E5C4 100%);
+  border: 1.5px solid #D4AF37;
+  box-shadow: 0 10px 25px -4px rgba(212, 175, 55, 0.22), 0 2px 8px 0 rgba(140, 80, 20, 0.08);
 }
 
-@keyframes flameFlicker {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-    filter: drop-shadow(0 0 6px rgba(255, 165, 0, 0.8));
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1.08) translateY(-1px);
-    filter: drop-shadow(0 0 10px rgba(255, 107, 0, 0.9));
-  }
+.cool-sky-border {
+  border-color: rgba(14, 165, 233, 0.3);
 }
 
-.animate-flame {
-  animation: flameFlicker 1.8s ease-in-out infinite;
+.cool-sky-border:hover {
+  border-color: rgba(14, 165, 233, 0.7);
 }
 
-/* Theme classes */
+/* Light & Cool Themes */
+.theme-frost {
+  --bg-primary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
+  --cool-accent: #0284C7;
+  --border-cool: rgba(14, 165, 233, 0.25);
+}
+
+.theme-azure {
+  --bg-primary: #F0F9FF;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #E0F2FE;
+  --cool-accent: #2563EB;
+  --border-cool: rgba(37, 99, 235, 0.25);
+}
+
+.theme-nordic {
+  --bg-primary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F1F5F9;
+  --cool-accent: #0D9488;
+  --border-cool: rgba(13, 148, 136, 0.25);
+}
+
 .theme-ponnonam {
-  --bg-primary: #0F0D0A;
-  --bg-card: #18140F;
-  --bg-card-hover: #221C16;
-  --gold-accent: #E5A910;
-  --border-gold: rgba(229, 169, 16, 0.25);
+  --bg-primary: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-card-hover: #F8FAFC;
+  --cool-accent: #0284C7;
+  --border-cool: rgba(14, 165, 233, 0.25);
 }
 
-.theme-kasavu {
-  --bg-primary: #121110;
-  --bg-card: #1C1A16;
-  --bg-card-hover: #26231E;
-  --gold-accent: #D4AF37;
-  --border-gold: rgba(212, 175, 55, 0.3);
-}
-
-.theme-temple {
-  --bg-primary: #120808;
-  --bg-card: #1C0F0F;
-  --bg-card-hover: #281414;
-  --gold-accent: #F59E0B;
-  --border-gold: rgba(245, 158, 11, 0.3);
-}
-
-/* Custom Gold Scrollbar */
+/* Custom Cool Light Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0E0C0A;
+  background: #F1F5F9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3A3022;
+  background: #CBD5E1;
   border-radius: 3px;
-  border: 1px solid rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(14, 165, 233, 0.2);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D4AF37;
+  background: #0284C7;
 }
 
 /* Audio Wave Visualizer Bars */

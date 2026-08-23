@@ -7,7 +7,7 @@ export type RadioCategory =
   | 'favorites'
   | 'custom';
 
-export type OnamThemeMode = 'ponnonam' | 'kasavu' | 'temple';
+export type OnamThemeMode = 'frost' | 'azure' | 'nordic' | 'ponnonam' | 'kasavu' | 'temple';
 
 export interface RadioStation {
   id: string;
