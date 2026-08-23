@@ -11,12 +11,15 @@ import {
   ListMusic,
   AlertCircle,
   Mail,
-  Info
+  Info,
+  BookmarkPlus,
+  Sliders
 } from 'lucide-react';
 import { RadioProvider, useRadio } from './context/RadioContext';
 import { Header } from './components/Header';
 import { StationCard } from './components/StationCard';
-import { RetroRadioTuner } from './components/RetroRadioTuner';
+import { DigitalRadioConsole } from './components/DigitalRadioConsole';
+import { DigitalTunerSynthesizer } from './components/DigitalTunerSynthesizer';
 import { AudioPlayerBar } from './components/AudioPlayerBar';
 import { EqualizerModal } from './components/EqualizerModal';
 import { SleepTimerModal } from './components/SleepTimerModal';
@@ -62,27 +65,27 @@ function RadioAppContent() {
   }, [allStations, favorites]);
 
   const categoriesList: { id: RadioCategory; label: string; malayalam: string; icon: React.ReactNode }[] = [
-    { id: 'all', label: 'All Stations', malayalam: 'എല്ലാം', icon: <ListMusic className="w-3.5 h-3.5" /> },
-    { id: 'community', label: 'Community Radios', malayalam: 'കമ്മ്യൂണിറ്റി', icon: <Users className="w-3.5 h-3.5" /> },
-    { id: 'air', label: 'AIR (Akashvani)', malayalam: 'ആകാശവാണി', icon: <TowerControl className="w-3.5 h-3.5" /> },
-    { id: 'online', label: 'Online Radios', malayalam: 'ഓൺലൈൻ', icon: <Globe className="w-3.5 h-3.5" /> },
+    { id: 'all', label: 'All Channels', malayalam: 'എല്ലാം', icon: <ListMusic className="w-3.5 h-3.5" /> },
+    { id: 'community', label: 'Community FM', malayalam: 'കമ്മ്യൂണിറ്റി', icon: <Users className="w-3.5 h-3.5" /> },
+    { id: 'air', label: 'AIR Akashvani', malayalam: 'ആകാശവാണി', icon: <TowerControl className="w-3.5 h-3.5" /> },
+    { id: 'online', label: 'Online & Gulf', malayalam: 'ഓൺലൈൻ', icon: <Globe className="w-3.5 h-3.5" /> },
     { id: 'devotional', label: 'Devotional', malayalam: 'ഭക്തിഗാനങ്ങൾ', icon: <Sparkles className="w-3.5 h-3.5" /> },
     { id: 'favorites', label: 'Favorites', malayalam: 'ഇഷ്ടപ്പെട്ടവ', icon: <Heart className="w-3.5 h-3.5" /> },
   ];
 
   const themeClass = onamTheme === 'kasavu' 
-    ? 'theme-kasavu bg-[#110F0C]' 
+    ? 'theme-kasavu bg-[#0E0D0B]' 
     : onamTheme === 'temple' 
-    ? 'theme-temple bg-[#140A0A]' 
-    : 'theme-ponnonam bg-[#0E0C0A]';
+    ? 'theme-temple bg-[#120808]' 
+    : 'theme-ponnonam bg-[#0C0A08]';
 
   return (
     <div className={`min-h-screen ${themeClass} text-[#FAF7F0] flex flex-col pb-36 transition-colors duration-300 selection:bg-amber-500 selection:text-black`}>
-      {/* Festive Background Glow & Golden Motifs */}
+      {/* Precision Digital Background Atmosphere */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-b from-amber-500/10 via-yellow-600/5 to-transparent blur-3xl"></div>
-        <div className="absolute top-1/3 -right-24 w-80 h-80 bg-orange-600/5 blur-3xl rounded-full"></div>
-        <div className="absolute bottom-1/4 -left-24 w-80 h-80 bg-amber-500/5 blur-3xl rounded-full"></div>
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[900px] h-[400px] bg-gradient-to-b from-amber-500/10 via-yellow-600/5 to-transparent blur-3xl" />
+        <div className="absolute top-1/3 -right-24 w-80 h-80 bg-orange-600/5 blur-3xl rounded-full" />
+        <div className="absolute bottom-1/4 -left-24 w-80 h-80 bg-amber-500/5 blur-3xl rounded-full" />
       </div>
 
       {/* Header */}
@@ -97,61 +100,23 @@ function RadioAppContent() {
         setViewMode={setViewMode}
       />
 
-      <main className="max-w-5xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-5 flex-1 flex flex-col relative z-10">
+      <main className="max-w-6xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-5 flex-1 flex flex-col relative z-10">
         
-        {/* Now Playing Status Banner Display (if playing) */}
-        {currentStation && (
-          <div className="mb-4 p-4 sm:p-5 rounded-2xl bg-[#1A150F] border border-amber-500/35 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative overflow-hidden shadow-lg shadow-black/50">
-            <div className="flex items-center gap-3 relative z-10">
-              <span className="h-[2px] w-8 bg-amber-400 hidden sm:inline-block rounded-full"></span>
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] uppercase tracking-[0.25em] text-amber-400 font-bold flex items-center gap-1">
-                    <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping inline-block"></span>
-                    Now Live
-                  </span>
-                  <span className="text-neutral-600">•</span>
-                  <span className="text-[11px] font-mono font-medium text-amber-200/70">
-                    {currentStation.frequency || 'Kerala FM'}
-                  </span>
-                </div>
-                <h2 className="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">
-                  {currentStation.name}
-                </h2>
-                {currentStation.malayalamName && (
-                  <p className="text-xs font-malayalam text-amber-200/80 mt-0.5 font-medium">
-                    {currentStation.malayalamName}
-                  </p>
-                )}
-              </div>
-            </div>
+        {/* MASTER DIGITAL RADIO RECEIVER CONSOLE */}
+        <DigitalRadioConsole
+          onOpenVisualizerModal={() => setIsVisualizerModalOpen(true)}
+          onOpenEqModal={() => setIsEqModalOpen(true)}
+          onOpenSleepModal={() => setIsSleepModalOpen(true)}
+          onOpenRecordingsModal={() => setIsRecordingsModalOpen(true)}
+        />
 
-            <div className="flex items-center gap-2 relative z-10 w-full sm:w-auto justify-end">
-              <button
-                onClick={() => setIsVisualizerModalOpen(true)}
-                className="px-3 py-1.5 rounded-lg bg-[#261E14] hover:bg-[#33281B] border border-amber-500/40 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-amber-100 flex items-center gap-1.5 transition shadow-sm"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                <span className="uppercase text-[10px] tracking-wider">Visualizer</span>
-              </button>
-              <button
-                onClick={() => setIsEqModalOpen(true)}
-                className="px-3 py-1.5 rounded-lg bg-[#261E14] hover:bg-[#33281B] border border-amber-500/40 hover:border-amber-400 text-xs font-bold text-amber-200 hover:text-amber-100 flex items-center gap-1.5 transition shadow-sm"
-              >
-                <SlidersHorizontal className="w-3.5 h-3.5 text-amber-400" />
-                <span className="uppercase text-[10px] tracking-wider">EQ Sound</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* View Mode: Retro Analog Tuner */}
+        {/* View Mode Switcher: Digital Synthesizer vs Categorized Digital Deck */}
         {viewMode === 'tuner' ? (
           <div className="py-2">
-            <RetroRadioTuner />
+            <DigitalTunerSynthesizer />
           </div>
         ) : (
-          /* View Mode: Single Vertical Scrolling List */
+          /* View Mode: Digital Station Channels Deck */
           <div className="flex-1">
             {/* Category Navigation Bar */}
             <div className="mb-4">
@@ -169,7 +134,7 @@ function RadioAppContent() {
                         className={`flex-shrink-0 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 sm:gap-2 border ${
                           isActive
                             ? 'bg-gradient-to-r from-amber-400 via-amber-500 to-yellow-500 text-black border-amber-300 font-extrabold shadow-md shadow-amber-500/25 scale-[1.02]'
-                            : 'bg-[#1A140E] text-amber-100/75 hover:text-white border-amber-500/20 hover:border-amber-400/50 hover:bg-[#241B12]'
+                            : 'bg-[#140F0A] text-amber-100/75 hover:text-white border-amber-500/20 hover:border-amber-400/50 hover:bg-[#1E1710]'
                         }`}
                       >
                         <span className={isActive ? 'text-black' : cat.id === 'favorites' ? 'text-rose-400' : 'text-amber-400'}>
@@ -180,7 +145,7 @@ function RadioAppContent() {
                           className={`text-[10px] px-1.5 py-0.2 rounded font-mono font-bold ${
                             isActive
                               ? 'bg-black text-amber-300'
-                              : 'bg-[#281F15] text-amber-300/80'
+                              : 'bg-[#22180F] text-amber-300/80'
                           }`}
                         >
                           {count}
@@ -201,9 +166,9 @@ function RadioAppContent() {
               </div>
             </div>
 
-            {/* AIR (Akashvani) Dynamic Stream Notice Banner */}
+            {/* AIR (Akashvani) Notice Banner */}
             {activeCategory === 'air' && (
-              <div className="mb-4 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-950/60 via-[#24170C]/80 to-amber-950/60 border border-amber-500/40 text-amber-200/90 text-xs shadow-md">
+              <div className="mb-4 p-3.5 sm:p-4 rounded-xl bg-gradient-to-r from-amber-950/60 via-[#20140A]/80 to-amber-950/60 border border-amber-500/40 text-amber-200/90 text-xs shadow-md">
                 <div className="flex items-start gap-2.5">
                   <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400 flex-shrink-0 mt-0.5" />
                   <div className="flex-1">
@@ -219,17 +184,17 @@ function RadioAppContent() {
                       </button>
                     </div>
                     <p className="mt-1 text-[11px] sm:text-xs text-amber-100/80 leading-relaxed">
-                      Notice: Some All India Radio (AIR) stations may occasionally experience playback issues or downtime because Prasar Bharati periodically updates its CDN streaming URLs and access tokens. We regularly refresh and update these live endpoints.
+                      Notice: All India Radio (AIR) streams are periodically rotated by Prasar Bharati CDN. We maintain verified live endpoints and backup relays for seamless listening.
                     </p>
                     <p className="mt-1 text-[11px] text-amber-300/70 font-malayalam">
-                      ആകാശവാണി സ്ട്രീമിംഗ് ലിങ്കുകൾ അപ്‌ഡേറ്റ് ചെയ്യപ്പെടുന്നതിനാൽ ചില സ്റ്റേഷനുകൾ താൽക്കാലികമായി ലഭിച്ചേക്കില്ല. പുതിയ ലിങ്കുകൾ ശ്രദ്ധയിൽപ്പെട്ടാൽ ദയവായി അറിയിക്കുക.
+                      ആകാശവാണി സ്ട്രീമിംഗ് ലിങ്കുകൾ അപ്‌ഡേറ്റ് ചെയ്യപ്പെടുന്നതിനാൽ ചില സ്റ്റേഷനുകൾ താൽക്കാലികമായി മാറിയേക്കാം. പുതിയ ലിങ്കുകൾ ശ്രദ്ധയിൽപ്പെട്ടാൽ ദയവായി അറിയിക്കുക.
                     </p>
                   </div>
                 </div>
               </div>
             )}
 
-            {/* Vertical Scrolling List of Cards */}
+            {/* Channels List */}
             {filteredStations.length === 0 ? (
               <div className="py-16 text-center text-neutral-400 space-y-4 max-w-md mx-auto">
                 <Radio className="w-12 h-12 text-amber-500/40 mx-auto stroke-1" />
@@ -250,14 +215,14 @@ function RadioAppContent() {
                       setSearchQuery('');
                       setActiveCategory('all');
                     }}
-                    className="px-4 py-2 rounded-lg bg-[#221B12] hover:bg-[#2F251A] border border-amber-500/30 text-amber-200 hover:text-white text-xs font-semibold uppercase tracking-wider transition"
+                    className="px-4 py-2 rounded-lg bg-[#1E1710] hover:bg-[#2A2016] border border-amber-500/30 text-amber-200 hover:text-white text-xs font-semibold uppercase tracking-wider transition"
                   >
                     View All Stations
                   </button>
                 </div>
               </div>
             ) : (
-              <div className="flex flex-col gap-3.5">
+              <div className="flex flex-col gap-3">
                 {filteredStations.map(station => (
                   <StationCard
                     key={station.id}
@@ -271,7 +236,7 @@ function RadioAppContent() {
             <div className="mt-8 pt-4 pb-2 border-t border-amber-500/20 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-amber-200/60">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-amber-400/80"></span>
-                <span>Kerala Radio • Live Malayalam Broadcasts</span>
+                <span>Kerala Radio • Premium Digital Broadcast Receiver</span>
               </div>
               <div className="flex items-center gap-3">
                 <button
@@ -287,7 +252,7 @@ function RadioAppContent() {
         )}
       </main>
 
-      {/* Sticky Bottom Audio Player Bar */}
+      {/* Sticky Bottom Digital Receiver Audio Player Bar */}
       <AudioPlayerBar
         onOpenVisualizerModal={() => setIsVisualizerModalOpen(true)}
         onOpenEqModal={() => setIsEqModalOpen(true)}

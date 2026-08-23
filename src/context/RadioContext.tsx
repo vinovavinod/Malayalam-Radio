@@ -39,6 +39,7 @@ interface RadioContextType {
   recordingDurationSec: number;
   activeStreamIndex: number;
   onamTheme: OnamThemeMode;
+  presets: string[];
   
   // Actions
   setOnamTheme: (theme: OnamThemeMode) => void;
@@ -49,6 +50,8 @@ interface RadioContextType {
   toggleMute: () => void;
   toggleBoost: () => void;
   toggleFavorite: (stationId: string) => void;
+  setPresetSlot: (slot: number, stationId: string) => void;
+  playPreset: (slot: number) => void;
   addCustomStation: (station: Omit<RadioStation, 'id' | 'isCustom'> & { id?: string }) => void;
   editCustomStation: (station: RadioStation) => void;
   deleteCustomStation: (stationId: string) => void;
@@ -78,8 +81,22 @@ const STORAGE_KEYS = {
   VOLUME: 'malayalam_radio_volume_v4',
   PRESET: 'malayalam_radio_eq_preset_v4',
   GAINS: 'malayalam_radio_eq_gains_v4',
-  ONAM_THEME: 'malayalam_radio_onam_theme_v4'
+  ONAM_THEME: 'malayalam_radio_onam_theme_v4',
+  PRESETS: 'malayalam_radio_presets_v4'
 };
+
+const DEFAULT_PRESET_IDS = [
+  'air-kochi',
+  'sargakshetra-896',
+  'devikulam-fm',
+  'radio-media-village',
+  'air-manjeri',
+  'kerala-community-radio',
+  'ponnonam-special',
+  'radio-kollam',
+  'air-calicut',
+  'radio-city-malayalam'
+];
 
 export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [onamTheme, setOnamThemeState] = useState<OnamThemeMode>(() => {
@@ -88,6 +105,19 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return (saved as OnamThemeMode) || 'ponnonam';
     } catch {
       return 'ponnonam';
+    }
+  });
+
+  const [presets, setPresets] = useState<string[]>(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEYS.PRESETS);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length >= 10) return parsed.slice(0, 10);
+      }
+      return DEFAULT_PRESET_IDS;
+    } catch {
+      return DEFAULT_PRESET_IDS;
     }
   });
 
@@ -227,6 +257,10 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEYS.PRESETS, JSON.stringify(presets));
+  }, [presets]);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEYS.RECENTS, JSON.stringify(recentStationIds));
@@ -573,6 +607,26 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     });
   }, []);
 
+  // Digital Presets
+  const setPresetSlot = useCallback((slot: number, stationId: string) => {
+    if (slot < 0 || slot >= 10) return;
+    setPresets(prev => {
+      const next = [...prev];
+      next[slot] = stationId;
+      return next;
+    });
+  }, []);
+
+  const playPreset = useCallback((slot: number) => {
+    if (slot < 0 || slot >= presets.length) return;
+    const stationId = presets[slot];
+    if (!stationId) return;
+    const targetStation = allStations.find(s => s.id === stationId);
+    if (targetStation) {
+      playStation(targetStation);
+    }
+  }, [presets, allStations, playStation]);
+
   // Custom stations CRUD
   const addCustomStation = useCallback((stationData: Omit<RadioStation, 'id' | 'isCustom'> & { id?: string }) => {
     const id = stationData.id || `custom-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`;
@@ -800,6 +854,7 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         recordingDurationSec,
         activeStreamIndex,
         onamTheme,
+        presets,
         setOnamTheme,
         playStation,
         togglePlayPause,
@@ -808,6 +863,8 @@ export const RadioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         toggleMute,
         toggleBoost,
         toggleFavorite,
+        setPresetSlot,
+        playPreset,
         addCustomStation,
         editCustomStation,
         deleteCustomStation,

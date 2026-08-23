@@ -2,11 +2,20 @@ import express from 'express';
 import http from 'http';
 import https from 'https';
 import path from 'path';
-import { createServer as createViteServer } from 'vite';
+import fs from 'fs';
+
+// Guard against unexpected unhandled rejections or uncaught exceptions
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+  console.error('Uncaught Exception:', error);
+});
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   // Stream proxy route to handle HTTP streams and CORS-restricted Icecast/Shoutcast streams safely over HTTPS
   app.get('/api/stream-proxy', (req, res) => {
@@ -81,23 +90,41 @@ async function startServer() {
     }
   });
 
-  // Health check
+  // Health checks
   app.get('/api/health', (_req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
   });
 
-  // Vite integration
+  app.get('/healthz', (_req, res) => {
+    res.status(200).send('OK');
+  });
+
+  // Vite development middleware vs Production static asset serving
   if (process.env.NODE_ENV !== 'production') {
+    const { createServer: createViteServer } = await import('vite');
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',
     });
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), 'dist');
+    // Locate the production build directory (cwd/dist or __dirname fallback)
+    const cwdDist = path.resolve(process.cwd(), 'dist');
+    const dirnameDist = path.resolve(__dirname, '..', 'dist');
+    const distPath = fs.existsSync(cwdDist)
+      ? cwdDist
+      : fs.existsSync(dirnameDist)
+      ? dirnameDist
+      : __dirname;
+
     app.use(express.static(distPath));
     app.get('*', (_req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
+      const indexPath = path.join(distPath, 'index.html');
+      if (fs.existsSync(indexPath)) {
+        res.sendFile(indexPath);
+      } else {
+        res.sendFile(path.join(process.cwd(), 'index.html'));
+      }
     });
   }
 
@@ -107,3 +134,4 @@ async function startServer() {
 }
 
 startServer();
+
