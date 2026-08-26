@@ -1,0 +1,169 @@
+<svg viewBox="0 0 500 500" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Smooth Rainbow Gradient for Top Arc -->
+    <linearGradient id="rainbowTopRing" x1="0%" y1="60%" x2="100%" y2="60%">
+      <stop offset="0%" stop-color="#1E3A8A" />
+      <stop offset="10%" stop-color="#2563EB" />
+      <stop offset="25%" stop-color="#0284C7" />
+      <stop offset="40%" stop-color="#10B981" />
+      <stop offset="55%" stop-color="#84CC16" />
+      <stop offset="70%" stop-color="#FACC15" />
+      <stop offset="85%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#EF4444" />
+    </linearGradient>
+
+    <!-- Dark Brush Stroke Gradient for Bottom Arc -->
+    <linearGradient id="brushBottomRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#334155" />
+    </linearGradient>
+
+    <!-- Lion Fiery Mane Gradient -->
+    <linearGradient id="lionManeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="20%" stop-color="#FBBF24" />
+      <stop offset="50%" stop-color="#FB923C" />
+      <stop offset="80%" stop-color="#EA580C" />
+      <stop offset="100%" stop-color="#C2410C" />
+    </linearGradient>
+
+    <!-- Jerusalem Text Gradient -->
+    <linearGradient id="jerusalemTextGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="25%" stop-color="#0EA5E9" />
+      <stop offset="55%" stop-color="#6366F1" />
+      <stop offset="80%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#A855F7" />
+    </linearGradient>
+
+    <!-- Mallus Text Gradient -->
+    <linearGradient id="mallusTextGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" />
+      <stop offset="22%" stop-color="#38BDF8" />
+      <stop offset="45%" stop-color="#3B82F6" />
+      <stop offset="70%" stop-color="#8B5CF6" />
+      <stop offset="88%" stop-color="#D946EF" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+  </defs>
+
+  <!-- Circular Ring -->
+  <!-- 1. Top Rainbow Arc (9 o'clock around the top to 4:30 o'clock) -->
+  <path
+    d="M 68 250 A 185 185 0 1 1 430 270"
+    stroke="url(#rainbowTopRing)"
+    stroke-width="12"
+    stroke-linecap="round"
+  />
+
+  <!-- 2. Bottom Brush Stroke Arc with distressed/tapered gaps -->
+  <path
+    d="M 432 278 A 185 185 0 0 1 76 270"
+    stroke="#0F172A"
+    stroke-width="11"
+    stroke-linecap="round"
+    stroke-dasharray="85 14 42 16 70 12 50 18 35 15"
+    opacity="0.95"
+  />
+  <path
+    d="M 140 422 A 185 185 0 0 1 84 315"
+    stroke="#1E293B"
+    stroke-width="5"
+    stroke-linecap="round"
+    stroke-dasharray="30 15 20"
+    opacity="0.8"
+  />
+  <path
+    d="M 370 380 A 185 185 0 0 1 200 442"
+    stroke="#0F172A"
+    stroke-width="4.5"
+    stroke-linecap="round"
+    stroke-dasharray="25 18 40"
+    opacity="0.85"
+  />
+
+  <!-- Lion Head Profile in center -->
+  <g transform="translate(18, 5)">
+    <!-- Main Lion Flame Mane -->
+    <path
+      d="M 215 132
+         C 224 130, 246 135, 258 140
+         C 276 128, 298 133, 310 142
+         C 316 156, 304 168, 292 174
+         C 306 172, 322 178, 326 188
+         C 316 200, 296 200, 282 198
+         C 292 208, 298 222, 290 234
+         C 278 232, 268 226, 260 218
+         C 256 236, 242 252, 222 260
+         C 216 244, 218 232, 212 220
+         C 202 238, 186 254, 162 262
+         C 158 248, 164 234, 172 222
+         C 152 230, 138 230, 130 220
+         C 138 208, 150 204, 158 198
+         C 142 196, 134 188, 134 178
+         C 148 174, 164 178, 172 170
+         C 158 162, 152 152, 158 142
+         C 172 144, 182 152, 192 158
+         C 190 144, 198 134, 215 132 Z"
+      fill="url(#lionManeGrad)"
+    />
+
+    <!-- Lion Face / Snout / Profile Details -->
+    <path
+      d="M 252 154
+         C 268 154, 290 165, 300 176
+         C 308 181, 320 186, 328 192
+         C 324 198, 314 199, 306 197
+         C 316 205, 322 214, 316 220
+         C 308 218, 300 211, 294 206
+         C 294 216, 286 224, 278 224
+         C 272 216, 270 206, 264 198
+         C 256 190, 246 182, 252 154 Z"
+      fill="#FFFBEB"
+    />
+
+    <!-- Eye and Nose Contours -->
+    <path
+      d="M 258 172 C 263 170, 268 172, 271 177 C 266 178, 261 177, 258 172 Z"
+      fill="#1E293B"
+    />
+    <path
+      d="M 310 192 C 313 194, 316 197, 313 200 C 309 198, 308 196, 310 192 Z"
+      fill="#1E293B"
+    />
+    <path
+      d="M 292 216 C 299 218, 304 224, 299 229 C 291 228, 286 222, 292 216 Z"
+      fill="#EA580C"
+    />
+  </g>
+
+  <!-- Brand Typography -->
+  <!-- "JERUSALEM" -->
+  <text
+    x="250"
+    y="306"
+    text-anchor="middle"
+    fill="url(#jerusalemTextGrad)"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="800"
+    font-size="34"
+    letter-spacing="5"
+  >
+    JERUSALEM
+  </text>
+
+  <!-- "MALLUS" -->
+  <text
+    x="250"
+    y="370"
+    text-anchor="middle"
+    fill="url(#mallusTextGrad)"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-weight="900"
+    font-size="58"
+    letter-spacing="6"
+  >
+    MALLUS
+  </text>
+</svg>

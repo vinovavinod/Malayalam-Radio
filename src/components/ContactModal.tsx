@@ -38,14 +38,14 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
   const getSubjectText = () => {
     switch (subjectType) {
       case 'air_update':
-        return `[Kerala Radio] AIR Streaming Link Update: ${stationName || 'Akashvani Stream'}`;
+        return `[Mallus Radio] AIR Streaming Link Update: ${stationName || 'Akashvani Stream'}`;
       case 'stream_issue':
-        return `[Kerala Radio] Broken Stream Report: ${stationName || 'Station'}`;
+        return `[Mallus Radio] Broken Stream Report: ${stationName || 'Station'}`;
       case 'new_station':
-        return `[Kerala Radio] New Malayalam Station Request: ${stationName || 'New FM'}`;
+        return `[Mallus Radio] New Malayalam Station Request: ${stationName || 'New FM'}`;
       case 'feedback':
       default:
-        return `[Kerala Radio] App Feedback & Suggestions`;
+        return `[Mallus Radio] App Feedback & Suggestions`;
     }
   };
 
@@ -53,7 +53,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
     e.preventDefault();
     const subject = encodeURIComponent(getSubjectText());
     const body = encodeURIComponent(
-      `Hello,\n\n${userMessage || 'I would like to get in touch regarding Kerala Radio.'}\n\nStation: ${stationName || 'N/A'}\nType: ${subjectType}\n\nBest regards.`
+      `Hello,\n\n${userMessage || 'I would like to get in touch regarding Mallus Radio.'}\n\nStation: ${stationName || 'N/A'}\nType: ${subjectType}\n\nBest regards.`
     );
     window.location.href = `mailto:${contactEmail}?subject=${subject}&body=${body}`;
     setSubmitted(true);
@@ -252,7 +252,7 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
 
         {/* Modal Footer */}
         <div className="px-6 py-3 border-t border-amber-500/20 bg-[#1A130D] flex items-center justify-between text-[11px] text-amber-200/60">
-          <span>Kerala Radio Web App</span>
+          <span>Mallus Radio Web App</span>
           <button
             onClick={onClose}
             className="text-amber-300 hover:text-white font-semibold transition"

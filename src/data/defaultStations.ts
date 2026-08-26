@@ -183,6 +183,24 @@ export const DEFAULT_STATIONS: RadioStation[] = [
 
   // ==================== AIR (AKASHVANI) ====================
   {
+    id: 'air-kochi-fm',
+    name: 'AIR Kochi FM',
+    malayalamName: 'ആകാശവാണി കൊച്ചി FM',
+    streamUrl: 'https://radio.wavespb.com/live/70400e7510e87cdf/70400e7510e87cdf.m3u8',
+    fallbackUrls: [
+      'https://air.pc.cdn.bitgravity.com/air/live/pbaudio044/playlist.m3u8'
+    ],
+    logo: 'https://radiosindia.com/images/air.jpg',
+    category: 'air',
+    frequency: '102.3 FM / AIR',
+    location: 'Kochi, Kerala',
+    bitrate: 'HLS Live',
+    gradient: 'from-sky-700 to-blue-900',
+    description: 'ആകാശവാണി കൊച്ചി നിലയം. പ്രാദേശിക വാർത്തകൾ, പ്രഭാതഭേരി, കർഷകരംഗം, മലയാള സംഗീതപരിപാടികൾ, വിജ്ഞാന വിനോദ പ്രക്ഷേപണങ്ങൾ.',
+    tags: ['ആകാശവാണി', 'കൊച്ചി', 'AIR Kochi', 'FM', 'വാർത്തകൾ'],
+    codec: 'hls'
+  },
+  {
     id: 'devikulam-fm',
     name: 'Akashvani Devikulam',
     malayalamName: 'ദേവികുളം എഫ്.എം 101.4',

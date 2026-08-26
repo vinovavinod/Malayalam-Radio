@@ -174,6 +174,16 @@ export const StationIcon: React.FC<StationIconProps> = ({
         monogram: 'AIR'
       };
     }
+    if (id === 'air-kochi-fm' || name.toLowerCase() === 'air kochi fm') {
+      return {
+        bg: 'from-blue-700 via-sky-700 to-indigo-900',
+        borderColor: 'border-sky-400/50',
+        textColor: 'text-sky-100',
+        icon: <TowerControl className={iconSizes} />,
+        badge: '102.3',
+        monogram: 'AIR'
+      };
+    }
     if (id === 'air-kochi-rainbow' || name.includes('rainbow')) {
       return {
         bg: 'from-rose-700 via-amber-600 to-indigo-700',

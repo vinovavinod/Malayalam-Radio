@@ -1,6 +1,6 @@
 {
-  "name": "Malayalam Radio",
-  "description": "Live Malayalam radio streaming application featuring an authentic golden theme, verified Kerala FM stations, Akashvani broadcasts, Pravasi channels, and interactive retro tuner.",
+  "name": "Mallus Radio",
+  "description": "Mallus Radio - Live Kerala FM stations, Akashvani broadcasts, Gulf Pravasi channels, and custom streams with authentic Malayalam radio experience.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

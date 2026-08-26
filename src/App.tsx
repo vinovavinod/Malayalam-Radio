@@ -27,6 +27,7 @@ import { VisualizerModal } from './components/VisualizerModal';
 import { RecordingsModal } from './components/RecordingsModal';
 import { OnlineDirectoryModal } from './components/OnlineDirectoryModal';
 import { ContactModal } from './components/ContactModal';
+import { MallusLogo } from './components/MallusLogo';
 import { RadioCategory } from './types/radio';
 
 function RadioAppContent() {
@@ -233,10 +234,10 @@ function RadioAppContent() {
             )}
 
             {/* Quick Footer Contact Bar */}
-            <div className="mt-8 pt-4 pb-2 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-sky-500"></span>
-                <span>Kerala Radio • Premium Cool Light Broadcast Receiver</span>
+            <div className="mt-8 pt-4 pb-2 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+              <div className="flex items-center gap-2.5">
+                <MallusLogo size={24} showText={false} />
+                <span className="font-semibold text-slate-700">Mallus Radio • Live Kerala FM & Broadcast Receiver</span>
               </div>
               <div className="flex items-center gap-3">
                 <button

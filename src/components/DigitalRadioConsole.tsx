@@ -187,7 +187,7 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
   // RDS Dynamic Program Ticker
   const rdsText = currentStation 
     ? `▶ [LIVE FM] ${currentStation.name} • ${currentStation.frequency || 'DIGITAL STEREO'} • ${currentStation.location || 'KERALA BROADCAST'} • ${currentStation.malayalamName || 'മലയാളം തത്സമയം'} • ${isBoosted ? 'DSP +6dB BASS ACTIVE' : 'HI-RES STEREO'} • STEREO 320 KBPS AAC-LC`
-    : `▶ KERALA DIGITAL RADIO RECEIVER • READY FOR RECEPTION • SELECT A PRESET OR STATION FROM LIST`;
+    : `▶ MALLUS RADIO DIGITAL RECEIVER • READY FOR RECEPTION • SELECT A PRESET OR STATION FROM LIST`;
 
   const isFav = currentStation ? favorites.includes(currentStation.id) : false;
 
@@ -229,7 +229,7 @@ export const DigitalRadioConsole: React.FC<DigitalRadioConsoleProps> = ({
             </span>
           </div>
           <span className="hidden sm:inline-block text-[11px] font-mono text-slate-500">
-            MODEL: KR-9000HiFi
+            MODEL: MALLUS-PRO-9000
           </span>
         </div>
 
